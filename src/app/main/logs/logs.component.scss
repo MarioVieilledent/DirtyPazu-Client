@@ -1,0 +1,78 @@
+
+$bg-color-list: #454341; // Couleur de la liste
+$bg-color-row-hover: #555351; // Couleur de fond des boutons hover
+$bg-color-done-row: #355531; // Couleur des lignes traduites
+
+$top-height: 100px;
+
+$padding: 12px;
+$border-radius: 4px;
+$border: 1px solid #999;
+
+$toggle-done-width: 36px;
+
+.body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: $padding;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            height: $top-height;
+            padding-bottom: $padding;
+            width: 100%;
+            
+            .left {
+                padding-right: $padding;
+            }
+            
+            .middle {
+                display: flex;
+                align-items: center;
+            }
+            
+            .right {
+                padding-left: $padding;
+            }
+
+            .left, .right {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: auto;
+
+            .log {
+                display: flex;
+
+                .timestamp {
+                    display: flex;
+                    white-space: nowrap;
+                    padding-right: $padding;
+                }
+
+                .message {
+                    display: flex;
+                    white-space: nowrap;
+                }
+            }
+
+            .log:hover {
+                background-color: #555351;
+            }
+        }
+    }
+}

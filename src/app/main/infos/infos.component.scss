@@ -1,0 +1,13 @@
+$padding: 12px;
+
+.body {
+    display: flex;
+    flex-direction: column;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+    
+    h1, h2, span {
+        padding: 0px 0px 6px 0px;
+    }
+}

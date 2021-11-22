@@ -1,0 +1,90 @@
+
+$bg-color-header: #151311; // Couleur de fond la plus foncée
+$bg-color-nav: #252321; // Couleur de fond entre-deux
+$bg-color-content: #353331; // Couleur de fond la plus claire
+$bg-color-nav-button: #353331; // Couleur de fond des boutons
+$bg-color-nav-button-hover: #454341; // Couleur de fond des boutons hover
+$bg-color-option-block: #555351; // Options
+$bg-color-option-block-hover: #656361; // Options hover
+
+$header-height: 50px;
+$footer-height: 0px;
+$nav-width: 200px;
+
+$padding: 12px;
+$border-radius: 4px;
+$border: 1px solid #999;
+
+.body {
+    display: flex;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+
+        .header {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            margin-top: $padding;
+
+            .block {
+                display: flex;
+                flex-direction: column;
+                border-radius: $border-radius;
+                border: $border;
+                margin: 0px 0px $padding 0px;
+                padding: $padding $padding 0px $padding;
+                max-width: 1200px;
+
+                .title {
+                    display: flex;
+                    margin-bottom: $padding;
+                }
+
+                .elements {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .element {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        border-radius: $border-radius;
+                        border: $border;
+                        margin: 0px $padding $padding 0px;
+                        padding: $padding;
+
+                        h3 {
+                            font-weight: 200;
+                            font-size: 16px;
+                            white-space: nowrap;
+                        }
+
+                        .number {
+                            font-size: 28px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
+            .chart {
+                padding-bottom: $padding;
+                align-items: center;
+                canvas {
+                    max-width: 700px;
+                }
+            }
+        }
+    }
+}

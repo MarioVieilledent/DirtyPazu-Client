@@ -1,0 +1,34 @@
+
+<div class="body">
+    <div class="container">
+        <div class="header">
+            <h1>Infos & stats</h1>
+            <p>Ce site à pour vocation de répertorier l'ensemble des mots de la langue Dibi.</p>
+            <p>Pour report un bug, ou proposer une suggestion => dm sur mon Discord : Pazu#4444</p>
+        </div>
+        <div class="content">
+            <div class="block">
+                <div class="title">
+                    <h2>Des chiffres</h2>
+                </div>
+                <div class="elements">
+                    <div *ngIf="dibiDict" class="element">
+                        <h3>Mots Dibi</h3>
+                        <span class="number">{{dibiDict.length}}</span>
+                    </div>
+                    <div *ngFor="let partOfSpeech of nbPartsOfSpeech" class="element">
+                        <h3 [className]="partOfSpeech.savedAs">{{partOfSpeech.label}}</h3>
+                        <span [className]="'number ' + partOfSpeech.savedAs">{{partOfSpeech.nb}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="block chart">
+                <div class="title">
+                    <h2>Répartition des mots selon leur nature grammaticale</h2>
+                </div>
+                <!-- <canvas id="pieChart" width="400" height="400"></canvas> -->
+                <canvas baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

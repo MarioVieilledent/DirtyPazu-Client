@@ -1,0 +1,83 @@
+<div class="body">
+    <div class="container">
+        <div class="header">
+                <div class="menu-button" *ngIf="menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-left-solid.svg" title="Modifier"></div>
+                <div class="menu-button" *ngIf="!menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-right-solid.svg" title="Modifier"></div>
+                <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()" (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
+                <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()" (auxclick)="openNewBlank()">Dibi</h1>
+                <button class="log-button" *ngIf="!adminConnected" (click)="login()">Login</button>
+                <button class="log-button" *ngIf="adminConnected" (click)="logout()">Logout</button>
+        </div>
+        <div class="middle">
+            <div class="nav" #nav>
+                <div class="buttons-list">
+                    <!-- <div class="button-block" (click)="setNav('Infos')">
+                        <h2>Infos</h2>
+                    </div> -->
+                    <div class="button-block" (click)="setNav('Flag')">
+                        <h2>Flag</h2>
+                        <div class='flag-options' *ngIf="navigation === 'Flag'">
+                            <div class="option-block">
+                                <h3>Taille</h3>
+                                <div class="h4 button" (click)="setSize(1)">Minuscule</div>
+                                <div class="h4 button" (click)="setSize(2)">Petit</div>
+                                <div class="h4 button" (click)="setSize(5)">Moyen</div>
+                                <div class="h4 button" (click)="setSize(15)">Grand</div>
+                                <div class="h4 button" (click)="setSize(30)">Géant</div>
+                                <h3>Afficher les départements</h3>
+                                <input type="checkbox" [(ngModel)]="displayRegions">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-block">
+                        <h2>Dibi</h2>
+                        <div class='flag-options'>
+                            <div class="option-block">
+                                <div class="h4 button" (click)="setNav('Dibi-infos')">Infos</div>
+                                <div class="h4 button" (click)="setNav('Dibi-dict')">Dictionnaire</div>
+                                <!-- <div class="h4 button" (click)="setNav('Dibi-grammar-rules')">Grammaire</div> -->
+                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-add-word')">Ajout mot</div>
+                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-mc')">Minecraft</div>
+                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Logs')">Logs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content" #content>
+                <div class="switch-component" [ngSwitch]="navigation">
+                    <ng-container *ngSwitchCase="'Infos'">
+                        <app-infos></app-infos>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Flag'">
+                        <app-flag [pixelSize]="pixelSize" [displayRegions]="displayRegions"></app-flag>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-infos'">
+                        <app-dibi-infos></app-dibi-infos>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-dict'">
+                        <app-dibi-dict [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-dict>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
+                        <app-dibi-grammar-rules [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-grammar-rules>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-add-word'">
+                        <app-dibi-new-word [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-new-word>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-mc'">
+                        <app-dibi-mc [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-mc>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Logs'">
+                        <app-logs></app-logs>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                    
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</div>

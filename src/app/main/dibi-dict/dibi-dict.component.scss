@@ -1,0 +1,503 @@
+
+$bg-color-row-hover: #454341; // Couleur de fond des boutons hover
+
+$top-height: 100px;
+$all-none-partOfSpeech-width: 52px;
+
+$padding: 12px;
+$border-radius: 4px;
+$border: 1px solid #999;
+
+// Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
+$left-menu-width: 60%;
+// $middle-menu-width: 50%;
+$right-menu-width: 40%;
+
+// Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
+$left-row-width: 70%;
+$middle-row-width: 15%;
+$right-row-width: 15%;
+
+// Largeur du label (créateur, description)
+$label-detail-view-width: 100px;
+
+// Hauteur d'une ligne
+$row-view-height: 30px;
+
+// textes
+$bold: 600;
+
+$size-checkbox: 12px;
+
+.body {
+    display: flex;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        max-width: 1200px;
+        min-width: 250px;
+        
+        .top {
+            display: flex;
+            height: $top-height;
+            width: 100%;
+            
+            .left {
+                display: flex;
+                align-items: flex-start;
+                width: $left-menu-width;
+                border-right: $border;
+                overflow: auto;
+
+                .all-none-partOfSpeech {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    width: $all-none-partOfSpeech-width;
+
+                    .all-none {
+                        display: flex;
+                        cursor: pointer;
+                        padding: 3px 0px 3px 0px;
+                        font-weight: 600;
+                        font-size: 14px;
+
+                        label {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .partsOfSpeech {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                    padding: 0px $padding 0px $padding;
+                    width: calc(100% - #{$all-none-partOfSpeech-width});
+                }
+
+                .partOfSpeech {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 3px 6px 3px 6px;
+
+                    input {
+                        height: $size-checkbox;
+                        width: $size-checkbox;
+                        margin-right: 6px;
+                    }
+                    
+                    label {
+                        font-size: 14px;
+                        cursor: pointer;
+                        white-space: nowrap;
+                    }
+                }
+            }
+
+            .right {
+                width: $right-menu-width;
+                padding-left: $padding;
+                overflow: auto;
+
+                .search-input {
+
+                    .search-and-regex-button {
+                        display: flex;
+                        justify-content: space-between;
+
+                        input {
+                            height: 28px;
+                            width: calc(100% - 28px - 12px);
+                        }
+
+                        button {
+                            height: 28px;
+                            width: 28px;
+                        }
+
+                        .regexOn {
+                            background-color: #7573b1;
+                        }
+                    }
+
+                    .options-search {
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                        flex-wrap: wrap;
+                        margin: $padding 0px 0px 0px;
+                        overflow: auto;
+                        
+                        .element {
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+                            padding: 3px 6px 3px 6px;
+    
+                            input {
+                                height: $size-checkbox;
+                                width: $size-checkbox;
+                            }
+            
+                            .label-option-search {
+                                font-weight: $bold;
+                                margin-left: 6px;
+                                font-size: 12px;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .nb-words {
+                            font-weight: 600;
+                            padding: 3px 6px 3px 6px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .row-header {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+            padding-right: $padding;
+
+            .left {
+                display: flex;
+                align-items: center;
+                width: $left-row-width;
+                white-space: nowrap;
+            }
+        
+            .middle {
+                display: flex;
+                align-items: center;
+                width: $middle-row-width;
+                white-space: nowrap;
+            }
+    
+            .right {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                margin: 0px $padding;
+                width: $right-row-width;
+                white-space: nowrap;
+            }
+
+            .label-button-sort {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    margin-left: $padding;
+                    height: 18px;
+                    width: 18px;
+                }
+            }
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - #{$top-height} - 30px);
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+            padding-top: $padding;
+
+            .row {
+                display: flex;
+                flex-direction: column;
+
+                .view {
+                    display: flex;
+                    align-items: center;
+                    height: $row-view-height;
+                    cursor: pointer;
+
+                    .left {
+                        display: flex;
+                        align-items: center;
+                        width: $left-row-width;
+
+                        .dibi {
+                            font-size: 18px;
+                            margin: 0px 24px 0px 6px;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+        
+                        .french, .english {
+                            font-size: 14px;
+                            color: #ddd;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+                    }
+            
+                    .middle {
+                        display: flex;
+                        align-items: center;
+                        width: $middle-row-width;
+
+                        .date {
+                            color: #999;
+                            font-size: 12px;
+                        }
+                    }
+            
+                    .right {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        margin: 0px $padding;
+                        width: $right-row-width;
+
+                        .partOfSpeech {
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+                .details {
+                    display: flex;
+                    flex-direction: column;
+                    padding-top: $padding;
+                    padding-right: $padding;
+                    padding-bottom: 0px;
+                    padding-left: calc(#{$padding} * 2);
+
+                    .block-detail-if-screen-too-small {
+                        display: none;
+                        flex-direction: column;
+                    }
+
+                    .block-detail {
+                        display: flex;
+                        margin-bottom: $padding;
+                        align-items: center;
+
+                        .label {
+                            display: flex;
+                            width: $label-detail-view-width;
+
+                            span {
+                                font-size: 14px;
+                            }
+                        }
+
+                        .value {
+                            display: flex;
+                            width: calc(100% - #{$label-detail-view-width});
+
+                            .partOfSpeech-small-screen {
+                                font-size: 13px;
+                            }
+
+                            span {
+                                font-size: 13px;
+                                word-break: break-word;
+                                color: #ddd;
+                            }
+                        }
+
+                        .no-details {
+                            font-size: 12px;
+                            color: #bbb;
+                        }
+                    }
+
+                    .buttons-detail {
+                        display: flex;
+                        justify-content: flex-end;
+                        margin: 0px 0px $padding 0px;
+            
+                        img {
+                            width: 18px;
+                            height: 18px;
+                            cursor: pointer;
+                            margin-left: $padding;
+                        }
+                    }
+
+                    .edit {
+                        display: flex;
+                        justify-content: center;
+                        margin-bottom: $padding;
+        
+                        .form-new-word {
+                            display: flex;
+                            flex-direction: column;
+                            border: $border;
+                            border-radius: $border-radius;
+                            padding: 12px;
+                    
+                            .block {
+                                display: flex;
+                                flex-direction: column;
+                                margin-bottom: $padding;
+                        
+                                .label-input {
+                                    display: flex;
+                                    align-items: center;
+                        
+                                    .label {
+                                        width: 20%;
+                                        font-size: 18px;
+                                        margin-right: $padding;
+                                    }
+                                    
+                                    input, select, textarea {
+                                        width: 80%;
+                                    }
+                                }
+                        
+                                .help {
+                                    margin-top: 6px;
+                                    margin-right: $padding;
+                                    font-size: 13px;
+                                    color: #CCC;
+                                }
+                            }
+                        
+                            .mandatory {
+                            }
+                        
+                            .facultative {
+                            }
+                        
+                            .buttons {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                        
+                                .green-mes {
+                                    color: #8E8;
+                                }
+                        
+                                .yellow-mes {
+                                    color: #EE8;
+                                }
+                        
+                                .red-mes {
+                                    color: #E88;
+                                }
+        
+                                .right {
+                                    button {
+                                        margin-left: $padding;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .row:hover {
+                background-color: $bg-color-row-hover;
+            }
+        }
+    }
+}
+
+// Media query
+
+@media screen and (max-width: 750px) {
+    .body {
+        .container {
+            .top {
+                .left {
+                    flex-direction: column;
+                    .all-none-partOfSpeech {
+                        .all-none {
+                            padding: 3px 6px 3px 6px;
+                        }
+                    }
+
+                    .partsOfSpeech {
+                        margin: 0px;
+                        padding: 0px;
+                    }
+                }
+            }
+            .row-header {
+                justify-content: space-between;
+
+                .left {
+                    width: auto;
+                }
+            
+                .middle {
+                    width: auto;
+                }
+        
+                .right {
+                    width: auto;
+                }
+    
+                .label-button-sort {
+                    font-size: 12px;
+                }
+            }
+            .list {
+                .row {
+                    .view {
+                        .left {
+                            width: 100%;
+                        }
+                        .middle {
+                            display: none;
+                        }
+                        .right {
+                            display: none;
+                        }
+                    }
+
+                    .details {
+                        .block-detail-if-screen-too-small {
+                            display: flex;
+                        }
+
+                        .edit {
+                            .form-new-word {
+                                .block {
+                                    .label-input {
+                                        .label {
+                                            width: 20%;
+                                            font-size: 14px;
+                                            margin-right: $padding;
+                                            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+                                            white-space: -webkit-pre-wrap;          /* Chrome & Safari */ 
+                                            white-space: -pre-wrap;                 /* Opera 4-6 */
+                                            white-space: -o-pre-wrap;               /* Opera 7 */
+                                            white-space: pre-wrap;                  /* CSS3 */
+                                            word-wrap: break-word;                  /* Internet Explorer 5.5+ */
+                                            word-break: break-all;
+                                            white-space: normal;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+
+<div class="body">
+    <div class="container">
+        <div class="header">
+            <div class="left">
+            </div>
+            <div class="middle">
+                <h3>Logs base de données</h3>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div *ngIf="logs" class="list">
+            <div class="log" *ngFor="let log of logs">
+                <div class="timestamp">
+                    <span>{{log.timestamp | date:'dd/MM/y - HH:mm:ss'}}</span>
+                </div>
+                <div class="message">
+                    <span>{{log.message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,386 @@
+[
+    {
+        "name": "Coeur Historique",
+        "discordLink": "https://discord.gg/qBamnNVfWu",
+        "lowerJ": 1,
+        "lowerI": 1,
+        "upperJ": 110,
+        "upperI": 50
+    },
+    {
+        "name": "Crash du Nord",
+        "discordLink": "https://discord.gg/2cRrW5vRkH",
+        "lowerJ": 111,
+        "lowerI": 1,
+        "upperJ": 155,
+        "upperI": 50
+    },
+    {
+        "name": "Crash du Vide",
+        "discordLink": "https://discord.gg/rk87qgRd",
+        "lowerJ": 156,
+        "lowerI": 1,
+        "upperJ": 196,
+        "upperI": 50
+    },
+    {
+        "name": "Vallée du Nord",
+        "discordLink": "https://discord.gg/nGEG9nPj5S",
+        "lowerJ": 197,
+        "lowerI": 1,
+        "upperJ": 240,
+        "upperI": 50
+    },
+    {
+        "name": "Littoral Nord",
+        "discordLink": "https://discord.gg/aCNxJH42",
+        "lowerJ": 241,
+        "lowerI": 1,
+        "upperJ": 290,
+        "upperI": 50
+    },
+    {
+        "name": "Mer du Nord",
+        "discordLink": "https://discord.gg/eEJwPY7rPb",
+        "lowerJ": 291,
+        "lowerI": 1,
+        "upperJ": 340,
+        "upperI": 47
+    },
+    {
+        "name": "Crash de l'Ouest",
+        "discordLink": "https://discord.gg/TzpjJuaE",
+        "lowerJ": 1,
+        "lowerI": 51,
+        "upperJ": 110,
+        "upperI": 79
+    },
+    {
+        "name": "Crash du Centre",
+        "discordLink": "https://discord.gg/U4uneE5v",
+        "lowerJ": 111,
+        "lowerI": 51,
+        "upperJ": 155,
+        "upperI": 79
+    },
+    {
+        "name": "Crash de l'Est",
+        "discordLink": "https://discord.gg/uUnEsPNa",
+        "lowerJ": 156,
+        "lowerI": 51,
+        "upperJ": 196,
+        "upperI": 79
+    },
+    {
+        "name": "Vallée Centrale",
+        "discordLink": "https://discord.gg/nGEG9nPj5S",
+        "lowerJ": 197,
+        "lowerI": 51,
+        "upperJ": 240,
+        "upperI": 79
+    },
+    {
+        "name": "Falaises",
+        "discordLink": "https://discord.gg/a3CXhh9AuA",
+        "lowerJ": 241,
+        "lowerI": 51,
+        "upperJ": 290,
+        "upperI": 79
+    },
+    {
+        "name": "Mer Kraken Rosalie",
+        "discordLink": "https://discord.gg/6JamRuD4",
+        "lowerJ": 290,
+        "lowerI": 45,
+        "upperJ": 330,
+        "upperI": 79
+    },
+    {
+        "name": "Crash Longiforme",
+        "discordLink": "https://discord.gg/JsmRV6XtCu",
+        "lowerJ": 1,
+        "lowerI": 80,
+        "upperJ": 110,
+        "upperI": 100
+    },
+    {
+        "name": "Crash du Sud",
+        "discordLink": "https://discord.gg/rk87qgRd",
+        "lowerJ": 111,
+        "lowerI": 80,
+        "upperJ": 155,
+        "upperI": 100
+    },
+    {
+        "name": "Terre du Millieu",
+        "discordLink": "https://discord.gg/AuJMwMhXdw",
+        "lowerJ": 156,
+        "lowerI": 80,
+        "upperJ": 196,
+        "upperI": 100
+    },
+    {
+        "name": "Vallée du Sud",
+        "discordLink": "https://discord.gg/nGEG9nPj5S",
+        "lowerJ": 197,
+        "lowerI": 80,
+        "upperJ": 240,
+        "upperI": 100
+    },
+    {
+        "name": "Abîme",
+        "discordLink": "https://discord.gg/HHZDURDq",
+        "lowerJ": 241,
+        "lowerI": 80,
+        "upperJ": 335,
+        "upperI": 104
+    },
+    {
+        "name": "Route de la Résolution",
+        "discordLink": "https://discord.gg/jzbXM7cD",
+        "lowerJ": 1,
+        "lowerI": 101,
+        "upperJ": 100,
+        "upperI": 120
+    },
+    {
+        "name": "Plateau Ouest",
+        "discordLink": "https://discord.gg/nHdkqsAe5x",
+        "lowerJ": 101,
+        "lowerI": 101,
+        "upperJ": 148,
+        "upperI": 120
+    },
+    {
+        "name": "Plateau Central",
+        "discordLink": "https://discord.gg/jzbXM7cD",
+        "lowerJ": 149,
+        "lowerI": 101,
+        "upperJ": 193,
+        "upperI": 120
+    },
+    {
+        "name": "Plateau Est",
+        "discordLink": "https://discord.gg/jzbXM7cD",
+        "lowerJ": 194,
+        "lowerI": 101,
+        "upperJ": 240,
+        "upperI": 120
+    },
+    {
+        "name": "Plages",
+        "discordLink": "https://discord.gg/a3CXhh9AuA",
+        "lowerJ": 241,
+        "lowerI": 101,
+        "upperJ": 290,
+        "upperI": 120
+    },
+    {
+        "name": "Mer du Sud",
+        "discordLink": "https://discord.gg/GqV7aVhvwE",
+        "lowerJ": 291,
+        "lowerI": 105,
+        "upperJ": 335,
+        "upperI": 120
+    },
+    {
+        "name": "Route du Sud",
+        "discordLink": "",
+        "lowerJ": 1,
+        "lowerI": 121,
+        "upperJ": 110,
+        "upperI": 146
+    },
+    {
+        "name": "Zone de Partage",
+        "discordLink": "",
+        "lowerJ": 101,
+        "lowerI": 121,
+        "upperJ": 110,
+        "upperI": 146
+    },
+    {
+        "name": "Montagnes de l'Ouest",
+        "discordLink": "https://discord.gg/By6ZgesS",
+        "lowerJ": 101,
+        "lowerI": 121,
+        "upperJ": 155,
+        "upperI": 150
+    },
+    {
+        "name": "Montagnes Centrales",
+        "discordLink": "https://discord.com/invite/smQeveCnbD",
+        "lowerJ": 156,
+        "lowerI": 121,
+        "upperJ": 199,
+        "upperI": 150
+    },
+    {
+        "name": "Montagnes de l'Est",
+        "discordLink": "https://discord.gg/smQeveCnbD",
+        "lowerJ": 200,
+        "lowerI": 121,
+        "upperJ": 240,
+        "upperI": 150
+    },
+    {
+        "name": "Lottoral Sud",
+        "discordLink": "https://discord.gg/a3CXhh9AuA",
+        "lowerJ": 241,
+        "lowerI": 121,
+        "upperJ": 290,
+        "upperI": 150
+    },
+    {
+        "name": "Grand Sud",
+        "discordLink": "https://discord.gg/hHNhWFfcNp",
+        "lowerJ": 1,
+        "lowerI": 121,
+        "upperJ": 100,
+        "upperI": 210
+    },
+    {
+        "name": "Route de la Retrouvaille",
+        "discordLink": "",
+        "lowerJ": 1,
+        "lowerI": 147,
+        "upperJ": 100,
+        "upperI": 210
+    },
+    {
+        "name": "Désert de l'Ouest",
+        "discordLink": "https://discord.gg/rt4nT4ZD",
+        "lowerJ": 101,
+        "lowerI": 147,
+        "upperJ": 155,
+        "upperI": 210
+    },
+    {
+        "name": "Désert Central",
+        "discordLink": "https://discord.gg/dqZfmbkb",
+        "lowerJ": 156,
+        "lowerI": 147,
+        "upperJ": 196,
+        "upperI": 209
+    },
+    {
+        "name": "Désert de l'Est",
+        "discordLink": "https://discord.gg/QyavyG9V",
+        "lowerJ": 197,
+        "lowerI": 147,
+        "upperJ": 240,
+        "upperI": 209
+    },
+    {
+        "name": "Plaines Fleuries",
+        "discordLink": "https://discord.gg/p5rjvcWT",
+        "lowerJ": 1,
+        "lowerI": 210,
+        "upperJ": 110,
+        "upperI": 250
+    },
+    {
+        "name": "Terre des Mirages",
+        "discordLink": "https://discord.gg/CWGYDR4E",
+        "lowerJ": 111,
+        "lowerI": 211,
+        "upperJ": 155,
+        "upperI": 250
+    },
+    {
+        "name": "Oasis",
+        "discordLink": "https://discord.gg/3K2ByRmy",
+        "lowerJ": 156,
+        "lowerI": 210,
+        "upperJ": 196,
+        "upperI": 250
+    },
+    {
+        "name": "Hautes Dunes",
+        "discordLink": "https://discord.gg/Ap23wcPqCa",
+        "lowerJ": 197,
+        "lowerI": 210,
+        "upperJ": 240,
+        "upperI": 250
+    },
+    {
+        "name": "Terres Fertiles",
+        "discordLink": "https://discord.gg/wpAUcCKk6a",
+        "lowerJ": 241,
+        "lowerI": 151,
+        "upperJ": 290,
+        "upperI": 250
+    },
+    {
+        "name": "Champ du Soleil",
+        "discordLink": "https://discord.gg/SMCv7h8A",
+        "lowerJ": 291,
+        "lowerI": 211,
+        "upperJ": 335,
+        "upperI": 250
+    },
+    {
+        "name": "Forêt Abyssale",
+        "discordLink": "https://discord.gg/9gkFxMKe",
+        "lowerJ": 331,
+        "lowerI": 1,
+        "upperJ": 430,
+        "upperI": 119
+    },
+    {
+        "name": "Salins",
+        "discordLink": "https://discord.gg/dQuW9prH",
+        "lowerJ": 291,
+        "lowerI": 120,
+        "upperJ": 430,
+        "upperI": 146
+    },
+    {
+        "name": "Volcan",
+        "discordLink": "https://discord.gg/dXket8cD",
+        "lowerJ": 291,
+        "lowerI": 147,
+        "upperJ": 430,
+        "upperI": 210
+    },
+    {
+        "name": "Coulées de Lave",
+        "discordLink": "https://discord.gg/hFDW4efe28",
+        "lowerJ": 336,
+        "lowerI": 211,
+        "upperJ": 430,
+        "upperI": 250
+    },
+    {
+        "name": "Jungle",
+        "discordLink": "https://discord.gg/5bNbczdp",
+        "lowerJ": 431,
+        "lowerI": 1,
+        "upperJ": 470,
+        "upperI": 50
+    },
+    {
+        "name": "Grande Clairière",
+        "discordLink": "https://discord.gg/ndRanwMq",
+        "lowerJ": 431,
+        "lowerI": 51,
+        "upperJ": 470,
+        "upperI": 79
+    },
+    {
+        "name": "Terre du Kraken",
+        "discordLink": "https://discord.gg/qRS8cGquV9",
+        "lowerJ": 431,
+        "lowerI": 80,
+        "upperJ": 510,
+        "upperI": 120
+    },
+    {
+        "name": "Lac Écarlate",
+        "discordLink": "https://discord.gg/tJbdUjJbjr",
+        "lowerJ": 431,
+        "lowerI": 121,
+        "upperJ": 510,
+        "upperI": 250
+    }
+]

@@ -1,0 +1,171 @@
+
+$bg-color-header: #151311; // Couleur de fond la plus foncée
+$bg-color-nav: #252321; // Couleur de fond entre-deux
+$bg-color-content: #353331; // Couleur de fond la plus claire
+$bg-color-nav-button: #353331; // Couleur de fond des boutons
+$bg-color-nav-button-hover: #454341; // Couleur de fond des boutons hover
+$bg-color-option-block: #555351; // Options
+$bg-color-option-block-hover: #656361; // Options hover
+
+$header-height: 50px;
+$footer-height: 0px;
+$nav-width: 200px;
+
+$padding: 12px;
+$border-radius: 4px;
+
+.body {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: $header-height;
+            width: 100%;
+            background-color: $bg-color-header;
+
+            .menu-button {
+                display: flex;
+                align-items: center;
+                margin-left: $padding;
+                cursor: pointer;
+
+                img {
+                    height: 20px;
+                    width: 20px;
+                }
+            }
+
+            .title, .title-small {
+                cursor: pointer;
+            }
+
+            .title-gold, .title-gold-small {
+                cursor: pointer;
+                color: #FFDB88;
+            }
+
+            .title-small, .title-gold-small {
+                display: none;
+            }
+
+            .log-button {
+                margin-right: $padding;
+            }
+        }
+
+        .middle {
+            display: flex;
+            height: calc(100% - #{$header-height} - #{$footer-height});
+            width: 100%;
+
+            .nav {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: $nav-width;
+                background-color: $bg-color-nav;
+                overflow: auto;
+
+                .buttons-list {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .button-block {
+                        display: flex;
+                        flex-direction: column;
+                        margin: $padding $padding 0px $padding;
+                        padding: $padding;
+                        border-radius: $border-radius;
+                        background-color: $bg-color-nav-button;
+
+                        h2 {
+                            font-size: 18px;
+                        }
+
+                        .flag-options {
+                            display: flex;
+                            flex-direction: column;
+                            margin-top: $padding;
+
+                            .option-block {
+                                display: flex;
+                                flex-direction: column;
+
+                                h3 {
+                                    font-weight: 400;
+                                    font-size: 16px;
+                                }
+
+                                .h4 {
+                                    font-size: 14px;
+                                }
+
+                                .button {
+                                    background-color: $bg-color-option-block;
+                                    border-radius: $border-radius;
+                                    margin-top: 6px;
+                                    padding: 6px;
+                                }
+                                .button:hover {
+                                    background-color: $bg-color-option-block-hover;
+                                }
+                            }
+                        }
+                    }
+
+                    .button-block:hover {
+                        cursor: pointer;
+                        background-color: $bg-color-nav-button-hover;
+                    }
+                }
+            }
+
+            .content {
+                display: flex;
+                height: 100%;
+                width: calc(100% - #{$nav-width});
+                background-color: $bg-color-content;
+                overflow: auto;
+
+                .switch-component {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+
+        .footer {
+            display: none;
+            height: $footer-height;
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .body {
+        .container {
+            .header {
+                .title, .title-gold {
+                    display: none;
+                }
+
+                .title-small, .title-gold-small {
+                    display: flex;
+                }
+            }
+        }
+    }
+}
