@@ -59,7 +59,7 @@ export class DibiDictComponent implements OnInit {
 
   message = {mes: '', color: ''}; // Message et sa couleur affichant le retour du serveur
 
-  translate: 'French' | 'English' | 'Both' = 'French';
+  translate: Translate = 'French';
 
   detail = ''; // Permet d'ouvrir l'affichage détaillé des mots
 
@@ -148,7 +148,6 @@ export class DibiDictComponent implements OnInit {
           // Catch de l'erreur, le regex n'est pas valide
           } catch(e: any) {
             this.setColorInputSearch('red');
-            console.log('Expression régulière non valide : ' + e.message);
           }
           // this.filteredDibiDict = filtered;
           this.sortDictionary(filtered, this.sortBy, this.sortOrder);
@@ -230,8 +229,19 @@ export class DibiDictComponent implements OnInit {
    * Sélection ou déselecitonne la recherche regex
    */
   toggleRegexSearch(): void {
-    this.regexSearch = !this.regexSearch; // Toggle de la recherche regex
     this.eachKeySearch() // Lancement d'un next dans l'observable de filtrage
+    if (this.regexSearch) {
+      if (this.searchOptions.element.Dibi && !this.searchOptions.element.French && !this.searchOptions.element.English) {
+        this.searchOptions.element.French = true;
+        this.searchOptions.element.English = true;
+      }
+    } else {
+      if (this.searchOptions.element.Dibi && this.searchOptions.element.French && this.searchOptions.element.English) {
+        this.searchOptions.element.French = false;
+        this.searchOptions.element.English = false;
+      }
+    }
+    this.regexSearch = !this.regexSearch; // Toggle de la recherche regex
   }
 
   /**
@@ -390,3 +400,4 @@ export class DibiDictComponent implements OnInit {
 
 type SortBy = 'dibi' | 'date' | 'partOfSpeech'; // Tri selon un élément
 type SortOrder = 'cresc' | 'decresc'; // Ordre de tri
+type Translate = 'French' | 'English' | 'Both';
