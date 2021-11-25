@@ -12,12 +12,18 @@ import { DibiWord } from 'src/app/types';
 })
 export class DibiDictComponent implements OnInit {
 
+  // Liste des mots du dico
   dibiDict: DibiWord[] = []; // Tous les mots
   filteredDibiDict: DibiWord[] = []; // Seulements ceux filtrés
+  filteredAllPages: DibiWord[][] = []; // Ceux filtrés structurés par pages
+
+  nbWordsPerPage: number; // Nombre de mots affichés dans une page (enregistré en localStorage pour préférence utilisateur)
+  nbWordsPerPageDefalut = 200; // Nombre de mots affichés dans une page par défaut (car localStorage pour préf utilisateur)
+  currentPage = 0; // Index de la page courante
 
   @Input() adminConnected: boolean; // Si un administrateur est connecté
   @Input() pwd: string; // Pwd en localSorage pour plus rester connecté
-  
+
   // Pour le filtrage des mots
 
   search = ''; // Input de recherche
@@ -54,10 +60,10 @@ export class DibiDictComponent implements OnInit {
 
   // Pour le tri des mots
 
-  sortBy : SortBy = 'dibi'; // Possibilité de trier par mot dibi, date, nature grammaticale, 
-  sortOrder : SortOrder = 'cresc'; // cresc (ordre alphabétique) et decresc (ordre inverse alphabétique)
+  sortBy: SortBy = 'dibi'; // Possibilité de trier par mot dibi, date, nature grammaticale, 
+  sortOrder: SortOrder = 'cresc'; // cresc (ordre alphabétique) et decresc (ordre inverse alphabétique)
 
-  message = {mes: '', color: ''}; // Message et sa couleur affichant le retour du serveur
+  message = { mes: '', color: '' }; // Message et sa couleur affichant le retour du serveur
 
   translate: Translate = 'French';
 
@@ -75,82 +81,87 @@ export class DibiDictComponent implements OnInit {
       map(mc => {
         let filtered = [];
 
-          // Si la recherche est en expression régulière, vérification de la validité du regex saisi
-          try {
-            if (this.regexSearch) {
-              new RegExp(this.search);
-              this.setColorInputSearch('green'); // Si regex correcte, couleur de fond verte pour l'input de recherche
+        // Si la recherche est en expression régulière, vérification de la validité du regex saisi
+        try {
+          if (this.regexSearch) {
+            new RegExp(this.search);
+            this.setColorInputSearch('green'); // Si regex correcte, couleur de fond verte pour l'input de recherche
+          } else {
+            this.setColorInputSearch('grey'); // Si recherche non regex, couleur classique
+          }
+
+          // Itération sur tous les mots pour les filtrer et les placer dans filteredDibiDict (seulements les mots triés)
+          this.dibiDict.forEach(word => {
+
+            // Vérification que le mot à filtrer soit inclus dans parmis les options à gauche de la barre de recherche
+            if ((this.searchOptions.doesNotContiain.author && word.author) || (this.searchOptions.doesNotContiain.description && word.description) || (this.searchOptions.doesNotContiain.english && word.english)) {
+
             } else {
-              this.setColorInputSearch('grey'); // Si recherche non regex, couleur classique
-            }
 
-            // Itération sur tous les mots pour les filtrer et les placer dans filteredDibiDict (seulements les mots triés)
-            this.dibiDict.forEach(word => {
-
-              // Vérification que le mot à filtrer soit inclus dans parmis les options à gauche de la barre de recherche
-              if ((this.searchOptions.doesNotContiain.author && word.author) || (this.searchOptions.doesNotContiain.description && word.description) || (this.searchOptions.doesNotContiain.english && word.english)) {
-
-              } else {
-
-                // Vérification que le mot à filtrer respecte l'expression saisie en barre de recherche
-                if (this.searchOptions.partsOfSpeech[word.partOfSpeech]) {
-                  if (this.searchSimplified === '') {
-                    filtered.push(word);
-                  } else {
-                    let isThere = false;
-                      if (this.searchOptions.element.Dibi) {
-                        if (this.isWordMatching(word.dibi)) {
-                          isThere = true;
-                        }
-                      }
-                      if (this.searchOptions.element.French) {
-                        if (this.isWordMatching(word.french)) {
-                          isThere = true;
-                        }
-                      }
-                      if (this.searchOptions.element.English) {
-                        if (word.english) {
-                          if (this.isWordMatching(word.english)) {
-                            isThere = true;
-                          }
-                        }
-                      }
-                      if (this.searchOptions.element.Author) {
-                        if (word.author) {
-                          if (this.isWordMatching(word.author)) {
-                            isThere = true;
-                          }
-                        }
-                      }
-                      if (this.searchOptions.element.Date) {
-                        if (word.date) {
-                          if (this.isWordMatching(word.date.toString())) {
-                            isThere = true;
-                          }
-                        }
-                      }
-                      if (this.searchOptions.element.Description) {
-                        if (word.description) {
-                          if (this.isWordMatching(word.description)) {
-                            isThere = true;
-                          }
-                        }
-                      }
-                    if (isThere) {
-                      filtered.push(word);
+              // Vérification que le mot à filtrer respecte l'expression saisie en barre de recherche
+              if (this.searchOptions.partsOfSpeech[word.partOfSpeech]) {
+                if (this.searchSimplified === '') {
+                  filtered.push(word);
+                } else {
+                  let isThere = false;
+                  if (this.searchOptions.element.Dibi) {
+                    if (this.isWordMatching(word.dibi)) {
+                      isThere = true;
                     }
                   }
+                  if (this.searchOptions.element.French) {
+                    if (this.isWordMatching(word.french)) {
+                      isThere = true;
+                    }
+                  }
+                  if (this.searchOptions.element.English) {
+                    if (word.english) {
+                      if (this.isWordMatching(word.english)) {
+                        isThere = true;
+                      }
+                    }
+                  }
+                  if (this.searchOptions.element.Author) {
+                    if (word.author) {
+                      if (this.isWordMatching(word.author)) {
+                        isThere = true;
+                      }
+                    }
+                  }
+                  if (this.searchOptions.element.Date) {
+                    if (word.date) {
+                      if (this.isWordMatching(word.date.toString())) {
+                        isThere = true;
+                      }
+                    }
+                  }
+                  if (this.searchOptions.element.Description) {
+                    if (word.description) {
+                      if (this.isWordMatching(word.description)) {
+                        isThere = true;
+                      }
+                    }
+                  }
+                  if (isThere) {
+                    filtered.push(word);
+                  }
                 }
-
               }
-            });
-          
+
+            }
+          });
+
           // Catch de l'erreur, le regex n'est pas valide
-          } catch(e: any) {
-            this.setColorInputSearch('red');
-          }
-          // this.filteredDibiDict = filtered;
-          this.sortDictionary(filtered, this.sortBy, this.sortOrder);
+        } catch (e: any) {
+          this.setColorInputSearch('red');
+        }
+
+        // Tri des mots
+        this.sortDictionary(filtered, this.sortBy, this.sortOrder);
+
+        // Organisation par pages
+        this.buildPages();
+
         return filtered;
       })
     );
@@ -163,28 +174,32 @@ export class DibiDictComponent implements OnInit {
   ngOnInit(): void {
 
     // Check du localStorage pour voir les préférences de tri (pas de filtrage)
-    window.localStorage.getItem('sortBy') ? this.sortBy = window.localStorage.getItem('sortBy') as SortBy : { };
-    window.localStorage.getItem('sortOrder') ? this.sortOrder = window.localStorage.getItem('sortOrder') as SortOrder : { };
+    window.localStorage.getItem('sortBy') ? this.sortBy = window.localStorage.getItem('sortBy') as SortBy : {};
+    window.localStorage.getItem('sortOrder') ? this.sortOrder = window.localStorage.getItem('sortOrder') as SortOrder : {};
+
+    // Check du localStorage pour voir su une préférence en nombre de mots par page existe
+    window.localStorage.getItem('nbWordsPerPage') ? this.nbWordsPerPage = parseInt(window.localStorage.getItem('nbWordsPerPage')) : this.nbWordsPerPage = this.nbWordsPerPageDefalut;
 
     // Demande du dictionnaire
-    this.socket.emit('fetchDict', { });
+    this.socket.emit('fetchDict', {});
 
     // Récupération du dictionnaire
     this.socket.on('loadDict', (data) => {
       this.dibiDict = data.dict;
       // Tri du dictionnaire par ordre alphabétique du mot Dibi
-      this.sortDictionary(this.dibiDict, this.sortBy, this.sortOrder); // Méthode de tri selon des critères définisables par l'utilisateur
+      // this.sortDictionary(this.dibiDict, this.sortBy, this.sortOrder); // Méthode de tri selon des critères définisables par l'utilisateur
+      this.searchObservable.next();
     });
 
     // En réponse à la modification d'un mot
     this.socket.on('responseEditWord', (data) => {
       if (data.status === 0) {
-        this.message = {mes: 'Succès', color: 'green'};
+        this.message = { mes: 'Succès', color: 'green' };
       } else {
-        this.message = {mes: data.mes, color: 'red'};
+        this.message = { mes: data.mes, color: 'red' };
       }
       // Clear du message au bout d'un certain délai
-      setTimeout(() => { this.message = {mes: '', color: ''}; }, 10000);
+      setTimeout(() => { this.message = { mes: '', color: '' }; }, 10000);
     });
 
     // Mot bien supprimé
@@ -200,15 +215,15 @@ export class DibiDictComponent implements OnInit {
    */
   isWordMatching(elem: string): boolean {
     let wordMatch = false;
-      if (this.regexSearch) {
-        if (elem.match(this.search)) {
-          wordMatch = true;
-        }
-      } else {
-        if (removeAccents(elem.toLowerCase()).includes(this.searchSimplified)) {
-          wordMatch = true;
-        }
+    if (this.regexSearch) {
+      if (elem.match(this.search)) {
+        wordMatch = true;
       }
+    } else {
+      if (removeAccents(elem.toLowerCase()).includes(this.searchSimplified)) {
+        wordMatch = true;
+      }
+    }
     return wordMatch;
   }
 
@@ -288,7 +303,7 @@ export class DibiDictComponent implements OnInit {
     if (!this.adminConnected) {
       alert('Administrateur non connecté.');
     } else {
-      this.message = {mes: 'Enregistrement...', color: 'yellow'};
+      this.message = { mes: 'Enregistrement...', color: 'yellow' };
       this.socket.emit('editWord', { wordToEdit: this.wordToEdit, oldWord: this.oldWord, pwd: this.pwd });
     }
   }
@@ -314,90 +329,145 @@ export class DibiDictComponent implements OnInit {
   /**
    * Quand l'utilisateur clique sur un label pour trier par (mot dibi, date d'ajout, nature, ordre normal, inverse)
    */
-   setSort(sortBy: SortBy): void {
-     if (this.sortBy === sortBy) {
-       if (this.sortOrder === 'cresc') {
+  setSort(sortBy: SortBy): void {
+    if (this.sortBy === sortBy) {
+      if (this.sortOrder === 'cresc') {
         this.sortOrder = 'decresc';
         window.localStorage.setItem('sortOrder', 'decresc');
-       } else {
+      } else {
         this.sortOrder = 'cresc';
         window.localStorage.setItem('sortOrder', 'cresc');
-       }
-     } else {
+      }
+    } else {
       this.sortOrder = 'cresc';
       window.localStorage.setItem('sortOrder', 'cresc');
-     }
-      this.sortBy = sortBy;
-      window.localStorage.setItem('sortBy', sortBy);
-      this.sortDictionary(this.filteredDibiDict, this.sortBy, this.sortOrder);
-   }
-
-   /**
-    * Tri tous les mots dans le dictionnaire selon un critère et un ordre
-    * Puis lance le calcul d'affichage en fonction des options de tri
-    */
-    sortDictionary(list: DibiWord[], sortBy: SortBy, sortOrder: SortOrder): void {
-      if (sortBy === 'date') { // Tri par date (de type Date)
-        list.sort((a, b) => {
-          if (!a.date && !b.date) {
-            return 0;
-          } else if (!a.date) {
-            if (sortOrder === 'cresc') {
-              return 1;
-            } else {
-              return -1;
-            }
-          } else if (!b.date) {
-            if (sortOrder === 'cresc') {
-              return -1;
-            } else {
-              return 1;
-            }
-          } else {
-            if (a.date > b.date) {
-              if (sortOrder === 'cresc') {
-                return -1;
-              } else {
-                return 1;
-              }
-            } else if (a.date < b.date) {
-              if (sortOrder === 'cresc') {
-                return 1;
-              } else {
-                return -1;
-              }
-            } else {
-              return 0;
-            } 
-          }
-        });
-      } else { // Tri par élément de type string
-        list.sort((a, b) => {
-          if (a[sortBy] > b[sortBy]) {
-            if (sortOrder === 'cresc') {
-              return 1;
-            } else {
-              return -1;
-            }
-          } else if (a[sortBy] < b[sortBy]) {
-            if (sortOrder === 'cresc') {
-              return -1;
-            } else {
-              return 1;
-            }
-          } else {
-            return 0;
-          }
-        });
-      }
-      this.filteredDibiDict = list;
-      // this.eachKeySearch();
     }
+    this.sortBy = sortBy;
+    window.localStorage.setItem('sortBy', sortBy);
+    this.sortDictionary(this.filteredDibiDict, this.sortBy, this.sortOrder);
+    this.buildPages();
+  }
+
+  /**
+  * Tri tous les mots dans le dictionnaire selon un critère et un ordre
+  * Puis lance le calcul d'affichage en fonction des options de tri
+  */
+  sortDictionary(list: DibiWord[], sortBy: SortBy, sortOrder: SortOrder): void {
+    if (sortBy === 'date') { // Tri par date (de type Date)
+      list.sort((a, b) => {
+        if (!a.date && !b.date) {
+          return 0;
+        } else if (!a.date) {
+          if (sortOrder === 'cresc') {
+            return 1;
+          } else {
+            return -1;
+          }
+        } else if (!b.date) {
+          if (sortOrder === 'cresc') {
+            return -1;
+          } else {
+            return 1;
+          }
+        } else {
+          if (a.date > b.date) {
+            if (sortOrder === 'cresc') {
+              return -1;
+            } else {
+              return 1;
+            }
+          } else if (a.date < b.date) {
+            if (sortOrder === 'cresc') {
+              return 1;
+            } else {
+              return -1;
+            }
+          } else {
+            return 0;
+          }
+        }
+      });
+    } else { // Tri par élément de type string
+      list.sort((a, b) => {
+        const aComparable = removeAccents(a[sortBy].toLowerCase());
+        const bComparable = removeAccents(b[sortBy].toLowerCase());
+        if (aComparable > bComparable) {
+          if (sortOrder === 'cresc') {
+            return 1;
+          } else {
+            return -1;
+          }
+        } else if (aComparable < bComparable) {
+          if (sortOrder === 'cresc') {
+            return -1;
+          } else {
+            return 1;
+          }
+        } else {
+          return 0;
+        }
+      });
+    }
+    this.filteredDibiDict = list;
+    // this.eachKeySearch();
+  }
+
+  /**
+   * À partir de la liste des mots filtrés et triés, construit 1 à n pages pour limiter le nombre de mots affichés en même temps
+   */
+  buildPages(): void {
+    this.currentPage = 0;
+    this.filteredAllPages = []; // Vidage de la liste trié
+    let i = 1; // Incrément pour compter le nombre de mots par page
+    let page = 0; // Page courante pour ajouter les mots
+    this.filteredAllPages[page] = [];
+    this.filteredDibiDict.forEach(word => {
+      this.filteredAllPages[page].push(word);
+      if (i === this.nbWordsPerPage) {
+        i = 1;
+        page++;
+        this.filteredAllPages[page] = [];
+      } else {
+        i++;
+      }
+    });
+  }
+
+  /**
+  * Change de page, 4 boutons, 4 comportements
+  */
+  changePage(action: string): void {
+    if (action === 'fullLeft') {
+      this.currentPage = 0;
+    } else if (action === 'left') {
+      if (this.currentPage > 0) {
+        this.currentPage--;
+      }
+    } else if (action === 'right') {
+      if (this.currentPage < this.filteredAllPages.length - 1) {
+        this.currentPage++;
+      }
+    } else if (action === 'fullRight') {
+      this.currentPage = this.filteredAllPages.length - 1;
+    }
+  }
+
+  /**
+   * Modifie le nombre de mots affichés par page
+   */
+  editNbWordsPerPage(event: any): void {
+    const nb = parseInt(event.target.value);
+    if (nb > 0) { // Pas moins d'un mot par page
+      this.nbWordsPerPage = nb;
+      window.localStorage.setItem('nbWordsPerPage', nb.toString());
+      this.buildPages();
+    }
+  }
 
 }
 
 // Types internes à cette classe
 
-type SortBy = 'dibi' | 'date' | 'partOfSpeech'; // Tri selon un élément
+type SortBy = 'dibi' | 'french' | 'date' | 'partOfSpeech'; // Tri selon un élément
 type SortOrder = 'cresc' | 'decresc'; // Ordre de tri
 type Translate = 'French' | 'English' | 'Both';

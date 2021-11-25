@@ -35,17 +35,36 @@
                         <div class="element" (click)="eachKeySearch()"><input id="Author" type="checkbox" class="Author" [(ngModel)]="searchOptions.element.Author"><label for="Author" class="label-option-search">Créateur</label></div>
                         <!-- <div class="element" (click)="eachKeySearch()"><input id="Date" type="checkbox" class="Date" [(ngModel)]="searchOptions.element.Date"><label for="Date" class="label-option-search">Date</label></div>
                             <div class="element" (click)="eachKeySearch()"><input id="Description" type="checkbox" class="Description" [(ngModel)]="searchOptions.element.Description"><label for="Description" class="label-option-search">Description</label></div> -->
-                        <span class="nb-words" *ngIf="dibiDict">{{filteredDibiDict.length}} / {{dibiDict.length}}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row-header">
+        <div class="row-pages">
+            <div class="left">
+                <img (click)="changePage('fullLeft')" src="./assets/angle-double-left-solid.svg">
+                <img (click)="changePage('left')" src="./assets/angle-left-solid.svg">
+            </div>
+            <div class="middle">
+                <input title="Nombre de mots affichés par page" type="number" min="1" (change)="editNbWordsPerPage($event)" value="{{nbWordsPerPage}}">
+                <span title="Page courante / nombre de page" class="current-page">Page {{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
+                <span title="Nombre de mots correspondant aux filtres et à la recherche / nombre de mots total" class="nb-words" *ngIf="dibiDict">Mots {{filteredDibiDict.length}} / {{dibiDict.length}}</span>
+            </div>
+            <div class="right">
+                <img (click)="changePage('right')" src="./assets/angle-right-solid.svg">
+                <img (click)="changePage('fullRight')" src="./assets/angle-double-right-solid.svg">
+            </div>
+        </div>
+        <div class="row-order">
             <div class="left">
                 <div class="label-button-sort" (click)="setSort('dibi')" title="Trier par mot Dibi">
                     <span>Mot Dibi</span>
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
+                </div>
+                <div class="label-button-sort label-button-sort-fr" (click)="setSort('french')" title="Trier par mot Français>">
+                    <span>Trad Fr</span>
+                    <img *ngIf="sortBy === 'french' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
+                    <img *ngIf="sortBy === 'french' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
                 </div>
             </div>
             <div class="middle">
@@ -63,32 +82,32 @@
                 </div>
             </div>
         </div>
-        <div class="list" *ngIf="filteredDibiDict">
-                <div class="row" *ngFor="let word of filteredDibiDict">
-                    <div class="view" (click)="openDetail(word)">
-                        <div class="left">
-                            <div [className]="'dibi ' + word.partOfSpeech">{{word.dibi}}</div>
-                            <div *ngIf="translate === 'French' || translate === 'Both'" class="french">{{word.french}}</div>
-                            <div *ngIf="translate === 'English' || translate === 'Both'" class="english">{{word.english}}</div>
-                        </div>
-                        <div class="middle">
-                            <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">{{word.date | date:'dd/MM/YYYY'}}</div>
-                        </div>
-                        <div class="right">
-                            <ng-container [ngSwitch]="word.partOfSpeech">
-                                <div class="partOfSpeech Noun" *ngSwitchCase="'Noun'">Nom</div>
-                                <div class="partOfSpeech Pronoun" *ngSwitchCase="'Pronoun'">Pronom</div>
-                                <div class="partOfSpeech Verb" *ngSwitchCase="'Verb'">Verbe</div>
-                                <div class="partOfSpeech Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
-                                <div class="partOfSpeech Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                                <div class="partOfSpeech Preposition" *ngSwitchCase="'Preposition'">Préposition</div>
-                                <div class="partOfSpeech Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
-                                <div class="partOfSpeech Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
-                                <div class="partOfSpeech Particule" *ngSwitchCase="'Particule'">Particule</div>
-                            </ng-container>
-                        </div>
+        <div class="list" *ngIf="filteredAllPages">
+            <div class="row" *ngFor="let word of filteredAllPages[currentPage]">
+                <div class="view" (click)="openDetail(word)">
+                    <div class="left">
+                        <div [className]="'dibi ' + word.partOfSpeech">{{word.dibi}}</div>
+                        <div *ngIf="translate === 'French' || translate === 'Both'" class="french">{{word.french}}</div>
+                        <div *ngIf="translate === 'English' || translate === 'Both'" class="english">{{word.english}}</div>
                     </div>
-                    <div *ngIf="detail === word._id" class="details" id="{{word.dibi + '.' + word.french + '.' + word.date.toString}}">
+                    <div class="middle">
+                        <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">{{word.date | date:'dd/MM/YYYY'}}</div>
+                    </div>
+                    <div class="right">
+                        <ng-container [ngSwitch]="word.partOfSpeech">
+                            <div class="partOfSpeech Noun" *ngSwitchCase="'Noun'">Nom</div>
+                            <div class="partOfSpeech Pronoun" *ngSwitchCase="'Pronoun'">Pronom</div>
+                            <div class="partOfSpeech Verb" *ngSwitchCase="'Verb'">Verbe</div>
+                            <div class="partOfSpeech Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
+                            <div class="partOfSpeech Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
+                            <div class="partOfSpeech Preposition" *ngSwitchCase="'Preposition'">Préposition</div>
+                            <div class="partOfSpeech Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
+                            <div class="partOfSpeech Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
+                            <div class="partOfSpeech Particule" *ngSwitchCase="'Particule'">Particule</div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div *ngIf="detail === word._id" class="details" id="{{word.dibi + '.' + word.french + '.' + word.date.toString}}">
                         <div class="block-detail-if-screen-too-small">
                             <div *ngIf="word.partOfSpeech" class="block-detail">
                                 <div class="label"><span>Nature</span></div>
@@ -175,39 +194,39 @@
                                 </div>
                                 <span class="help">Nature grammaticale (ou classe grammaticale).</span>
                             </div>
-                        </div>
-                        <div class="facultative">
-                            <div class="block">
-                                <div class="label-input">
-                                    <span class="label">Créateur</span>
-                                    <input type="text" [(ngModel)]="wordToEdit.author" placeholder="pseudo#code">
-                                </div>
-                                <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
                             </div>
-                            <div class="block">
-                                <div class="label-input">
-                                    <span class="label">Description</span>
-                                    <textarea name="new-word-description" id="new-word-description" rows="5" [(ngModel)]="wordToEdit.description"></textarea>
+                            <div class="facultative">
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Créateur</span>
+                                        <input type="text" [(ngModel)]="wordToEdit.author" placeholder="pseudo#code">
+                                    </div>
+                                    <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
                                 </div>
-                                <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc. Facultatif.</span>
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Description</span>
+                                        <textarea name="new-word-description" id="new-word-description" rows="5" [(ngModel)]="wordToEdit.description"></textarea>
+                                    </div>
+                                    <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc. Facultatif.</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="buttons">
-                            <span [ngSwitch]="message.color">
-                                <p class="green-mes" *ngSwitchCase="'green'">{{message.mes}}</p>
-                                <p class="yellow-mes" *ngSwitchCase="'yellow'">{{message.mes}}</p>
-                                <p class="red-mes" *ngSwitchCase="'red'">{{message.mes}}</p>
-                                <p *ngSwitchDefault></p>
-                            </span>
-                            <div class="right">
-                                <button (click)="edit(word)">Annuler</button>
-                                <button (click)="editWord()">Modifier</button>
+                            <div class="buttons">
+                                <span [ngSwitch]="message.color">
+                                    <p class="green-mes" *ngSwitchCase="'green'">{{message.mes}}</p>
+                                    <p class="yellow-mes" *ngSwitchCase="'yellow'">{{message.mes}}</p>
+                                    <p class="red-mes" *ngSwitchCase="'red'">{{message.mes}}</p>
+                                    <p *ngSwitchDefault></p>
+                                </span>
+                                <div class="right">
+                                    <button (click)="edit(word)">Annuler</button>
+                                    <button (click)="editWord()">Modifier</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         <span *ngIf="!filteredDibiDict">Chargement des mots Dibi...</span>
     </div>

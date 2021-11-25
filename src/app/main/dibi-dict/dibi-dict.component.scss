@@ -1,7 +1,7 @@
 
 $bg-color-row-hover: #454341; // Couleur de fond des boutons hover
 
-$top-height: 100px;
+$top-height: 73px;
 $all-none-partOfSpeech-width: 52px;
 
 $padding: 12px;
@@ -9,9 +9,9 @@ $border-radius: 4px;
 $border: 1px solid #999;
 
 // Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
-$left-menu-width: 60%;
+$left-menu-width: 50%;
 // $middle-menu-width: 50%;
-$right-menu-width: 40%;
+$right-menu-width: 50%;
 
 // Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
 $left-row-width: 70%;
@@ -155,17 +155,67 @@ $size-checkbox: 12px;
                                 cursor: pointer;
                             }
                         }
-
-                        .nb-words {
-                            font-weight: 600;
-                            padding: 3px 6px 3px 6px;
-                        }
                     }
                 }
             }
         }
 
-        .row-header {
+        .row-pages {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+
+            .left {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+
+                img {
+                    margin-right: $padding;
+                }
+            }
+        
+            .middle {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+
+                span {
+                    margin: 0px 12px;
+                }
+
+                input {
+                    background-color: transparent;
+                    width: 100px;
+                }
+
+                input:hover, input:focus {
+                    background-color: #555351;
+                }
+            }
+    
+            .right {
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+
+                img {
+                    margin-left: $padding;
+                }
+            }
+
+            img {
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .row-order {
             display: flex;
             align-items: center;
             height: 30px;
@@ -207,6 +257,10 @@ $size-checkbox: 12px;
                     height: 18px;
                     width: 18px;
                 }
+            }
+
+            .label-button-sort-fr {
+                margin-left: $padding;
             }
         }
 
@@ -436,7 +490,12 @@ $size-checkbox: 12px;
                     }
                 }
             }
-            .row-header {
+            .row-pages {
+                .middle {
+                    display: none;
+                }
+            }
+            .row-order {
                 justify-content: space-between;
 
                 .left {
