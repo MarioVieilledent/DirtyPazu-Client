@@ -45,9 +45,14 @@
                 <img (click)="changePage('left')" src="./assets/angle-left-solid.svg">
             </div>
             <div class="middle">
-                <input title="Nombre de mots affichés par page" type="number" min="1" (change)="editNbWordsPerPage($event)" value="{{nbWordsPerPage}}">
-                <span title="Page courante / nombre de page" class="current-page">Page {{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
-                <span title="Nombre de mots correspondant aux filtres et à la recherche / nombre de mots total" class="nb-words" *ngIf="dibiDict">Mots {{filteredDibiDict.length}} / {{dibiDict.length}}</span>
+                <div title="Page courante / nombre de page (cliquer pour choisir le nombre de mots par pages)" class="block-info clickable" (click)="editNbWordsPerPage()">
+                    <span class="desc-word">Page </span>
+                    <span class="values">{{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
+                </div>
+                <div title="Nombre de mots correspondants aux filtres et à la recherche / nombre de mots total" class="block-info" *ngIf="dibiDict">
+                    <span class="desc-word">Mots </span>
+                    <span class="values">{{filteredDibiDict.length}} / {{dibiDict.length}}</span>
+                </div>
             </div>
             <div class="right">
                 <img (click)="changePage('right')" src="./assets/angle-right-solid.svg">
@@ -100,7 +105,6 @@
                             <div class="partOfSpeech Verb" *ngSwitchCase="'Verb'">Verbe</div>
                             <div class="partOfSpeech Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
                             <div class="partOfSpeech Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                            <div class="partOfSpeech Preposition" *ngSwitchCase="'Preposition'">Préposition</div>
                             <div class="partOfSpeech Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
                             <div class="partOfSpeech Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
                             <div class="partOfSpeech Particule" *ngSwitchCase="'Particule'">Particule</div>
@@ -118,7 +122,6 @@
                                         <div class="partOfSpeech-small-screen Verb" *ngSwitchCase="'Verb'">Verbe</div>
                                         <div class="partOfSpeech-small-screen Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
                                         <div class="partOfSpeech-small-screen Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                                        <div class="partOfSpeech-small-screen Preposition" *ngSwitchCase="'Preposition'">Préposition</div>
                                         <div class="partOfSpeech-small-screen Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
                                         <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
                                         <div class="partOfSpeech-small-screen Particule" *ngSwitchCase="'Particule'">Particule</div>
@@ -186,7 +189,6 @@
                                         <option value="Verb">Verbe</option>
                                         <option value="Adjective">Adjectif</option>
                                         <option value="Adverb">Adverbe</option>
-                                        <option value="Preposition">Préposition</option>
                                         <option value="Conjonction">Conjonction</option>
                                         <option value="Interjection">Interjection</option>
                                         <option value="Particule">Particule</option>

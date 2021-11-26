@@ -184,13 +184,12 @@ $size-checkbox: 12px;
                 align-items: center;
                 white-space: nowrap;
 
-                span {
+                .block-info {
                     margin: 0px 12px;
                 }
 
-                input {
-                    background-color: transparent;
-                    width: 100px;
+                .clickable {
+                    cursor: pointer;
                 }
 
                 input:hover, input:focus {
@@ -472,7 +471,7 @@ $size-checkbox: 12px;
 
 // Media query
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 700px) {
     .body {
         .container {
             .top {
@@ -491,8 +490,23 @@ $size-checkbox: 12px;
                 }
             }
             .row-pages {
+                .left {
+                    img {
+                        margin-right: 6px;
+                    }
+                }
                 .middle {
-                    display: none;
+                    .desc-word {
+                        display: none;
+                    }
+                    .block-info {
+                        margin: 0px 6px;
+                    }
+                }
+                .right {
+                    img {
+                        margin-left: 6px;
+                    }
                 }
             }
             .row-order {

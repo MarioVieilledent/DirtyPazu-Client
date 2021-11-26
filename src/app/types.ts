@@ -29,7 +29,7 @@ export interface Region {
 
 // Général
 
-export type PartOfSpitch = 'Noun' |'Pronoun' | 'Verb' | 'Adjective' | 'Adverb' | 'Preposition' | 'Conjonction' | 'Interjection' | 'Particule';
+export type PartOfSpitch = 'Noun' |'Pronoun' | 'Verb' | 'Adjective' | 'Adverb' | 'Conjonction' | 'Interjection' | 'Particule';
 
 // Pour le dictionnaire
 

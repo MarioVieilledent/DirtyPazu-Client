@@ -41,7 +41,7 @@ input:focus, button:focus, select:focus, textarea:focus {
 
 // Couleurs et style des natures grammaticales
 
-.Noun, .Pronoun, .Verb, .Adjective, .Adverb, .Conjonction, .Particule, .Preposition, .Interjection {
+.Noun, .Pronoun, .Verb, .Adjective, .Adverb, .Conjonction, .Particule, .Interjection {
     font-weight: 600;
 }
 
@@ -52,7 +52,6 @@ input:focus, button:focus, select:focus, textarea:focus {
 .Adverb { color: #EA8; }
 .Conjonction { color: #E8E; }
 .Particule { color: #EE8; }
-.Preposition { color: rgb(197, 194, 194); }
 .Interjection { color: #A8E; }
 
 // Style des scrollbars

@@ -18,7 +18,7 @@ export class DibiDictComponent implements OnInit {
   filteredAllPages: DibiWord[][] = []; // Ceux filtrés structurés par pages
 
   nbWordsPerPage: number; // Nombre de mots affichés dans une page (enregistré en localStorage pour préférence utilisateur)
-  nbWordsPerPageDefalut = 200; // Nombre de mots affichés dans une page par défaut (car localStorage pour préf utilisateur)
+  nbWordsPerPageDefalut = 100; // Nombre de mots affichés dans une page par défaut (car localStorage pour préf utilisateur)
   currentPage = 0; // Index de la page courante
 
   @Input() adminConnected: boolean; // Si un administrateur est connecté
@@ -35,7 +35,6 @@ export class DibiDictComponent implements OnInit {
       Verb: true,
       Adjective: true,
       Adverb: true,
-      Preposition: true,
       Conjonction: true,
       Interjection: true,
       Particule: true
@@ -455,8 +454,8 @@ export class DibiDictComponent implements OnInit {
   /**
    * Modifie le nombre de mots affichés par page
    */
-  editNbWordsPerPage(event: any): void {
-    const nb = parseInt(event.target.value);
+  editNbWordsPerPage(): void {
+    const nb = parseInt(window.prompt('Nombre de mots affichés par page'));
     if (nb > 0) { // Pas moins d'un mot par page
       this.nbWordsPerPage = nb;
       window.localStorage.setItem('nbWordsPerPage', nb.toString());

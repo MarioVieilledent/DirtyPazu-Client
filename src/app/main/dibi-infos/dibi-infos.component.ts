@@ -21,7 +21,6 @@ export class DibiInfosComponent implements OnInit {
     { label: 'Adverbes', savedAs: 'Adverb', nb: 0 , color: '#EA8'},
     { label: 'Conjonctions', savedAs: 'Conjonction', nb: 0 , color: '#E8E'},
     { label: 'Particules', savedAs: 'Particule', nb: 0, color: '#EE8' },
-    { label: 'Prépositions', savedAs: 'Preposition', nb: 0 , color: 'rgb(197, 194, 194)'},
     { label: 'Interjections', savedAs: 'Interjection', nb: 0 , color: '#A8E'}
   ]
 
@@ -53,7 +52,6 @@ export class DibiInfosComponent implements OnInit {
           case('Verb'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Verb').nb++; break;
           case('Adjective'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Adjective').nb++; break;
           case('Adverb'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Adverb').nb++; break;
-          case('Preposition'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Preposition').nb++; break;
           case('Conjonction'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Conjonction').nb++; break;
           case('Interjection'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Interjection').nb++; break;
           case('Particule'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Particule').nb++; break;
