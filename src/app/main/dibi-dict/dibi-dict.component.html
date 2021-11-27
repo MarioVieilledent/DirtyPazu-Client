@@ -49,9 +49,9 @@
                     <span class="desc-word">Page </span>
                     <span class="values">{{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
                 </div>
-                <div title="Nombre de mots correspondants aux filtres et à la recherche / nombre de mots total" class="block-info" *ngIf="dibiDict">
+                <div title="Mots de la page / mots résultats de recherche" class="block-info" *ngIf="dibiDict">
                     <span class="desc-word">Mots </span>
-                    <span class="values">{{filteredDibiDict.length}} / {{dibiDict.length}}</span>
+                    <span class="values">{{filteredAllPages[currentPage]?.length}} / {{filteredDibiDict.length}}</span>
                 </div>
             </div>
             <div class="right">
