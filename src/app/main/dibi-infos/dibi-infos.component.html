@@ -1,9 +1,8 @@
-
 <div class="body">
     <div class="container">
         <div class="header">
             <h1>Infos & stats</h1>
-            <p>Ce site à pour vocation de répertorier l'ensemble des mots de la langue Dibi.</p>
+            <p>Ce site à pour vocation de répertorier l'ensemble des mots du Dibi.</p>
             <p>Pour report un bug, ou proposer une suggestion => dm sur mon Discord : Pazu#4444</p>
         </div>
         <div class="content">
@@ -28,6 +27,13 @@
                 </div>
                 <!-- <canvas id="pieChart" width="400" height="400"></canvas> -->
                 <canvas baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
+            </div>
+            <div class="block chart">
+                <div class="title">
+                    <h2>Taille du dictionnaire en fonction du temps</h2>
+                </div>
+                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'bar'">
+                </canvas>
             </div>
         </div>
     </div>

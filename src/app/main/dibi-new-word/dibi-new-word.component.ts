@@ -32,7 +32,7 @@ export class DibiNewWordComponent implements OnInit {
         this.newWord.dibi = '';
         this.newWord.french = '';
         this.newWord.english = '';
-        this.newWord.author = '';
+        // this.newWord.author = ''; // Auteur conservé
         this.newWord.date = '';
         this.newWord.description = '';
       } else {
@@ -55,5 +55,15 @@ export class DibiNewWordComponent implements OnInit {
       this.socket.emit('addWord', { newWord: this.newWord, pwd: this.pwd });
     }
   }
+
+  /**
+   * Adapte automatique le formatage de la saisie des mots Dibis, Français et Anglais.
+   * Format = Majuscule au début du mot.
+   */
+   checkFormat(event: any): void {
+    let value = event.target.value;
+    value = value.charAt(0).toUpperCase() + value.slice(1);
+    this.newWord.dibi = value;
+   }
 
 }

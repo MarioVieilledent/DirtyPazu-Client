@@ -8,7 +8,7 @@
             <div class="block">
                 <div class="label-input">
                     <span class="label">Dibi</span>
-                    <input type="text" [(ngModel)]="newWord.dibi">
+                    <input type="text" (input)="checkFormat($event)" [(ngModel)]="newWord.dibi">
                 </div>
                 <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
             </div>

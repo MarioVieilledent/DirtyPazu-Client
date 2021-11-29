@@ -12,7 +12,7 @@ export class DibiInfosComponent implements OnInit {
 
   dibiDict: DibiWord[]; // Tous les mots
 
-  // Stats
+  // Stats de répartition des natures gr.
   nbPartsOfSpeech: any = [
     { label: 'Noms', savedAs: 'Noun', nb: 0 , color: '#8AE'},
     { label: 'Pronoms', savedAs: 'Pronoun', nb: 0 , color: '#8EE'},
@@ -24,13 +24,27 @@ export class DibiInfosComponent implements OnInit {
     { label: 'Interjections', savedAs: 'Interjection', nb: 0 , color: '#A8E'}
   ]
 
-  // Pie Chart
+  // Options Charts
   options: ChartOptions = { aspectRatio: 1 }
+
+  // Pie Chart pour la répartition des natures gr.
   pieChartLabels = [];
   pieChartData = [];
   pieChartColors: any = [{
     backgroundColor: []
   }];
+
+  // Pie Chart pour le nb de mots en fonction du temps
+  barChartData = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
+  ];
+  barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  barChartLegend = true;
 
   constructor(private socket: Socket) { }
 
@@ -44,7 +58,7 @@ export class DibiInfosComponent implements OnInit {
       let list = data.dict;
       this.dibiDict = list;
 
-      // Récupérations des stats
+      // Récupérations des stats de la répartition des natures gr.
       this.dibiDict.forEach(word => {
         switch (word.partOfSpeech) {
           case('Noun'): this.nbPartsOfSpeech.find(i => i.savedAs === 'Noun').nb++; break;
@@ -58,7 +72,7 @@ export class DibiInfosComponent implements OnInit {
         }
       });
 
-      // Tri par nombre
+      // Tri par nombre (stats de répartiotion des natures gr.)
       this.nbPartsOfSpeech.sort((a, b) => {
         if (a.nb < b.nb) {
           return 1;
@@ -75,6 +89,12 @@ export class DibiInfosComponent implements OnInit {
         this.pieChartData.push(element.nb);
         this.pieChartColors[0].backgroundColor.push(element.color);
       });
+
+      // Récupérations des stats de la répartition des natures gr.
+      this.dibiDict.forEach(word => {
+
+      });
+
     });
   }
 
