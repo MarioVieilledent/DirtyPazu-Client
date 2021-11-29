@@ -44,7 +44,7 @@ $border: 1px solid #999;
                 border: $border;
                 margin: 0px 0px $padding 0px;
                 padding: $padding $padding 0px $padding;
-                max-width: 1200px;
+                max-width: 1400px;
 
                 .title {
                     display: flex;
@@ -81,8 +81,11 @@ $border: 1px solid #999;
             .chart {
                 padding-bottom: $padding;
                 align-items: center;
-                canvas {
+                .pie-chart {
                     max-width: 700px;
+                }
+                .line-chart {
+                    max-width: 1400px;
                 }
             }
         }

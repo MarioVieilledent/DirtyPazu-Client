@@ -26,13 +26,13 @@
                     <h2>Répartition des mots selon leur nature grammaticale</h2>
                 </div>
                 <!-- <canvas id="pieChart" width="400" height="400"></canvas> -->
-                <canvas baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
+                <canvas class="pie-chart" baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
             </div>
             <div class="block chart">
                 <div class="title">
                     <h2>Taille du dictionnaire en fonction du temps</h2>
                 </div>
-                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'bar'">
+                <canvas class="line-chart" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'line'">
                 </canvas>
             </div>
         </div>
