@@ -34,8 +34,9 @@ export class DibiInfosComponent implements OnInit {
     backgroundColor: []
   }];
 
-  // Pie Chart pour le nb de mots en fonction du temps
+  // Bar Chart pour le nb de mots selon leur nature grammaticale en fonction du temps
   numbersOfWords = {
+    Total: 0,
     Noms: 0,
     Pronoms: 0,
     Verbes: 0,
@@ -45,7 +46,7 @@ export class DibiInfosComponent implements OnInit {
     Particules: 0,
     Interjections: 0
   };
-  barChartData = [
+  barChartDataNG = [
     { data: [], label: 'Noms', borderColor: '#8AE', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#8AE' },
     { data: [], label: 'Pronoms', borderColor: '#8EE', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#8EE' },
     { data: [], label: 'Verbes', borderColor: '#E88', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#E88' },
@@ -54,6 +55,17 @@ export class DibiInfosComponent implements OnInit {
     { data: [], label: 'Conjonctions', borderColor: '#E8E', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#E8E' },
     { data: [], label: 'Particules', borderColor: '#EE8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#EE8' },
     { data: [], label: 'Interjections', borderColor: '#A8E', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#A8E' }
+  ];
+  barChartLabelsNG = [];
+  barChartOptionsNG = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  barChartLegendNG = true;
+
+  // Bar Chart pour le nb de mots selon leur nature grammaticale en fonction du temps
+  barChartData = [
+    { data: [], label: 'Total mots', borderColor: '#d6d5d4', backgroundColor: 'rgba(240, 240, 240, 0.1)', pointBackgroundColor: '#cccbca' }
   ];
   barChartLabels = [];
   barChartOptions = {
@@ -124,27 +136,32 @@ export class DibiInfosComponent implements OnInit {
 
       // Construction du line chart du nb mots chaque jour
       let day = this.datify(new Date(this.dibiDict[0].date));
+      this.barChartLabelsNG.push(day);
       this.barChartLabels.push(day);
       this.dibiDict.forEach(word => {
         if (day === this.datify(new Date(word.date))) {
           this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
+          this.numbersOfWords.Total++; // Incrément des mots totaux
         } else {
           // Ajout des nouveaux mots selon la date
-          this.barChartData.forEach(elem => {
+          this.barChartDataNG.forEach(elem => {
             elem.data.push(this.numbersOfWords[elem.label]);
           });
+          this.barChartData[0].data.push(this.numbersOfWords.Total);
           // Mise à jour de la date suivante
           day = this.datify(new Date(word.date));
+          this.barChartLabelsNG.push(day);
           this.barChartLabels.push(day);
         }
       });
       // Ajout des nouveaux mots selon la date
-      this.barChartData.forEach(elem => {
+      this.barChartDataNG.forEach(elem => {
         elem.data.push(this.numbersOfWords[elem.label]);
       });
+      this.barChartData[0].data.push(this.numbersOfWords.Total);
 
       // Tri par taille (stats de répartiotion des natures gr.)
-      this.barChartData.sort((a, b) => {
+      this.barChartDataNG.sort((a, b) => {
         if (a.data[a.data.length - 1] < b.data[b.data.length - 1]) {
           return 1;
         } else if (a.data[a.data.length - 1] > b.data[b.data.length - 1]) {

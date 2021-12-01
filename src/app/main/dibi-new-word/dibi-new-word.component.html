@@ -8,28 +8,28 @@
             <div class="block">
                 <div class="label-input">
                     <span class="label">Dibi</span>
-                    <input type="text" (input)="checkFormat($event)" [(ngModel)]="newWord.dibi">
+                    <input [className]="newWord.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')" [(ngModel)]="newWord.dibi">
                 </div>
                 <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
             </div>
             <div class="block">
                 <div class="label-input">
                     <span class="label">Français</span>
-                    <input type="text" [(ngModel)]="newWord.french">
+                    <input type="text" (input)="checkFormat($event, 'french')" [(ngModel)]="newWord.french">
                 </div>
                 <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés par des virgules.</span>
             </div>
             <div class="block">
                 <div class="label-input">
                     <span class="label">Anglais</span>
-                    <input type="text" [(ngModel)]="newWord.english">
+                    <input type="text" (input)="checkFormat($event, 'english')" [(ngModel)]="newWord.english">
                     </div>
                 <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés par des virgules. Facultatif.</span>
             </div>
             <div class="block">
                 <div class="label-input">
                     <span class="label">Nature</span>
-                    <select name="" id="" [(ngModel)]="newWord.partOfSpeech">
+                    <select [className]="newWord.partOfSpeech" [(ngModel)]="newWord.partOfSpeech">
                         <option value="Noun">Nom</option>
                         <option value="Pronoun">Pronom</option>
                         <option value="Verb">Verbe</option>

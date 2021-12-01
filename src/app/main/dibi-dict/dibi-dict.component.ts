@@ -230,13 +230,14 @@ export class DibiDictComponent implements OnInit {
    * Modifie la couleur de fond de l'input de recherche pour indiquer que le regex est juste ou faux
    */
   setColorInputSearch(color: string): void {
-    let colorHex = '#757371';
+    let colorHex = '#555453';
     switch (color) {
       case 'red': colorHex = '#957371'; break;
       case 'green': colorHex = '#759371'; break;
       case 'blue': colorHex = '#757391'; break;
     }
-    document.getElementById('expression-search').style.backgroundColor = colorHex;
+    let doc = document.getElementById('expression-search');
+    doc ? doc.style.backgroundColor = colorHex : {};
   }
 
   /**
@@ -315,6 +316,15 @@ export class DibiDictComponent implements OnInit {
     // Next sur l'observable de filtrage de tous les mots
     this.searchObservable.next(this.searchSimplified);
   }
+
+  /**
+   * Vide la barre de recherche
+   */
+   emptySearch(): void {
+     this.search = ''
+    this.searchSimplified = '';
+    this.searchObservable.next(this.searchSimplified);
+   }
 
   /**
    * Sélectionne tous ou aucun des cases à cocher pour la nature des mots

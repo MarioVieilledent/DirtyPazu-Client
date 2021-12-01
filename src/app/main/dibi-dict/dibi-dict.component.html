@@ -3,36 +3,74 @@
         <div class="top">
             <div class="left">
                 <div class="all-none-partOfSpeech">
-                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(true)" title="Sélectionner toutes les natures grammaticales">Tous</label></div>
-                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(false)" title="Sélectionner aucune nature grammaticale">Aucun</label></div>
+                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(true)"
+                            title="Sélectionner toutes les natures grammaticales">Tous</label></div>
+                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(false)"
+                            title="Sélectionner aucune nature grammaticale">Aucun</label></div>
                 </div>
                 <div class="partsOfSpeech">
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Noun" type="checkbox" class="Noun" [(ngModel)]="searchOptions.partsOfSpeech.Noun"><label for="Noun" class="Noun">Noms</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Pronoun" type="checkbox" class="Pronoun" [(ngModel)]="searchOptions.partsOfSpeech.Pronoun"><label for="Pronoun" class="Pronoun">Pronoms</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Verb" type="checkbox" class="Verb" [(ngModel)]="searchOptions.partsOfSpeech.Verb"><label for="Verb" class="Verb">Verbes</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adverb" type="checkbox" class="Adverb" [(ngModel)]="searchOptions.partsOfSpeech.Adverb"><label for="Adverb" class="Adverb">Adverbes</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox" class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label for="Adjective" class="Adjective">Adjectifs</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Particule" type="checkbox" class="Particule" [(ngModel)]="searchOptions.partsOfSpeech.Particule"><label for="Particule" class="Particule">Particules</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Conjonction" type="checkbox" class="Conjonction" [(ngModel)]="searchOptions.partsOfSpeech.Conjonction"><label for="Conjonction" class="Conjonction">Conjonctions</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Interjection" type="checkbox" class="Interjection" [(ngModel)]="searchOptions.partsOfSpeech.Interjection"><label for="Interjection" class="Interjection">Interjections</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Noun" type="checkbox" class="Noun"
+                            [(ngModel)]="searchOptions.partsOfSpeech.Noun"><label for="Noun" class="Noun">Noms</label>
+                    </div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Pronoun" type="checkbox"
+                            class="Pronoun" [(ngModel)]="searchOptions.partsOfSpeech.Pronoun"><label for="Pronoun"
+                            class="Pronoun">Pronoms</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Verb" type="checkbox" class="Verb"
+                            [(ngModel)]="searchOptions.partsOfSpeech.Verb"><label for="Verb" class="Verb">Verbes</label>
+                    </div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adverb" type="checkbox"
+                            class="Adverb" [(ngModel)]="searchOptions.partsOfSpeech.Adverb"><label for="Adverb"
+                            class="Adverb">Adverbes</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox"
+                            class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label for="Adjective"
+                            class="Adjective">Adjectifs</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Particule" type="checkbox"
+                            class="Particule" [(ngModel)]="searchOptions.partsOfSpeech.Particule"><label for="Particule"
+                            class="Particule">Particules</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Conjonction" type="checkbox"
+                            class="Conjonction" [(ngModel)]="searchOptions.partsOfSpeech.Conjonction"><label
+                            for="Conjonction" class="Conjonction">Conjonctions</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Interjection" type="checkbox"
+                            class="Interjection" [(ngModel)]="searchOptions.partsOfSpeech.Interjection"><label
+                            for="Interjection" class="Interjection">Interjections</label></div>
                     <ng-container *ngIf="adminConnected">
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noAuthor" type="checkbox" class="noAuthor" [(ngModel)]="searchOptions.doesNotContiain.author"><label for="noAuthor" class="noAuthor">Sans créateur</label></div>
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noDescription" type="checkbox" class="noDescription" [(ngModel)]="searchOptions.doesNotContiain.description"><label for="noDescription" class="noDescription">Sans description</label></div>
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noEnglish" type="checkbox" class="noEnglish" [(ngModel)]="searchOptions.doesNotContiain.english"><label for="noEnglish" class="noEnglish">Sans Anglais</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noAuthor" type="checkbox"
+                                class="noAuthor" [(ngModel)]="searchOptions.doesNotContiain.author"><label
+                                for="noAuthor" class="noAuthor">Sans créateur</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noDescription" type="checkbox"
+                                class="noDescription" [(ngModel)]="searchOptions.doesNotContiain.description"><label
+                                for="noDescription" class="noDescription">Sans description</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noEnglish" type="checkbox"
+                                class="noEnglish" [(ngModel)]="searchOptions.doesNotContiain.english"><label
+                                for="noEnglish" class="noEnglish">Sans Anglais</label></div>
                     </ng-container>
                 </div>
             </div>
             <div class="right">
                 <div class="search-input">
                     <div class="search-and-regex-button">
-                        <input type="text" [(ngModel)]="search" (input)="eachKeySearch()" placeholder="Rechercher" id="expression-search">
-                        <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''" title="Recherche expression régulière">.*</button>
+                        <div class="input-and-cross" id="expression-search">
+                            <input type="text" [(ngModel)]="search" (input)="eachKeySearch()" placeholder="Rechercher">
+                            <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
+                                <img class="empty-search" src="./assets/times-solid.svg">
+                            </div>
+                        </div>
+                        <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''"
+                            title="Recherche expression régulière">.*</button>
                     </div>
                     <div class="options-search">
-                        <div class="element" (click)="eachKeySearch()"><input id="Dibi" type="checkbox" class="Dibi" [(ngModel)]="searchOptions.element.Dibi"><label for="Dibi" class="label-option-search">Dibi</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="French" type="checkbox" class="French" [(ngModel)]="searchOptions.element.French"><label for="French" class="label-option-search">Français</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="English" type="checkbox" class="English" [(ngModel)]="searchOptions.element.English"><label for="English" class="label-option-search">Anglais</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="Author" type="checkbox" class="Author" [(ngModel)]="searchOptions.element.Author"><label for="Author" class="label-option-search">Créateur</label></div>
+                        <div class="element" (click)="eachKeySearch()"><input id="Dibi" type="checkbox" class="Dibi"
+                                [(ngModel)]="searchOptions.element.Dibi"><label for="Dibi"
+                                class="label-option-search">Dibi</label></div>
+                        <div class="element" (click)="eachKeySearch()"><input id="French" type="checkbox" class="French"
+                                [(ngModel)]="searchOptions.element.French"><label for="French"
+                                class="label-option-search">Français</label></div>
+                        <div class="element" (click)="eachKeySearch()"><input id="English" type="checkbox"
+                                class="English" [(ngModel)]="searchOptions.element.English"><label for="English"
+                                class="label-option-search">Anglais</label></div>
+                        <div class="element" (click)="eachKeySearch()"><input id="Author" type="checkbox" class="Author"
+                                [(ngModel)]="searchOptions.element.Author"><label for="Author"
+                                class="label-option-search">Créateur</label></div>
                         <!-- <div class="element" (click)="eachKeySearch()"><input id="Date" type="checkbox" class="Date" [(ngModel)]="searchOptions.element.Date"><label for="Date" class="label-option-search">Date</label></div>
                             <div class="element" (click)="eachKeySearch()"><input id="Description" type="checkbox" class="Description" [(ngModel)]="searchOptions.element.Description"><label for="Description" class="label-option-search">Description</label></div> -->
                     </div>
@@ -45,7 +83,8 @@
                 <img (click)="changePage('left')" src="./assets/angle-left-solid.svg">
             </div>
             <div class="middle">
-                <div title="Page courante / nombre de page (cliquer pour choisir le nombre de mots par pages)" class="block-info clickable" (click)="editNbWordsPerPage()">
+                <div title="Page courante / nombre de page (cliquer pour choisir le nombre de mots par pages)"
+                    class="block-info clickable" (click)="editNbWordsPerPage()">
                     <span class="desc-word">Page </span>
                     <span class="values">{{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
                 </div>
@@ -66,7 +105,8 @@
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
                 </div>
-                <div class="label-button-sort label-button-sort-fr" (click)="setSort('french')" title="Trier par mot Français>">
+                <div class="label-button-sort label-button-sort-fr" (click)="setSort('french')"
+                    title="Trier par mot Français>">
                     <span>Trad Fr</span>
                     <img *ngIf="sortBy === 'french' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
                     <img *ngIf="sortBy === 'french' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
@@ -83,7 +123,8 @@
                 <div class="label-button-sort" (click)="setSort('partOfSpeech')" title="Trier par nature grammaticale">
                     <span>Nature</span>
                     <img *ngIf="sortBy === 'partOfSpeech' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
-                    <img *ngIf="sortBy === 'partOfSpeech' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
+                    <img *ngIf="sortBy === 'partOfSpeech' && sortOrder === 'decresc'"
+                        src="./assets/chevron-down-solid.svg">
                 </div>
             </div>
         </div>
@@ -93,10 +134,12 @@
                     <div class="left">
                         <div [className]="'dibi ' + word.partOfSpeech">{{word.dibi}}</div>
                         <div *ngIf="translate === 'French' || translate === 'Both'" class="french">{{word.french}}</div>
-                        <div *ngIf="translate === 'English' || translate === 'Both'" class="english">{{word.english}}</div>
+                        <div *ngIf="translate === 'English' || translate === 'Both'" class="english">{{word.english}}
+                        </div>
                     </div>
                     <div class="middle">
-                        <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">{{word.date | date:'dd/MM/YYYY'}}</div>
+                        <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">
+                            {{word.date | date:'dd/MM/YYYY'}}</div>
                     </div>
                     <div class="right">
                         <ng-container [ngSwitch]="word.partOfSpeech">
@@ -111,91 +154,101 @@
                         </ng-container>
                     </div>
                 </div>
-                <div *ngIf="detail === word._id" class="details" id="{{word.dibi + '.' + word.french + '.' + word.date.toString}}">
-                        <div class="block-detail-if-screen-too-small">
-                            <div *ngIf="word.partOfSpeech" class="block-detail">
-                                <div class="label"><span>Nature</span></div>
-                                <div class="value">
-                                    <ng-container [ngSwitch]="word.partOfSpeech">
-                                        <div class="partOfSpeech-small-screen Noun" *ngSwitchCase="'Noun'">Nom</div>
-                                        <div class="partOfSpeech-small-screen Pronoun" *ngSwitchCase="'Pronoun'">Pronom</div>
-                                        <div class="partOfSpeech-small-screen Verb" *ngSwitchCase="'Verb'">Verbe</div>
-                                        <div class="partOfSpeech-small-screen Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
-                                        <div class="partOfSpeech-small-screen Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                                        <div class="partOfSpeech-small-screen Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
-                                        <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
-                                        <div class="partOfSpeech-small-screen Particule" *ngSwitchCase="'Particule'">Particule</div>
-                                    </ng-container>
-                                </div>
+                <div *ngIf="detail === word._id" class="details"
+                    id="{{word.dibi + '.' + word.french + '.' + word.date.toString}}">
+                    <div class="block-detail-if-screen-too-small">
+                        <div *ngIf="word.partOfSpeech" class="block-detail">
+                            <div class="label"><span>Nature</span></div>
+                            <div class="value">
+                                <ng-container [ngSwitch]="word.partOfSpeech">
+                                    <div class="partOfSpeech-small-screen Noun" *ngSwitchCase="'Noun'">Nom</div>
+                                    <div class="partOfSpeech-small-screen Pronoun" *ngSwitchCase="'Pronoun'">Pronom
+                                    </div>
+                                    <div class="partOfSpeech-small-screen Verb" *ngSwitchCase="'Verb'">Verbe</div>
+                                    <div class="partOfSpeech-small-screen Adjective" *ngSwitchCase="'Adjective'">
+                                        Adjectif</div>
+                                    <div class="partOfSpeech-small-screen Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
+                                    <div class="partOfSpeech-small-screen Conjonction" *ngSwitchCase="'Conjonction'">
+                                        Conjonction</div>
+                                    <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">
+                                        Interjection</div>
+                                    <div class="partOfSpeech-small-screen Particule" *ngSwitchCase="'Particule'">
+                                        Particule</div>
+                                </ng-container>
                             </div>
                         </div>
-                        <div *ngIf="word.french" class="block-detail">
-                            <div class="label"><span>Français</span></div>
-                            <div class="value"><span>{{word.french}}</span></div>
-                        </div>
-                        <div *ngIf="word.english" class="block-detail">
-                            <div class="label"><span>Anglais</span></div>
-                            <div class="value"><span>{{word.english}}</span></div>
-                        </div>
-                        <div *ngIf="word.author" class="block-detail">
-                            <div class="label"><span>Créateur</span></div>
-                            <div class="value"><span>{{word.author}}</span></div>
-                        </div>
-                        <div *ngIf="word.description" class="block-detail">
-                            <div class="label"><span>Description</span></div>
-                            <div class="value"><span>{{word.description}}</span></div>
-                        </div>
-                        <div *ngIf="word.date" class="block-detail">
-                            <div class="label"><span>Date d'ajout</span></div>
-                            <div class="value"><span>{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}</span></div>
-                        </div>
-                        <div *ngIf="!word.author && !word.description && !word.date" class="block-detail">
-                            <span class="no-details">Pas de détails</span>
-                        </div>
-                        <div *ngIf="adminConnected" class="buttons-detail">
-                            <img (click)="delete(word)" src="./assets/trash-solid.svg" title="Supprimer">
-                            <img (click)="edit(word)" src="./assets/pen-solid.svg" title="Modifier">
-                        </div>
-                        <div *ngIf="editing === word._id" class="edit">
-                            <div class='form-new-word'>
-                                <div class="mandatory">
-                                    <div class="block">
-                                        <div class="label-input">
-                                            <span class="label">Dibi</span>
-                                    <input type="text" [(ngModel)]="wordToEdit.dibi">
+                    </div>
+                    <div *ngIf="word.french" class="block-detail">
+                        <div class="label"><span>Français</span></div>
+                        <div class="value"><span>{{word.french}}</span></div>
+                    </div>
+                    <div *ngIf="word.english" class="block-detail">
+                        <div class="label"><span>Anglais</span></div>
+                        <div class="value"><span>{{word.english}}</span></div>
+                    </div>
+                    <div *ngIf="word.author" class="block-detail">
+                        <div class="label"><span>Créateur</span></div>
+                        <div class="value"><span>{{word.author}}</span></div>
+                    </div>
+                    <div *ngIf="word.description" class="block-detail">
+                        <div class="label"><span>Description</span></div>
+                        <div class="value"><span>{{word.description}}</span></div>
+                    </div>
+                    <div *ngIf="word.date" class="block-detail">
+                        <div class="label"><span>Date d'ajout</span></div>
+                        <div class="value"><span>{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}</span></div>
+                    </div>
+                    <div *ngIf="!word.author && !word.description && !word.date" class="block-detail">
+                        <span class="no-details">Pas de détails</span>
+                    </div>
+                    <div *ngIf="adminConnected" class="buttons-detail">
+                        <img (click)="delete(word)" src="./assets/trash-solid.svg" title="Supprimer">
+                        <img (click)="edit(word)" src="./assets/pen-solid.svg" title="Modifier">
+                    </div>
+                    <div *ngIf="editing === word._id" class="edit">
+                        <div class='form-new-word'>
+                            <div class="mandatory">
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Dibi</span>
+                                        <input [className]="wordToEdit.partOfSpeech" type="text"
+                                            [(ngModel)]="wordToEdit.dibi">
+                                    </div>
+                                    <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec
+                                        un "-".</span>
                                 </div>
-                                <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
-                            </div>
-                            <div class="block">
-                                <div class="label-input">
-                                    <span class="label">Français</span>
-                                    <input type="text" [(ngModel)]="wordToEdit.french">
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Français</span>
+                                        <input type="text" [(ngModel)]="wordToEdit.french">
+                                    </div>
+                                    <span class="help">Traduction en Français, un ou plusieurs mots commançant par des
+                                        majuscules, séparés par des virgules.</span>
                                 </div>
-                                <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés par des virgules.</span>
-                            </div>
-                            <div class="block">
-                                <div class="label-input">
-                                    <span class="label">Anglais</span>
-                                    <input type="text" [(ngModel)]="wordToEdit.english">
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Anglais</span>
+                                        <input type="text" [(ngModel)]="wordToEdit.english">
+                                    </div>
+                                    <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des
+                                        majuscules, séparés par des virgules. Facultatif.</span>
                                 </div>
-                                <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés par des virgules. Facultatif.</span>
-                            </div>
-                            <div class="block">
-                                <div class="label-input">
-                                    <span class="label">Nature</span>
-                                    <select name="" id="" [(ngModel)]="wordToEdit.partOfSpeech">
-                                        <option value="Noun">Nom</option>
-                                        <option value="Pronoun">Pronom</option>
-                                        <option value="Verb">Verbe</option>
-                                        <option value="Adjective">Adjectif</option>
-                                        <option value="Adverb">Adverbe</option>
-                                        <option value="Conjonction">Conjonction</option>
-                                        <option value="Interjection">Interjection</option>
-                                        <option value="Particule">Particule</option>
-                                    </select>
+                                <div class="block">
+                                    <div class="label-input">
+                                        <span class="label">Nature</span>
+                                        <select [className]="wordToEdit.partOfSpeech" [(ngModel)]="wordToEdit.partOfSpeech">
+                                            <option value="Noun">Nom</option>
+                                            <option value="Pronoun">Pronom</option>
+                                            <option value="Verb">Verbe</option>
+                                            <option value="Adjective">Adjectif</option>
+                                            <option value="Adverb">Adverbe</option>
+                                            <option value="Conjonction">Conjonction</option>
+                                            <option value="Interjection">Interjection</option>
+                                            <option value="Particule">Particule</option>
+                                        </select>
+                                    </div>
+                                    <span class="help">Nature grammaticale (ou classe grammaticale).</span>
                                 </div>
-                                <span class="help">Nature grammaticale (ou classe grammaticale).</span>
-                            </div>
                             </div>
                             <div class="facultative">
                                 <div class="block">
@@ -203,14 +256,17 @@
                                         <span class="label">Créateur</span>
                                         <input type="text" [(ngModel)]="wordToEdit.author" placeholder="pseudo#code">
                                     </div>
-                                    <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
+                                    <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo
+                                        Discord).</span>
                                 </div>
                                 <div class="block">
                                     <div class="label-input">
                                         <span class="label">Description</span>
-                                        <textarea name="new-word-description" id="new-word-description" rows="5" [(ngModel)]="wordToEdit.description"></textarea>
+                                        <textarea name="new-word-description" id="new-word-description" rows="5"
+                                            [(ngModel)]="wordToEdit.description"></textarea>
                                     </div>
-                                    <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc. Facultatif.</span>
+                                    <span class="help">Description, étymologie, exemples, règles grammaticales, lore,
+                                        etc. Facultatif.</span>
                                 </div>
                             </div>
                             <div class="buttons">

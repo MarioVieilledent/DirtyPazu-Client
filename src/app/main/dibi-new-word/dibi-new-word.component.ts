@@ -57,13 +57,45 @@ export class DibiNewWordComponent implements OnInit {
   }
 
   /**
+   * 1)
    * Adapte automatique le formatage de la saisie des mots Dibis, Français et Anglais.
-   * Format = Majuscule au début du mot.
+   * Format = Majuscule au début du mot, le reste en minuscule.
+   * 2)
+   * Vérifie que le mot ne se termine par un espace
+   * 3)
+   * Scrute la terminaison du mot pour adapter sa nature grammaticale (uniquement si mot Dibi)
    */
-   checkFormat(event: any): void {
-    let value = event.target.value;
+  checkFormat(event: any, partOfSpeech: string): void {
+    // Setup
+    let value: string = event.target.value;
+    // Met tout en minuscule (qui le mot Dibi)
+    if (partOfSpeech === 'dibi') {
+      value = value.toLocaleLowerCase();
+    }
+    // Set de la première lettre en majuscule
     value = value.charAt(0).toUpperCase() + value.slice(1);
-    this.newWord.dibi = value;
+    // Suppression d'espaces à la fin (que le mot Dibi)
+    if (partOfSpeech === 'dibi') {
+      if (value.endsWith(' ')) {
+        console.log(value + '!');
+        value = value.slice(0, -1);
+        console.log(value + '!');
+      }
+    }
+    // Set du bon formatage du mot Dibi
+    this.newWord[partOfSpeech] = value;
+    // Autoadapt de la nature grammaticale
+    if (partOfSpeech === 'dibi') {
+      if (value.endsWith('e')) {
+        this.newWord.partOfSpeech = 'Verb';
+      } else if (value.endsWith('i') || value.endsWith('fo') || value.endsWith('ro') || value.endsWith('ti')) {
+        this.newWord.partOfSpeech = 'Noun';
+      } else if (value.endsWith('al')) {
+        this.newWord.partOfSpeech = 'Adjective';
+      } else if (value.endsWith('or')) {
+        this.newWord.partOfSpeech = 'Adverb';
+      }
+    }
    }
 
 }

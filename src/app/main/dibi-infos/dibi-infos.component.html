@@ -28,13 +28,20 @@
                 <!-- <canvas id="pieChart" width="400" height="400"></canvas> -->
                 <canvas class="pie-chart" baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
             </div>
-            <div class="block chart">
+            <!-- <div class="block chart">
                 <div class="title">
                     <h2>Taille du dictionnaire en fonction du temps</h2>
                 </div>
                 <canvas class="line-chart" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'line'">
                 </canvas>
             </div>
+            <div class="block chart">
+                <div class="title">
+                    <h2>Nombres de mots dans le dictrionnaire selon leur nature grammaticale en fonciton du temps</h2>
+                </div>
+                <canvas class="line-chart" baseChart [datasets]="barChartDataNG" [labels]="barChartLabelsNG" [options]="barChartOptionsNG" [legend]="barChartLegendNG" [chartType]="'line'">
+                </canvas>
+            </div> -->
         </div>
     </div>
 </div>

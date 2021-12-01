@@ -13,7 +13,7 @@ $nav-width: 200px;
 
 $padding: 12px;
 $border-radius: 4px;
-$border: 1px solid #999;
+$border: 1px solid #757473;
 
 .body {
     display: flex;
@@ -45,6 +45,8 @@ $border: 1px solid #999;
                 margin: 0px 0px $padding 0px;
                 padding: $padding $padding 0px $padding;
                 max-width: 1400px;
+                overflow: auto;
+                background-color: #3c3b3a;
 
                 .title {
                     display: flex;
@@ -63,6 +65,7 @@ $border: 1px solid #999;
                         border: $border;
                         margin: 0px $padding $padding 0px;
                         padding: $padding;
+                        background-color: #464544;
 
                         h3 {
                             font-weight: 200;
@@ -81,8 +84,10 @@ $border: 1px solid #999;
             .chart {
                 padding-bottom: $padding;
                 align-items: center;
+                min-width: 700px;
+
                 .pie-chart {
-                    max-width: 700px;
+                    max-width: 450px;
                 }
                 .line-chart {
                     max-width: 1400px;
