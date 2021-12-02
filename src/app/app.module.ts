@@ -18,9 +18,8 @@ import { DibiDictComponent } from './main/dibi-dict/dibi-dict.component';
 import { DibiNewWordComponent } from './main/dibi-new-word/dibi-new-word.component';
 import { DibiMcComponent } from './main/dibi-mc/dibi-mc.component';
 import { LogsComponent } from './main/logs/logs.component';
-import { DibiGrammarRulesComponent } from './main/dibi-grammar-rules/dibi-grammar-rules.component';
 import { InfosComponent } from './main/infos/infos.component';
-import { NewRuleComponent } from './main/dibi-grammar-rules/new-rule/new-rule.component';
+import { ConnectCenterComponent } from './main/connect-center/connect-center.component';
 
 const hostname = window.location.hostname;
 const url = (hostname === 'localhost') ? `${window.location.protocol}//${hostname}:5000` : undefined;
@@ -36,9 +35,8 @@ const config: SocketIoConfig = { url, options: {} };
     DibiNewWordComponent,
     DibiMcComponent,
     LogsComponent,
-    DibiGrammarRulesComponent,
     InfosComponent,
-    NewRuleComponent
+    ConnectCenterComponent
   ],
   imports: [
     BrowserModule,

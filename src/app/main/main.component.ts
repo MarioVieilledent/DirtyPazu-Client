@@ -22,8 +22,9 @@ export class MainComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
 
   adminConnected: boolean; // Si un administrateur est connecté
-  // token: number; // Token reçu du serveur
   pwd: string; // Mot de passe en base 64 permettant le fonctionnement des requêtes serveur
+
+  adminBox = false; // À true, ouvre la page de connexion et manage de comptes
 
   constructor(private socket: Socket) {
   }
@@ -42,17 +43,10 @@ export class MainComponent implements OnInit {
 
     // Le serveur valide que ce client est admin
     this.socket.on('trust', data => {
-      this.adminConnected = true;
+      this.setAdminConnected(true);
       window.localStorage.setItem('pwd', data.pwd);
     });
 
-    // Une requête envoyé au serveur à un token érroné, on affiche un alert pour l'indiquer
-    this.socket.on('wrongPwd', () => {
-      this.adminConnected = false;
-      window.localStorage.removeItem('pwd');
-      window.alert('Le mot de passe est faux.');
-      location.reload();
-    });
   }
 
   ngAfterViewInit() {
@@ -94,11 +88,17 @@ export class MainComponent implements OnInit {
     }
   }
 
+  /**
+   * Change de page
+   */
   setNav(page: PageName): void {
     this.navigation = page;
     window.localStorage.setItem('nav', page);
   }
 
+  /**
+   * Pour le flag
+   */
   setSize(size: number): void {
     this.pixelSize = size;
   }
@@ -113,14 +113,22 @@ export class MainComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  login() {
-    this.socket.emit('login', {pwd: btoa(prompt('Entrer le mot de passe'))});
+  openAdminBox() {
+    this.adminBox = true;
   }
 
-  logout() {
-    this.adminConnected = false;
-    window.localStorage.removeItem('pwd');
-    this.socket.emit('logout', {});
+  /**
+   * Setter de la connexion admin (fonction déclenchée par un eventEmitter du component main/conncet-center)
+   */
+  setAdminConnected(event: boolean) {
+    this.adminConnected = event;
+  }
+
+  /**
+   * Setter de l'affichage de la page admin (fonction déclenchée par un eventEmitter du component main/conncet-center)
+   */
+  setAdminBox(event: boolean) {
+    this.adminBox = event;
   }
 
 }

@@ -62,8 +62,21 @@ export interface Log {
     timestamp: Date;
 }
 
-// Pour les règles de grammaire
+// Pour les utilisateurs
 
+export interface User {
+    pseudo: string; // Court pseudo du l'utilisateur (pseudo affiché)
+    discordTagName: string; // Pseudo Discord avec code à 4 chiffres
+    color: UserColor; // Couleur choisie
+}
+
+export interface UserColor {
+    name: string; // Nom de la couleur
+    hex: string; // Code hexa avec #
+}
+
+// Pour les règles de grammaire
+/*
 // Un exemple dans une règle de grammaire
 export interface Example {
     dibi: string; // Phrase en Dibi pour illustrer l'exemple
@@ -89,3 +102,4 @@ export interface GroupedGrammatarRules {
     name: string; // Nom du groupe
     grammarRules: GrammarRule[]; // Liste de règles appartenant à ce groupe
 }
+*/
