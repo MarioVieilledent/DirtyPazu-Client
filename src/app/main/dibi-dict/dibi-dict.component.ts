@@ -185,8 +185,8 @@ export class DibiDictComponent implements OnInit {
     // Récupération du dictionnaire
     this.socket.on('loadDict', (data) => {
       this.dibiDict = data.dict;
-      // Tri du dictionnaire par ordre alphabétique du mot Dibi
-      // this.sortDictionary(this.dibiDict, this.sortBy, this.sortOrder); // Méthode de tri selon des critères définisables par l'utilisateur
+      // Mise en minuscule de tous les mots Dibis
+      this.formatDibiWords();
       this.searchObservable.next();
     });
 
@@ -420,6 +420,15 @@ export class DibiDictComponent implements OnInit {
     this.filteredDibiDict = list;
     // this.eachKeySearch();
   }
+
+  /**
+   * Met en minuscule tous les mots Dibis (pour que les mots soit mieux lisibles dans le dico)
+   */
+   formatDibiWords(): void {
+     this.dibiDict.forEach(word => {
+      word.dibi = word.dibi.toLowerCase();
+     });
+   }
 
   /**
    * À partir de la liste des mots filtrés et triés, construit 1 à n pages pour limiter le nombre de mots affichés en même temps

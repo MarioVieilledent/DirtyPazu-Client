@@ -3,8 +3,12 @@
         <div class="header">
                 <div class="menu-button" *ngIf="menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-left-solid.svg" title="Modifier"></div>
                 <div class="menu-button" *ngIf="!menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-right-solid.svg" title="Modifier"></div>
-                <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()" (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
-                <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()" (auxclick)="openNewBlank()">Dibi</h1>
+                <div class="block-title">
+                    <img src="./assets/xmas.png" class="special-event">
+                    <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()" (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
+                    <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()" (auxclick)="openNewBlank()">Dibi</h1>
+                    <img src="./assets/xmas.png" class="special-event-turned">
+                </div>
                 <button class="log-button" *ngIf="!adminConnected" (click)="login()">Login</button>
                 <button class="log-button" *ngIf="adminConnected" (click)="logout()">Logout</button>
         </div>
