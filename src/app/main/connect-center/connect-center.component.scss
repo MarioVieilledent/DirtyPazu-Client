@@ -4,6 +4,8 @@ $border-radius: 4px;
 $border: 1px solid #757473;
 
 $box-color: #454443;
+$hover-color: #3f3e3d;
+$selected-color: #393837;
 
 .container {
     display: flex;
@@ -25,7 +27,9 @@ $box-color: #454443;
         justify-content: flex-start;
         width: 100%;
         max-width: 700px;
-        height: 500px;
+        height: 100%;
+        max-height: 550px;
+        overflow: auto;
         background-color: $box-color;
         border: $border;
         border-radius: $border-radius;
@@ -69,12 +73,44 @@ $box-color: #454443;
                     flex-direction: column;
                     width: 100%;
 
-                    .user {
-                        margin-bottom: $padding;
+                    .user, .selected-user {
+                        display: flex;
+                        justify-content: space-between;
+                        border-radius: $border-radius;
+                        padding: calc(#{$padding} / 2) $padding;
+                        cursor: pointer;
 
-                        .pseudo-style {
-                            margin-right: $padding;
+                        .names {
+                            display: flex;
+                            flex-direction: column;
+                            flex-grow: 1;
+                            height: 100%;
+
+                            .pseudo-style {
+                                margin-right: $padding;
+                            }
                         }
+
+                        .options {
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+
+                            img {
+                                margin-left: $padding;
+                                height: 18px;
+                                width: 18px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .user:hover, .selected-user {
+                        background-color: $hover-color;
+                    }
+
+                    .selected-user {
+                        background-color: $selected-color;
                     }
                 }
 
@@ -83,6 +119,7 @@ $box-color: #454443;
                     flex-direction: column;
                     align-items: flex-start;
                     width: 100%;
+                    margin-top: $padding;
 
                     .new-user-form {
                         display: flex;

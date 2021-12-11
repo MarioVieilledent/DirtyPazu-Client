@@ -13,9 +13,14 @@
             </div>
             <div class="user-manager">
                 <div class="users">
-                    <div class="user" *ngFor="let user of users">
-                        <span  class="pseudo-style" [style.color]="user.color.hex">{{user.pseudo}}</span>
-                        <span>{{user.discordTagName}}</span>
+                    <div [className]="selectedUser === user ? 'selected-user' : 'user'" *ngFor="let user of users" (click)="selectUser(user)">
+                        <div class="names">
+                            <span  class="pseudo-style" [style.color]="user.color.hex">{{user.pseudo}}</span>
+                            <span>{{user.discordTagName}}</span>
+                        </div>
+                        <div class="options">
+                            <img title="Supprimer l'utilisateur" (click)="deleteUser(user)" src="./assets/trash-solid.svg">
+                        </div>
                     </div>
                 </div>
                 <div class="new-user">

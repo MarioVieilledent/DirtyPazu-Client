@@ -18,6 +18,9 @@ export class ConnectCenterComponent implements OnInit {
   password: string; // Mot de passe administrateur entré par l'utilisateur
   errorMessage: string; // Message en cas de mot de passe faux
 
+  // Utilisateur sélectionné
+  selectedUser: User;
+
   // Création d'un nouvel utilisateur
   users: User[]; // Liste de tous les utilisateurs
   creatingNewUser = false; // True = création d'un nouvel utilisateur
@@ -33,11 +36,18 @@ export class ConnectCenterComponent implements OnInit {
   ];
 
   constructor(private socket: Socket) {
-    window.onclick = (event: any) => {
+    // Si click à l'extérieur de la fenêtre, fermeture de la fenêtre
+    window.onclick = (event: MouseEvent) => {
       if (event.target === document.getElementById('zone-click-exit')) {
         this.closeBoxEmitter.emit(false);
       }
     };
+    // Si touche esc, fermeture de la fenêtre
+    window.addEventListener('keyup', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        this.closeBoxEmitter.emit(false);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -54,6 +64,7 @@ export class ConnectCenterComponent implements OnInit {
 
     // Chargement de la liste des utilisateurs
     this.socket.on('usersLoaded', (users: User[]) => {
+      this.users = undefined;
       this.users = users;
       this.creatingNewUser = false;
     });
@@ -66,6 +77,11 @@ export class ConnectCenterComponent implements OnInit {
     // Erreur de création de l'utilisateur
     this.socket.on('addUserError', (data: any) => {
       window.alert(data.mes);
+    });
+
+    // Confirmation utilisateur supprimé
+    this.socket.on('userDeleted', (data: any) => {
+      this.socket.emit('loadUsers', {});
     });
 
     // Demande de tous les utilisateurs
@@ -120,6 +136,22 @@ export class ConnectCenterComponent implements OnInit {
       this.socket.emit('newUser', {pwd: this.password, user: this.newUser });
     } else {
       window.alert('Impossible de créer l\'utilisateur.');
+    }
+  }
+
+  /**
+   * Sélectionne un utilisateur
+   */
+  selectUser(user: User): void {
+    this.selectedUser = user;
+  }
+
+  /**
+   * Supprime un utilisateur
+   */
+  deleteUser(user: User): void {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      this.socket.emit('deleteUser', {pwd: this.password, user });
     }
   }
 

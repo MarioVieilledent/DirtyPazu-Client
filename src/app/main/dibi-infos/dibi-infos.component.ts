@@ -83,8 +83,8 @@ export class DibiInfosComponent implements OnInit {
 
     // Récupération du dictionnaire
     this.socket.on('loadDict', (data) => {
-      let list = data.dict;
-      this.dibiDict = list;
+
+      this.dibiDict = data.dict;
 
       // Récupérations des stats de la répartition des natures gr. et nb mots langue
       this.dibiDict.forEach(word => {
@@ -139,9 +139,9 @@ export class DibiInfosComponent implements OnInit {
       this.barChartLabelsNG.push(day);
       this.barChartLabels.push(day);
       this.dibiDict.forEach(word => {
+        this.numbersOfWords.Total++; // Incrément des mots totaux
         if (day === this.datify(new Date(word.date))) {
           this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
-          this.numbersOfWords.Total++; // Incrément des mots totaux
         } else {
           // Ajout des nouveaux mots selon la date
           this.barChartDataNG.forEach(elem => {
@@ -152,6 +152,8 @@ export class DibiInfosComponent implements OnInit {
           day = this.datify(new Date(word.date));
           this.barChartLabelsNG.push(day);
           this.barChartLabels.push(day);
+          // Ajout du prochain mot (qui est passé en else car nouvelle date, mais qu'il faut compter)
+          this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
         }
       });
       // Ajout des nouveaux mots selon la date

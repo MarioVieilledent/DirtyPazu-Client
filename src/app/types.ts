@@ -65,6 +65,7 @@ export interface Log {
 // Pour les utilisateurs
 
 export interface User {
+    id_?: string; // Identifiant mongodb
     pseudo: string; // Court pseudo du l'utilisateur (pseudo affiché)
     discordTagName: string; // Pseudo Discord avec code à 4 chiffres
     color: UserColor; // Couleur choisie
