@@ -1,4 +1,3 @@
-
 $bg-color-header: #151311; // Couleur de fond la plus foncée
 $bg-color-nav: #252321; // Couleur de fond entre-deux
 $bg-color-content: #353331; // Couleur de fond la plus claire
@@ -51,29 +50,24 @@ $border-radius: 4px;
                 align-items: center;
                 height: 100%;
 
-                .special-event, .special-event-turned {
-                    height: 100%;
-                }
-
-                .special-event-turned {
-                    transform: scaleX(-1);
-                }
-
                 h1 {
                     cursor: pointer;
                     margin: 0px 12px;
                 }
 
-                .title, .title-small {
+                .title,
+                .title-small {
                     margin: 0px 12px;
                 }
-    
-                .title-gold, .title-gold-small {
+
+                .title-gold,
+                .title-gold-small {
                     cursor: pointer;
-                    color: #FFDB88;
+                    color: #ffdb88;
                 }
-    
-                .title-small, .title-gold-small {
+
+                .title-small,
+                .title-gold-small {
                     display: none;
                 }
             }
@@ -178,11 +172,13 @@ $border-radius: 4px;
         .container {
             .header {
                 .block-title {
-                    .title, .title-gold {
+                    .title,
+                    .title-gold {
                         display: none;
                     }
 
-                    .title-small, .title-gold-small {
+                    .title-small,
+                    .title-gold-small {
                         display: flex;
                     }
                 }

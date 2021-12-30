@@ -1,4 +1,3 @@
-
 <div class="body">
     <div class="title-description">
         <h1>Ajouter un mot</h1>
@@ -8,7 +7,8 @@
             <div class="block">
                 <div class="label-input">
                     <span class="label">Dibi</span>
-                    <input [className]="newWord.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')" [(ngModel)]="newWord.dibi">
+                    <input [className]="newWord.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')"
+                        [(ngModel)]="newWord.dibi">
                 </div>
                 <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
             </div>
@@ -17,14 +17,16 @@
                     <span class="label">Français</span>
                     <input type="text" (input)="checkFormat($event, 'french')" [(ngModel)]="newWord.french">
                 </div>
-                <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés par des virgules.</span>
+                <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés
+                    par des virgules.</span>
             </div>
             <div class="block">
                 <div class="label-input">
                     <span class="label">Anglais</span>
                     <input type="text" (input)="checkFormat($event, 'english')" [(ngModel)]="newWord.english">
-                    </div>
-                <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés par des virgules. Facultatif.</span>
+                </div>
+                <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés
+                    par des virgules. Facultatif.</span>
             </div>
             <div class="block">
                 <div class="label-input">
@@ -38,6 +40,7 @@
                         <option value="Conjonction">Conjonction</option>
                         <option value="Interjection">Interjection</option>
                         <option value="Particule">Particule</option>
+                        <option value="SpiritWord">Mot d'esprit</option>
                     </select>
                 </div>
                 <span class="help">Nature grammaticale (ou classe grammaticale).</span>
@@ -54,18 +57,20 @@
             <div class="block">
                 <div class="label-input">
                     <span class="label">Description</span>
-                    <textarea name="new-word-description" id="new-word-description" rows="5" [(ngModel)]="newWord.description"></textarea>
+                    <textarea name="new-word-description" id="new-word-description" rows="5"
+                        [(ngModel)]="newWord.description"></textarea>
                 </div>
-                <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc. Facultatif.</span>
+                <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc.
+                    Facultatif.</span>
             </div>
         </div>
         <div class="buttons">
-                <span [ngSwitch]="message.color">
+            <span [ngSwitch]="message.color">
                 <p class="green-mes" *ngSwitchCase="'green'">{{message.mes}}</p>
                 <p class="yellow-mes" *ngSwitchCase="'yellow'">{{message.mes}}</p>
                 <p class="red-mes" *ngSwitchCase="'red'">{{message.mes}}</p>
                 <p *ngSwitchDefault></p>
-                </span>
+            </span>
             <button (click)="addWord()">Ajouter</button>
         </div>
     </div>

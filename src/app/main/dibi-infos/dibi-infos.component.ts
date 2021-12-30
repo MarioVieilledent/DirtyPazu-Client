@@ -20,7 +20,9 @@ export class DibiInfosComponent implements OnInit {
     { label: 'Adjectifs', savedAs: 'Adjective', nb: 0, color: '#8E8' },
     { label: 'Adverbes', savedAs: 'Adverb', nb: 0, color: '#EA8' },
     { label: 'Conjonctions', savedAs: 'Conjonction', nb: 0, color: '#E8E' },
-    { label: 'Particules', savedAs: 'Particule', nb: 0, color: '#EE8' },
+    { label: 'Particules de fonction', savedAs: 'FunctionParticule', nb: 0, color: '#EE8' },
+    { label: 'Particules de transformation', savedAs: 'TransformationParticule', nb: 0, color: '#EE8' },
+    { label: 'Mots d\'esprit', savedAs: 'SpiritWord', nb: 0, color: '#395' },
     { label: 'Interjections', savedAs: 'Interjection', nb: 0, color: '#A8E' }
   ]
 
@@ -43,7 +45,9 @@ export class DibiInfosComponent implements OnInit {
     Adjectifs: 0,
     Adverbes: 0,
     Conjonctions: 0,
-    Particules: 0,
+    'Particules de fonction': 0,
+    'Particules de transformation': 0,
+    'Mots d\'esprit': 0,
     Interjections: 0
   };
   barChartDataNG = [
@@ -53,7 +57,9 @@ export class DibiInfosComponent implements OnInit {
     { data: [], label: 'Adjectifs', borderColor: '#8E8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#8E8' },
     { data: [], label: 'Adverbes', borderColor: '#EA8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#EA8' },
     { data: [], label: 'Conjonctions', borderColor: '#E8E', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#E8E' },
-    { data: [], label: 'Particules', borderColor: '#EE8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#EE8' },
+    { data: [], label: 'Particules de fonction', borderColor: '#EE8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#EE8' },
+    { data: [], label: 'Particules de transformation', borderColor: '#EE8', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#EE8' },
+    { data: [], label: 'Mots d\'esprit', borderColor: '#395', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#395' },
     { data: [], label: 'Interjections', borderColor: '#A8E', backgroundColor: 'rgba(0, 0, 0, 0)', pointBackgroundColor: '#A8E' }
   ];
   barChartLabelsNG = [];
@@ -107,8 +113,14 @@ export class DibiInfosComponent implements OnInit {
           case ('Conjonction'):
             this.nbPartsOfSpeech.find(i => i.savedAs === 'Conjonction').nb++;
             break;
-          case ('Particule'):
-            this.nbPartsOfSpeech.find(i => i.savedAs === 'Particule').nb++;
+          case ('FunctionParticule'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'FunctionParticule').nb++;
+            break;
+          case ('TransformationParticule'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'TransformationParticule').nb++;
+            break;
+          case ('SpiritWord'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'SpiritWord').nb++;
             break;
           case ('Interjection'):
             this.nbPartsOfSpeech.find(i => i.savedAs === 'Interjection').nb++;
@@ -162,7 +174,7 @@ export class DibiInfosComponent implements OnInit {
       });
       this.barChartData[0].data.push(this.numbersOfWords.Total);
 
-      // Tri par taille (stats de répartiotion des natures gr.)
+      // Tri par taille (stats de répartition des natures gr.)
       this.barChartDataNG.sort((a, b) => {
         if (a.data[a.data.length - 1] < b.data[b.data.length - 1]) {
           return 1;
@@ -203,7 +215,9 @@ export class DibiInfosComponent implements OnInit {
       case ('Adjective'): return 'Adjectifs'; break;
       case ('Adverb'): return 'Adverbes'; break;
       case ('Conjonction'): return 'Conjonctions'; break;
-      case ('Particule'): return 'Particules'; break;
+      case ('FunctionParticule'): return 'Particules de fonction'; break;
+      case ('TransformationParticule'): return 'Particules de transformation'; break;
+      case ('SpiritWord'): return 'Mots d\'esprit'; break;
       case ('Interjection'): return 'Interjections'; break;
     }
   }

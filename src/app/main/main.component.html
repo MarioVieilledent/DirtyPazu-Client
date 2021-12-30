@@ -1,16 +1,20 @@
 <div class="body">
-    <app-connect-center *ngIf="adminBox" [adminConnected]="adminConnected" [pwd]="pwd" (adminConnectionEmitter)="setAdminConnected($event)" (closeBoxEmitter)="setAdminBox($event)"></app-connect-center>
+    <app-connect-center *ngIf="adminBox" [adminConnected]="adminConnected" [pwd]="pwd"
+        (adminConnectionEmitter)="setAdminConnected($event)" (closeBoxEmitter)="setAdminBox($event)">
+    </app-connect-center>
     <div class="container">
         <div class="header">
-                <div class="menu-button" *ngIf="menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-left-solid.svg" title="Modifier"></div>
-                <div class="menu-button" *ngIf="!menuDisplayed" (click)="toggleMenu()"><img src="./assets/chevron-right-solid.svg" title="Modifier"></div>
-                <div class="block-title">
-                    <img src="./assets/xmas.png" class="special-event">
-                    <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()" (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
-                    <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()" (auxclick)="openNewBlank()">Dibi</h1>
-                    <img src="./assets/xmas.png" class="special-event-turned">
-                </div>
-                <button class="log-button" (click)="openAdminBox()">Admin</button>
+            <div class="menu-button" *ngIf="menuDisplayed" (click)="toggleMenu()"><img
+                    src="./assets/chevron-left-solid.svg" title="Modifier"></div>
+            <div class="menu-button" *ngIf="!menuDisplayed" (click)="toggleMenu()"><img
+                    src="./assets/chevron-right-solid.svg" title="Modifier"></div>
+            <div class="block-title">
+                <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()"
+                    (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
+                <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()"
+                    (auxclick)="openNewBlank()">Dibi</h1>
+            </div>
+            <button class="log-button" (click)="openAdminBox()">Admin</button>
         </div>
         <div class="middle">
             <div class="nav" #nav>
@@ -18,7 +22,7 @@
                     <!-- <div class="button-block" (click)="setNav('Infos')">
                         <h2>Infos</h2>
                     </div> -->
-                    <div class="button-block" (click)="setNav('Flag')">
+                    <!-- <div class="button-block" (click)="setNav('Flag')">
                         <h2>Flag</h2>
                         <div class='flag-options' *ngIf="navigation === 'Flag'">
                             <div class="option-block">
@@ -32,7 +36,7 @@
                                 <input type="checkbox" [(ngModel)]="displayRegions">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="button-block">
                         <h2>Dibi</h2>
                         <div class='flag-options'>
@@ -40,8 +44,10 @@
                                 <div class="h4 button" (click)="setNav('Dibi-infos')">Infos</div>
                                 <div class="h4 button" (click)="setNav('Dibi-dict')">Dictionnaire</div>
                                 <!-- <div class="h4 button" (click)="setNav('Dibi-grammar-rules')">Grammaire</div> -->
-                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-add-word')">Ajout mot</div>
-                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-mc')">Minecraft</div>
+                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-add-word')">Ajout
+                                    mot</div>
+                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-mc')">Minecraft
+                                </div>
                                 <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Logs')">Logs</div>
                             </div>
                         </div>
@@ -72,7 +78,7 @@
                         <app-logs></app-logs>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
-                    
+
                     </ng-container>
                 </div>
             </div>

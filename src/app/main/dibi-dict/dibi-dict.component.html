@@ -15,18 +15,26 @@
                     <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Pronoun" type="checkbox"
                             class="Pronoun" [(ngModel)]="searchOptions.partsOfSpeech.Pronoun"><label for="Pronoun"
                             class="Pronoun">Pronoms</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox"
+                            class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label for="Adjective"
+                            class="Adjective">Adjectifs</label></div>
                     <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Verb" type="checkbox" class="Verb"
                             [(ngModel)]="searchOptions.partsOfSpeech.Verb"><label for="Verb" class="Verb">Verbes</label>
                     </div>
                     <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adverb" type="checkbox"
                             class="Adverb" [(ngModel)]="searchOptions.partsOfSpeech.Adverb"><label for="Adverb"
                             class="Adverb">Adverbes</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox"
-                            class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label for="Adjective"
-                            class="Adjective">Adjectifs</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Particule" type="checkbox"
-                            class="Particule" [(ngModel)]="searchOptions.partsOfSpeech.Particule"><label for="Particule"
-                            class="Particule">Particules</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="FunctionParticule" type="checkbox"
+                            class="FunctionParticule" [(ngModel)]="searchOptions.partsOfSpeech.FunctionParticule"><label
+                            for="FunctionParticule" class="FunctionParticule">Particules de fonction</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="TransformationParticule"
+                            type="checkbox" class="TransformationParticule"
+                            [(ngModel)]="searchOptions.partsOfSpeech.TransformationParticule"><label
+                            for="TransformationParticule" class="TransformationParticule">Particules de
+                            transformation</label></div>
+                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="SpiritWord" type="checkbox"
+                            class="SpiritWord" [(ngModel)]="searchOptions.partsOfSpeech.SpiritWord"><label
+                            for="SpiritWord" class="SpiritWord">Mots d'esprit</label></div>
                     <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Conjonction" type="checkbox"
                             class="Conjonction" [(ngModel)]="searchOptions.partsOfSpeech.Conjonction"><label
                             for="Conjonction" class="Conjonction">Conjonctions</label></div>
@@ -83,15 +91,11 @@
                 <img (click)="changePage('left')" src="./assets/angle-left-solid.svg">
             </div>
             <div class="middle">
-                <div title="Page courante / nombre de page (cliquer pour choisir le nombre de mots par pages)"
-                    class="block-info clickable" (click)="editNbWordsPerPage()">
-                    <span class="desc-word">Page </span>
-                    <span class="values">{{this.currentPage + 1}} / {{this.filteredAllPages.length}}</span>
-                </div>
-                <div title="Mots de la page / mots résultats de recherche" class="block-info" *ngIf="dibiDict">
-                    <span class="desc-word">Mots </span>
-                    <span class="values">{{filteredAllPages[currentPage]?.length}} / {{filteredDibiDict.length}}</span>
-                </div>
+                <span (click)="editNbWordsPerPage()">{{filteredDibiDict.length === 0 ? '0' : this.currentPage *
+                    nbWordsPerPage + 1}} -
+                    {{((this.currentPage + 1) * nbWordsPerPage) > filteredDibiDict.length ?
+                    (filteredDibiDict.length) : ((this.currentPage + 1) * nbWordsPerPage)}} sur
+                    {{filteredDibiDict.length}}</span>
             </div>
             <div class="right">
                 <img (click)="changePage('right')" src="./assets/angle-right-solid.svg">
@@ -150,7 +154,11 @@
                             <div class="partOfSpeech Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
                             <div class="partOfSpeech Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
                             <div class="partOfSpeech Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
-                            <div class="partOfSpeech Particule" *ngSwitchCase="'Particule'">Particule</div>
+                            <div class="partOfSpeech FunctionParticule" *ngSwitchCase="'FunctionParticule'">Particule de
+                                fonction</div>
+                            <div class="partOfSpeech TransformationParticule" *ngSwitchCase="'TransformationParticule'">
+                                Particule de transformation</div>
+                            <div class="partOfSpeech SpiritWord" *ngSwitchCase="'SpiritWord'">Mot d'esprit</div>
                         </ng-container>
                     </div>
                 </div>
@@ -172,8 +180,14 @@
                                         Conjonction</div>
                                     <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">
                                         Interjection</div>
-                                    <div class="partOfSpeech-small-screen Particule" *ngSwitchCase="'Particule'">
-                                        Particule</div>
+                                    <div class="partOfSpeech-small-screen FunctionParticule"
+                                        *ngSwitchCase="'FunctionParticule'">
+                                        Particule de fonction</div>
+                                    <div class="partOfSpeech-small-screen TransformationParticule"
+                                        *ngSwitchCase="'TransformationParticule'">
+                                        Particule de transformation</div>
+                                    <div class="partOfSpeech-small-screen SpiritWord" *ngSwitchCase="'SpiritWord'">
+                                        Mot d'esprit</div>
                                 </ng-container>
                             </div>
                         </div>
@@ -236,7 +250,8 @@
                                 <div class="block">
                                     <div class="label-input">
                                         <span class="label">Nature</span>
-                                        <select [className]="wordToEdit.partOfSpeech" [(ngModel)]="wordToEdit.partOfSpeech">
+                                        <select [className]="wordToEdit.partOfSpeech"
+                                            [(ngModel)]="wordToEdit.partOfSpeech">
                                             <option value="Noun">Nom</option>
                                             <option value="Pronoun">Pronom</option>
                                             <option value="Verb">Verbe</option>
@@ -244,7 +259,9 @@
                                             <option value="Adverb">Adverbe</option>
                                             <option value="Conjonction">Conjonction</option>
                                             <option value="Interjection">Interjection</option>
-                                            <option value="Particule">Particule</option>
+                                            <option value="FunctionParticule">Particule de fonction</option>
+                                            <option value="TransformationParticule">Particule de transformation</option>
+                                            <option value="SpiritWord">Mot d'esprit</option>
                                         </select>
                                     </div>
                                     <span class="help">Nature grammaticale (ou classe grammaticale).</span>

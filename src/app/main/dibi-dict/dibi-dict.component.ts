@@ -14,7 +14,7 @@ export class DibiDictComponent implements OnInit {
 
   // Liste des mots du dico
   dibiDict: DibiWord[] = []; // Tous les mots
-  filteredDibiDict: DibiWord[] = []; // Seulements ceux filtrés
+  filteredDibiDict: DibiWord[] = []; // Seulement ceux filtrés
   filteredAllPages: DibiWord[][] = []; // Ceux filtrés structurés par pages
 
   nbWordsPerPage: number; // Nombre de mots affichés dans une page (enregistré en localStorage pour préférence utilisateur)
@@ -37,7 +37,9 @@ export class DibiDictComponent implements OnInit {
       Adverb: true,
       Conjonction: true,
       Interjection: true,
-      Particule: true
+      FunctionParticule: true,
+      TransformationParticule: true,
+      SpiritWord: true
     },
     element: {
       Dibi: true,
@@ -320,11 +322,11 @@ export class DibiDictComponent implements OnInit {
   /**
    * Vide la barre de recherche
    */
-   emptySearch(): void {
-     this.search = ''
+  emptySearch(): void {
+    this.search = ''
     this.searchSimplified = '';
     this.searchObservable.next(this.searchSimplified);
-   }
+  }
 
   /**
    * Sélectionne tous ou aucun des cases à cocher pour la nature des mots
@@ -424,11 +426,11 @@ export class DibiDictComponent implements OnInit {
   /**
    * Met en minuscule tous les mots Dibis (pour que les mots soit mieux lisibles dans le dico)
    */
-   formatDibiWords(): void {
-     this.dibiDict.forEach(word => {
+  formatDibiWords(): void {
+    this.dibiDict.forEach(word => {
       word.dibi = word.dibi.toLowerCase();
-     });
-   }
+    });
+  }
 
   /**
    * À partir de la liste des mots filtrés et triés, construit 1 à n pages pour limiter le nombre de mots affichés en même temps
