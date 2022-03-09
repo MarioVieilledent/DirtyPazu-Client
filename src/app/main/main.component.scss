@@ -75,6 +75,32 @@ $border-radius: 4px;
             .log-button {
                 margin-right: $padding;
             }
+
+            .groupped-imgs {
+                display: flex;
+                align-items: center;
+
+                .user-button {
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 12px;
+                    cursor: pointer;
+                }
+
+                .user-connected-button {
+                    height: 32px;
+                    width: 32px;
+                    margin-right: 12px;
+                    border-radius: 32px;
+                    cursor: pointer;
+                }
+
+                .golden-crown {
+                    height: 20px;
+                    width: 20px;
+                    margin-right: 12px;
+                }
+            }
         }
 
         .middle {
@@ -90,58 +116,32 @@ $border-radius: 4px;
                 background-color: $bg-color-nav;
                 overflow: auto;
 
-                .buttons-list {
+                h3 {
+                    font-weight: 400;
+                    font-size: 16px;
+                }
+
+                .button {
                     display: flex;
-                    flex-direction: column;
-                    width: 100%;
+                    align-items: center;
+                    border-radius: $border-radius;
+                    cursor: pointer;
+                    margin: 6px 6px 0px 6px;
+                    padding: 6px;
 
-                    .button-block {
-                        display: flex;
-                        flex-direction: column;
-                        margin: $padding $padding 0px $padding;
-                        padding: $padding;
-                        border-radius: $border-radius;
-                        background-color: $bg-color-nav-button;
-
-                        h2 {
-                            font-size: 18px;
-                        }
-
-                        .flag-options {
-                            display: flex;
-                            flex-direction: column;
-                            margin-top: $padding;
-
-                            .option-block {
-                                display: flex;
-                                flex-direction: column;
-
-                                h3 {
-                                    font-weight: 400;
-                                    font-size: 16px;
-                                }
-
-                                .h4 {
-                                    font-size: 14px;
-                                }
-
-                                .button {
-                                    background-color: $bg-color-option-block;
-                                    border-radius: $border-radius;
-                                    margin-top: 6px;
-                                    padding: 6px;
-                                }
-                                .button:hover {
-                                    background-color: $bg-color-option-block-hover;
-                                }
-                            }
-                        }
+                    img {
+                        height: 20px;
+                        width: 24px;
+                        margin-right: 6px;
                     }
 
-                    .button-block:hover {
-                        cursor: pointer;
-                        background-color: $bg-color-nav-button-hover;
+                    span {
+                        font-size: 15px;
                     }
+                }
+
+                .button:hover {
+                    background-color: $bg-color-nav-button-hover;
                 }
             }
 

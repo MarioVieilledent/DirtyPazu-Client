@@ -1,0 +1,81 @@
+<div class='form-word'>
+    <div class="mandatory">
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Dibi</span>
+                <div class="input-and-mandatory-logo">
+                    <input [className]="word.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')"
+                        [(ngModel)]="word.dibi">
+                    <img class="mandatory" *ngIf="!word.dibi" src="assets/mandatory.svg">
+                </div>
+            </div>
+            <span class="help">Un mot commençant par une majuscule. Particules en minuscule avec un "-".</span>
+        </div>
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Français</span>
+                <div class="input-and-mandatory-logo">
+                    <input type="text" (input)="checkFormat($event, 'french')" [(ngModel)]="word.french">
+                    <img class="mandatory" *ngIf="!word.french" src="assets/mandatory.svg">
+                </div>
+            </div>
+            <span class="help">Traduction en Français, un ou plusieurs mots commençant par des majuscules, séparés
+                par des virgules.</span>
+        </div>
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Anglais</span>
+                <div class="input-and-mandatory-logo">
+                    <input type="text" (input)="checkFormat($event, 'english')" [(ngModel)]="word.english">
+                </div>
+            </div>
+            <span class="help">Traduction en Anglais, un ou plusieurs mots commençant par des majuscules, séparés
+                par des virgules. Facultatif.</span>
+        </div>
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Nature</span>
+                <div class="input-and-mandatory-logo">
+                    <select [className]="word.partOfSpeech" [(ngModel)]="word.partOfSpeech">
+                        <option value="Noun">Nom</option>
+                        <option value="Pronoun">Pronom</option>
+                        <option value="Verb">Verbe</option>
+                        <option value="Adjective">Adjectif</option>
+                        <option value="Adverb">Adverbe</option>
+                        <option value="Conjonction">Conjonction</option>
+                        <option value="Interjection">Interjection</option>
+                        <option value="Particule">Particule</option>
+                        <option value="SpiritWord">Mot d'esprit</option>
+                    </select>
+                </div>
+            </div>
+            <span class="help">Nature grammaticale (ou classe grammaticale).</span>
+        </div>
+    </div>
+    <div class="facultative">
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Créateur</span>
+                <div class="input-and-mandatory-logo">
+                    <input type="text" [(ngModel)]="word.author" placeholder="pseudo#code">
+                    <img class="mandatory" *ngIf="!word.author" src="assets/mandatory.svg">
+                </div>
+            </div>
+            <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
+        </div>
+        <div class="block">
+            <div class="label-input">
+                <span class="label">Description</span>
+                <div class="input-and-mandatory-logo">
+                    <textarea name="new-word-description" id="new-word-description" rows="5"
+                        [(ngModel)]="word.description"></textarea>
+                </div>
+            </div>
+            <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc.
+                Facultatif.</span>
+        </div>
+    </div>
+    <div class="buttons">
+        <button *ngIf="word.dibi && word.french && word.author" (click)="sendWord()">{{buttonMessage}}</button>
+    </div>
+</div>

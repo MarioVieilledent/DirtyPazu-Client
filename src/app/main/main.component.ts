@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { SocialAuthService, SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider } from "angularx-social-login";
 import { Socket } from 'ngx-socket-io';
 import { PageName } from '../types';
 
@@ -24,9 +26,11 @@ export class MainComponent implements OnInit {
   adminConnected: boolean; // Si un administrateur est connecté
   pwd: string; // Mot de passe en base 64 permettant le fonctionnement des requêtes serveur
 
-  adminBox = false; // À true, ouvre la page de connexion et manage de comptes
+  user: SocialUser; // Utilisateur Google
 
-  constructor(private socket: Socket) {
+  userMenu = false; // À true, ouvre la page de connexion et manage de comptes
+
+  constructor(private socket: Socket, private authService: SocialAuthService) {
   }
 
   ngOnInit(): void {
@@ -46,6 +50,21 @@ export class MainComponent implements OnInit {
       this.setAdminConnected(true);
       window.localStorage.setItem('pwd', data.pwd);
     });
+
+    // Prépare la réception de la connexion
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      console.log(user);
+    });
+
+    // Tente de se connecter avec le compte Google
+    setTimeout(() => {
+      try {
+        this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+      } catch (e) {
+        console.error(e.message);
+      }
+    }, 1000);
 
   }
 
@@ -113,8 +132,11 @@ export class MainComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  openAdminBox() {
-    this.adminBox = true;
+  /**
+   * Ouvre la fenêtre de connexion
+   */
+  openUserMenu() {
+    this.userMenu = true;
   }
 
   /**
@@ -127,8 +149,15 @@ export class MainComponent implements OnInit {
   /**
    * Setter de l'affichage de la page admin (fonction déclenchée par un eventEmitter du component main/conncet-center)
    */
-  setAdminBox(event: boolean) {
-    this.adminBox = event;
+  setUserMenu(event: boolean) {
+    this.userMenu = event;
+  }
+
+  /**
+   * Set l'utilisateur qui s'est connecté via Google
+   */
+  setUser(event: SocialUser): void {
+    this.user = event;
   }
 
 }

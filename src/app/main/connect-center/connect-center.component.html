@@ -1,56 +1,37 @@
 <div class="container" id="zone-click-exit">
     <div class="box">
-        <div *ngIf="!adminConnected" class="admin-connection">
-            <h3>Mot de passe admin</h3>
-            <input type="password" [(ngModel)]="password">
-            <span class="error-message" *ngIf="errorMessage">{{errorMessage}}</span>
-            <button (click)="connectAdmin()">Entrer</button>
+        <div class="header">
         </div>
-        <div *ngIf="adminConnected" class="admin-connected">
-            <div class="header">
-                <h3>Bienvenue !</h3>
-                <button (click)="logout()">Déconnexion</button>
-            </div>
-            <div class="user-manager">
-                <div class="users">
-                    <div [className]="selectedUser === user ? 'selected-user' : 'user'" *ngFor="let user of users" (click)="selectUser(user)">
-                        <div class="names">
-                            <span  class="pseudo-style" [style.color]="user.color.hex">{{user.pseudo}}</span>
-                            <span>{{user.discordTagName}}</span>
-                        </div>
-                        <div class="options">
-                            <img title="Supprimer l'utilisateur" (click)="deleteUser(user)" src="./assets/trash-solid.svg">
-                        </div>
+        <div class="google-account">
+            <div class="left">
+                <h3>Compte Google</h3>
+                <div class="user-display" *ngIf="user">
+                    <img src="{{user.photoUrl}}">
+                    <div class="text-infos">
+                        <h4>{{user.name}}</h4>
+                        <p>{{user.email}}</p>
                     </div>
                 </div>
-                <div class="new-user">
-                    <ng-container *ngIf="creatingNewUser; else elseTemplate">
-                        <div class="new-user-form">
-                            <div class="block">
-                                <label>Pseudo affiché</label>
-                                <input class="pseudo-style" [style.color]="newUser.color.hex" type="text" [(ngModel)]="newUser.pseudo">
-                            </div>
-                            <div class="block">
-                                <label>Pseudo Discord avec code à 4 chiffres</label>
-                                <input type="text" [(ngModel)]="newUser.discordTagName">
-                            </div>
-                            <div class="block">
-                                <label >Couleur</label>
-                                <div class="color-selector">
-                                    <div title="{{color.name}}" [className]="newUser.color.hex === color.hex ? 'color-selected' : 'color'" [style.background]="color.hex" *ngFor="let color of colors" (click)="setColorNewUser(color)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="buttons">
-                                <button (click)="creatingNewUser = false">Annuler</button>
-                                <button (click)="addNewUser()">Créer</button>
-                            </div>
-                        </div>
-                    </ng-container>
-                    <ng-template #elseTemplate>
-                        <button (click)="initNewUser()">Nouvel utilisateur</button>
-                    </ng-template>
+                <button *ngIf="!user" (click)="signInWithGoogle()">Connexion via Google</button>
+                <button *ngIf="user" (click)="signOut()">Déconnexion</button>
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div class="admin">
+            <div class="left">
+                <div class="admin-section" *ngIf="adminConnected">
+                    <h3 class="margin-bottom">Vous êtes Admin</h3>
+                    <button *ngIf="adminConnected" (click)="logoutAdmin()">Déconnexion admin</button>
                 </div>
+                <div class="admin-section" *ngIf="!adminConnected">
+                    <h3 class="margin-bottom">Connexion Admin</h3>
+                    <input class="margin-bottom" type="password" [(ngModel)]="password">
+                    <span class="margin-bottom" *ngIf="errorMessage">{{errorMessage}}</span>
+                    <button (click)="connectAdmin()">Entrer</button>
+                </div>
+            </div>
+            <div class="right">
             </div>
         </div>
     </div>

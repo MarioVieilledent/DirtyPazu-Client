@@ -1,0 +1,28 @@
+<div class="body">
+    <div class="title-description">
+        <h1>Proposer un mot</h1>
+    </div>
+    <div class="word-and-help" *ngIf="user">
+        <div>
+            <app-word-editor [buttonMessage]="'Proposer'" (wordEmitter)="suggestWord($event)"></app-word-editor>
+        </div>
+        <img class="chevron-more" *ngIf="!more" src="assets/chevron-up-solid.svg" (click)="toggleMoreInfos(true)">
+        <img class="chevron-more" *ngIf="more" src="assets/chevron-down-solid.svg" (click)="toggleMoreInfos(false)">
+        <div class="help" *ngIf="more">
+            <h2>Processus proposition d'un mot</h2>
+            <p>1) Tout le monde peut proposer un mot en complétant un maximum d'informations.</p>
+            <p>2) Le mot passe en phase de vote, tout le monde peut voter et commenter pour des modifications.</p>
+            <p>3) À partir d'un certain nombre de vote positifs, le mot est acceptable et attend la validation d'un
+                admin.</p>
+            <p>4) Si les admins l'acceptent, le mot est ajouté au dictionnaire.</p>
+            <p>5) Si le mot n'est pas accepté par les membres, l'utilisateur qui a proposé le mot peut modifier sa
+                proposition en fonction des commentaires.</p>
+            <p>6) Si le mot n'est pas accepté par les admins, l'utilisateur qui a proposé le mot peut modifier sa
+                proposition en fonction des commentaires des admins.</p>
+            <p>7) Lorsque le mot est de nouveau modifié, le cycle recommence.</p>
+        </div>
+    </div>
+    <div class="" *ngIf="!user">
+        <span class="not-connected">Vous devez vous connecter via Google pour proposer un mot.</span>
+    </div>
+</div>

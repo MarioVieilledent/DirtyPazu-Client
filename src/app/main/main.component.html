@@ -1,6 +1,7 @@
 <div class="body">
-    <app-connect-center *ngIf="adminBox" [adminConnected]="adminConnected" [pwd]="pwd"
-        (adminConnectionEmitter)="setAdminConnected($event)" (closeBoxEmitter)="setAdminBox($event)">
+    <app-connect-center *ngIf="userMenu" [adminConnected]="adminConnected" [pwd]="pwd" [user]="user"
+        (adminConnectionEmitter)="setAdminConnected($event)" (closeBoxEmitter)="setUserMenu($event)"
+        (userEmitter)="setUser($event)">
     </app-connect-center>
     <div class="container">
         <div class="header">
@@ -14,45 +15,47 @@
                 <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()"
                     (auxclick)="openNewBlank()">Dibi</h1>
             </div>
-            <button class="log-button" (click)="openAdminBox()">Admin</button>
+            <div class="groupped-imgs">
+                <img *ngIf="adminConnected" class="golden-crown" src="assets/crown-solid.svg" title="Admin">
+                <img *ngIf="!user" class="user-button" src="assets/user-solid.svg" (click)="openUserMenu()"
+                    title="Connexion">
+                <img *ngIf="user" class="user-connected-button" src="{{user.photoUrl}}" (click)="openUserMenu()"
+                    title="Options utilisateur">
+            </div>
         </div>
         <div class="middle">
             <div class="nav" #nav>
-                <div class="buttons-list">
-                    <!-- <div class="button-block" (click)="setNav('Infos')">
-                        <h2>Infos</h2>
-                    </div> -->
-                    <!-- <div class="button-block" (click)="setNav('Flag')">
-                        <h2>Flag</h2>
-                        <div class='flag-options' *ngIf="navigation === 'Flag'">
-                            <div class="option-block">
-                                <h3>Taille</h3>
-                                <div class="h4 button" (click)="setSize(1)">Minuscule</div>
-                                <div class="h4 button" (click)="setSize(2)">Petit</div>
-                                <div class="h4 button" (click)="setSize(5)">Moyen</div>
-                                <div class="h4 button" (click)="setSize(15)">Grand</div>
-                                <div class="h4 button" (click)="setSize(30)">Géant</div>
-                                <h3>Afficher les départements</h3>
-                                <input type="checkbox" [(ngModel)]="displayRegions">
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="button-block">
-                        <h2>Dibi</h2>
-                        <div class='flag-options'>
-                            <div class="option-block">
-                                <div class="h4 button" (click)="setNav('Dibi-infos')">Infos</div>
-                                <div class="h4 button" (click)="setNav('Dibi-dict')">Dictionnaire</div>
-                                <!-- <div class="h4 button" (click)="setNav('Dibi-grammar-rules')">Grammaire</div> -->
-                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-add-word')">Ajout
-                                    mot</div>
-                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Dibi-mc')">Minecraft
-                                </div>
-                                <div *ngIf="adminConnected" class="h4 button" (click)="setNav('Logs')">Logs</div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="button" (click)="setNav('Dibi-infos')">
+                    <img src="assets/circle-info-solid.svg">
+                    <span>Infos</span>
                 </div>
+
+                <div class="button" (click)="setNav('Dibi-dict')">
+                    <img src="assets/book-solid.svg">
+                    <span>Dictionnaire</span>
+                </div>
+
+                <div *ngIf="user" class="button" (click)="setNav('Dibi-suggest-word')">
+                    <img src="assets/circle-plus-solid.svg">
+                    <span>Proposer</span>
+                </div>
+
+                <div *ngIf="user" class="button" (click)="setNav('Dibi-vote')">
+                    <img src="assets/square-poll-horizontal-solid.svg">
+                    <span>Voter</span>
+                </div>
+
+                <!-- <div class="button" (click)="setNav('Dibi-grammar-rules')">
+                <span>Grammaire</span>
+                </div> -->
+
+                <div *ngIf="adminConnected" class="button" (click)="setNav('Logs')">
+                    <img src="assets/file-lines-regular.svg">
+                    <span>Logs</span>
+                </div>
+
+
             </div>
             <div class="content" #content>
                 <div class="switch-component" [ngSwitch]="navigation">
@@ -68,11 +71,11 @@
                     <ng-container *ngSwitchCase="'Dibi-dict'">
                         <app-dibi-dict [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-dict>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'Dibi-add-word'">
-                        <app-dibi-new-word [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-new-word>
+                    <ng-container *ngSwitchCase="'Dibi-suggest-word'">
+                        <app-dibi-suggest [user]="user"></app-dibi-suggest>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'Dibi-mc'">
-                        <app-dibi-mc [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-mc>
+                    <ng-container *ngSwitchCase="'Dibi-vote'">
+                        <app-dibi-vote></app-dibi-vote>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Logs'">
                         <app-logs></app-logs>

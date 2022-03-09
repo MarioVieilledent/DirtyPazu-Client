@@ -15,12 +15,19 @@ import { MainComponent } from './main/main.component';
 import { FlagComponent } from './main/flag/flag.component';
 import { DibiInfosComponent } from './main/dibi-infos/dibi-infos.component';
 import { DibiDictComponent } from './main/dibi-dict/dibi-dict.component';
-import { DibiNewWordComponent } from './main/dibi-new-word/dibi-new-word.component';
-import { DibiMcComponent } from './main/dibi-mc/dibi-mc.component';
 import { LogsComponent } from './main/logs/logs.component';
 import { InfosComponent } from './main/infos/infos.component';
 import { ConnectCenterComponent } from './main/connect-center/connect-center.component';
+import { DibiSuggestComponent } from './main/dibi-suggest/dibi-suggest.component';
+import { WordEditorComponent } from './main/word-editor/word-editor.component';
+import { DibiVoteComponent } from './main/dibi-vote/dibi-vote.component';
 
+// Social connexion
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+const socialId = '886518860996-o45rlpuk1f0n9verombausklme0ampga.apps.googleusercontent.com';
+
+// Socket.io
 const hostname = window.location.hostname;
 const url = (hostname === 'localhost') ? `${window.location.protocol}//${hostname}:5000` : undefined;
 const config: SocketIoConfig = { url, options: {} };
@@ -32,11 +39,12 @@ const config: SocketIoConfig = { url, options: {} };
     FlagComponent,
     DibiDictComponent,
     DibiInfosComponent,
-    DibiNewWordComponent,
-    DibiMcComponent,
     LogsComponent,
     InfosComponent,
-    ConnectCenterComponent
+    ConnectCenterComponent,
+    DibiSuggestComponent,
+    WordEditorComponent,
+    DibiVoteComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +52,25 @@ const config: SocketIoConfig = { url, options: {} };
     CommonModule,
     HttpClientModule,
     SocketIoModule.forRoot(config),
-    ChartsModule
+    ChartsModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(socialId)
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider(socialId)
+        }
+      ]
+    } as SocialAuthServiceConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

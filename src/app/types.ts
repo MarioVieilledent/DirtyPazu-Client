@@ -1,7 +1,7 @@
 
 // Pour le noms des différentes pages / components Angular
 
-export type PageName = 'Infos' | 'Flag' | 'Dibi-infos' | 'Dibi-dict' | 'Dibi-grammar-rules' | 'Dibi-add-word' | 'Dibi-mc' | 'Logs';
+export type PageName = 'Infos' | 'Flag' | 'Dibi-infos' | 'Dibi-dict' | 'Dibi-suggest-word' | 'Dibi-vote' | 'Dibi-grammar-rules' | 'Logs';
 
 // Pour la page flag
 
@@ -33,6 +33,7 @@ export type PartOfSpitch = 'Noun' | 'Pronoun' | 'Verb' | 'Adjective' | 'Adverb' 
 
 // Pour le dictionnaire
 
+// Mot Dibi
 export interface DibiWord {
     _id?: string;
     dibi: string;
@@ -44,15 +45,34 @@ export interface DibiWord {
     description?: string;
 }
 
-// Pour la partie Minecraft
-
-export interface MinecraftWord {
-    _id?: string;
-    english: string;
-    dibi: string;
-    done: boolean;
-    memo?: string;
+// Une suggestion est une liste de versions 
+export interface DibiWordSuggestion {
+    version: number; // Version de la suggestion (1 au début, puis 2 après première modification si refus...)
+    date: Date; // Date et heure de la proposition
+    author: any; // Compte utilisateur qui a proposé le mot
+    word: DibiWord; // Mot proposé ne contenant pas encore d'_id
+    upVotes: []; // Comptes utilisateurs ayant votés pour
+    downVotes: []; // Comptes utilisateurs ayant votés contre
+    comments: Comment[]; // liste des commentaires faits par les utilisateurs
+    state: stateSuggestion;
 }
+
+//Un commentaire
+export interface Comment {
+    author: any; // Compte du commentateur
+    title: string; // Titre du commentaire
+    content: string; // Commentaire texte
+    date: Date; // Date et heure du post du commentaire
+}
+
+// États que peut prendre une suggestion
+export type stateSuggestion =
+    'suggested' // Le mot vient d'être proposé, il n'est pas issue d'une modification, le mot est en phase de vote par les utilisateurs
+    | 'modified' // Après un refus utilisateurs ou admins, le mot a été modifié par son auteur, le mot est en phase de vote par les utilisateurs
+    | 'accepted' // Les votes des utilisateurs ont permis de valider le mot, le mot est à présent en attente de validation par admins
+    | 'refusedByUsers' // Les votes des utilisateurs ont refusé le mot, il est en attente d'être modifié par l'auteur en fonction des commentaires
+    | 'refusedByAdmins' // Les admins ont refusé le mot accepté par les utilisateur, il est en attente d'être modifié par l'auteur en fonction des commentaires
+    | 'added' // Le mot accepté par les utilisateurs et validé par les admins, il est à présent ajouté comme mot au dictionnaire, et archivé (l'archivage est simplement l'état added)
 
 // Pour les logs
 
@@ -60,20 +80,6 @@ export interface Log {
     id_?: string;
     message: string;
     timestamp: Date;
-}
-
-// Pour les utilisateurs
-
-export interface User {
-    id_?: string; // Identifiant mongodb
-    pseudo: string; // Court pseudo du l'utilisateur (pseudo affiché)
-    discordTagName: string; // Pseudo Discord avec code à 4 chiffres
-    color: UserColor; // Couleur choisie
-}
-
-export interface UserColor {
-    name: string; // Nom de la couleur
-    hex: string; // Code hexa avec #
 }
 
 // Pour les règles de grammaire

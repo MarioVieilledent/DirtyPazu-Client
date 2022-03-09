@@ -1,0 +1,43 @@
+$padding: 12px;
+$border-radius: 4px;
+$border: 1px solid #757473;
+
+.body {
+    display: flex;
+    flex-direction: column;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+
+    .title-description {
+        margin-bottom: $padding;
+    }
+
+    .word-and-help {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .chevron-more {
+            cursor: pointer;
+            height: 20px;
+            margin-top: $padding;
+        }
+
+        .help {
+            margin-top: $padding;
+            padding: $padding;
+            border-radius: $border-radius;
+            background-color: #444240;
+
+            h2 {
+                margin-bottom: 24px;
+            }
+
+            p {
+                margin-bottom: $padding;
+            }
+        }
+    }
+}

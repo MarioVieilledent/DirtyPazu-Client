@@ -1,22 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { DibiWord } from 'src/app/types';
 
 @Component({
-  selector: 'app-dibi-new-word',
-  templateUrl: './dibi-new-word.component.html',
-  styleUrls: ['./dibi-new-word.component.scss']
+  selector: 'app-word-editor',
+  templateUrl: './word-editor.component.html',
+  styleUrls: ['./word-editor.component.scss']
 })
-export class DibiNewWordComponent implements OnInit {
+export class WordEditorComponent implements OnInit {
+
+  @Input() buttonMessage; // Message à afficher dans le bouton d'envoie en bas (Ajouter, Modifier, Proposer)
+  @Output() wordEmitter = new EventEmitter<DibiWord>(); // Emitter du mot sur lequel on a travaillé
 
   dibiDict: DibiWord[];
+  message = { mes: '', color: '' };
 
-  @Input() adminConnected: boolean; // Si un administrateur est connecté
-  @Input() pwd: string; // Pwd en localSorage pour plus rester connecté
-
-  message = {mes: '', color: ''};
-
-  newWord: DibiWord = {
+  word: DibiWord = {
     dibi: '',
     french: '',
     english: '',
@@ -28,32 +27,26 @@ export class DibiNewWordComponent implements OnInit {
   ngOnInit(): void {
     this.socket.on('responseAddWord', (data) => {
       if (data.status === 0) {
-        this.message = {mes: 'Succès', color: 'green'};
-        this.newWord.dibi = '';
-        this.newWord.french = '';
-        this.newWord.english = '';
+        this.message = { mes: 'Succès', color: 'green' };
+        this.word.dibi = '';
+        this.word.french = '';
+        this.word.english = '';
         // this.newWord.author = ''; // Auteur conservé
-        this.newWord.date = '';
-        this.newWord.description = '';
+        this.word.date = '';
+        this.word.description = '';
       } else {
-        this.message = {mes: data.mes, color: 'red'};
+        this.message = { mes: data.mes, color: 'red' };
       }
       // Clear du message au bout d'un certain délai
-      setTimeout(() => { this.message = {mes: '', color: ''}; }, 10000);
+      setTimeout(() => { this.message = { mes: '', color: '' }; }, 10000);
     });
   }
 
   /**
-   * Ajoute un mot dans la bdd
+   * Valide le mot, l'envoie au component parent pour ajout, modification ou proposition du mot selon le contexte
    */
-  addWord(): void {
-    if (!this.adminConnected) {
-      alert('Administrateur non connecté.');
-    } else {
-      this.newWord.date = new Date();
-      this.message = {mes: 'Enregistrement...', color: 'yellow'};
-      this.socket.emit('addWord', { newWord: this.newWord, pwd: this.pwd });
-    }
+  sendWord(): void {
+    this.wordEmitter.emit(this.word);
   }
 
   /**
@@ -83,19 +76,19 @@ export class DibiNewWordComponent implements OnInit {
       }
     }
     // Set du bon formatage du mot Dibi
-    this.newWord[partOfSpeech] = value;
+    this.word[partOfSpeech] = value;
     // Autoadapt de la nature grammaticale
     if (partOfSpeech === 'dibi') {
       if (value.endsWith('e')) {
-        this.newWord.partOfSpeech = 'Verb';
+        this.word.partOfSpeech = 'Verb';
       } else if (value.endsWith('i') || value.endsWith('fo') || value.endsWith('ro') || value.endsWith('ti')) {
-        this.newWord.partOfSpeech = 'Noun';
+        this.word.partOfSpeech = 'Noun';
       } else if (value.endsWith('al')) {
-        this.newWord.partOfSpeech = 'Adjective';
+        this.word.partOfSpeech = 'Adjective';
       } else if (value.endsWith('or')) {
-        this.newWord.partOfSpeech = 'Adverb';
+        this.word.partOfSpeech = 'Adverb';
       }
     }
-   }
+  }
 
 }
