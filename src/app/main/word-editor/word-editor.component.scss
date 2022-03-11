@@ -46,6 +46,62 @@ $border: 1px solid #757473;
             }
         }
 
+        .checkbox-multiple-dibi {
+            display: flex;
+            align-items: center;
+            margin-bottom: $padding;
+
+            input {
+                cursor: pointer;
+                height: 18px;
+                width: 18px;
+            }
+
+            label {
+                cursor: pointer;
+                padding-left: $padding;
+            }
+        }
+
+        .multiple-dibi {
+            display: flex;
+            flex-direction: column;
+
+            .dibi-row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 12px;
+                width: 100%;
+
+                span {
+                    font-size: 14px;
+                }
+
+                .dibi {
+                    width: 20%;
+                    margin-right: $padding;
+                }
+
+                .description {
+                    width: calc(75% - (2 * #{$padding}));
+                    margin-right: $padding;
+                }
+
+                img {
+                    cursor: pointer;
+                    width: 5%;
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+
+            .new-row {
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+            }
+        }
+
         .help {
             margin-top: 6px;
             margin-right: $padding;

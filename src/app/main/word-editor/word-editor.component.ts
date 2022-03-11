@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { DibiWord } from 'src/app/types';
+import { DibiWord, Suggestion } from 'src/app/types';
 
 @Component({
   selector: 'app-word-editor',
@@ -9,10 +9,10 @@ import { DibiWord } from 'src/app/types';
 })
 export class WordEditorComponent implements OnInit {
 
-  @Input() buttonMessage; // Message à afficher dans le bouton d'envoie en bas (Ajouter, Modifier, Proposer)
-  @Output() wordEmitter = new EventEmitter<DibiWord>(); // Emitter du mot sur lequel on a travaillé
+  @Input() use; // Utilisation du component
+  @Output() wordEmitter = new EventEmitter<any>(); // Emitter du mot sur lequel on a travaillé
 
-  dibiDict: DibiWord[];
+  @Input() dibiDict: DibiWord[];
   message = { mes: '', color: '' };
 
   word: DibiWord = {
@@ -22,31 +22,24 @@ export class WordEditorComponent implements OnInit {
     partOfSpeech: 'Noun',
   }
 
+  // Dans le cas d'une suggestion de mot, plusieurs suggestions peuvent être proposées pour le mot dibi
+  multipleDibi = false;
+  dibiSuggestions: Suggestion[] = [{}, {}, {}];
+
   constructor(private socket: Socket) { }
 
   ngOnInit(): void {
-    this.socket.on('responseAddWord', (data) => {
-      if (data.status === 0) {
-        this.message = { mes: 'Succès', color: 'green' };
-        this.word.dibi = '';
-        this.word.french = '';
-        this.word.english = '';
-        // this.newWord.author = ''; // Auteur conservé
-        this.word.date = '';
-        this.word.description = '';
-      } else {
-        this.message = { mes: data.mes, color: 'red' };
-      }
-      // Clear du message au bout d'un certain délai
-      setTimeout(() => { this.message = { mes: '', color: '' }; }, 10000);
-    });
   }
 
   /**
    * Valide le mot, l'envoie au component parent pour ajout, modification ou proposition du mot selon le contexte
    */
   sendWord(): void {
-    this.wordEmitter.emit(this.word);
+    if (this.multipleDibi) {
+      this.wordEmitter.emit({ word: this.word, multipleDibi: this.multipleDibi, dibiSuggestions: this.dibiSuggestions });
+    } else {
+      this.wordEmitter.emit({ word: this.word, multipleDibi: this.multipleDibi });
+    }
   }
 
   /**
@@ -70,9 +63,7 @@ export class WordEditorComponent implements OnInit {
     // Suppression d'espaces à la fin (que le mot Dibi)
     if (partOfSpeech === 'dibi') {
       if (value.endsWith(' ')) {
-        console.log(value + '!');
         value = value.slice(0, -1);
-        console.log(value + '!');
       }
     }
     // Set du bon formatage du mot Dibi
@@ -89,6 +80,21 @@ export class WordEditorComponent implements OnInit {
         this.word.partOfSpeech = 'Adverb';
       }
     }
+  }
+
+  /**
+   * Dans le cas d'une proposition d'un mot avec plusieurs versions Dibi, ajout d'une nouvelle ligne
+   * Maximum 12 propositions
+   */
+  addRowSuggestion(): void {
+    this.dibiSuggestions.push({});
+  }
+
+  /**
+   * Dans le cas d'une proposition d'un mot avec plusieurs versions Dibi, suppression d'une ligne
+   */
+  removeRowSuggestion(i: number): void {
+    this.dibiSuggestions.splice(i, 1);
   }
 
 }

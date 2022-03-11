@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { AccountSettings } from 'src/app/types';
 
 @Component({
   selector: 'app-connect-center',
@@ -20,8 +21,9 @@ export class ConnectCenterComponent implements OnInit {
   password: string; // Mot de passe administrateur entré par l'utilisateur
   errorMessage: string; // Message en cas de mot de passe faux
 
-  // Utilisateur Google
+  // Utilisateur Google et informations profil
   @Input() user: SocialUser;
+  @Input() accountSettings: AccountSettings;
 
   constructor(private socket: Socket, private authService: SocialAuthService) {
     // Si click à l'extérieur de la fenêtre, fermeture de la fenêtre
@@ -50,16 +52,29 @@ export class ConnectCenterComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    // Si aucune information du profil n'est chargé, elle sont initialisées à vide
+    setTimeout(() => {
+      if (!this.accountSettings) {
+        if (this.user) {
+          this.accountSettings = { email: this.user.email, user: this.user, discordPseudo: '', discordTag: '' };
+          console.log(this.accountSettings)
+        }
+      }
+    }, 250);
+  }
+
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
+  // signInWithFB(): void {
+  //   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  // }
 
   signOut(): void {
     this.authService.signOut();
+    this.accountSettings = { email: '', user: undefined, discordPseudo: '', discordTag: '' };
   }
 
   /**
@@ -84,6 +99,26 @@ export class ConnectCenterComponent implements OnInit {
   setAdminConnected(value: boolean): void {
     this.adminConnected = value;
     this.adminConnectionEmitter.emit(value); // Envoie de la donnée au component main
+  }
+
+  /**
+   * Enregistre en bdd les options du compte
+   */
+  saveAccountSettings(): void {
+    if (this.accountSettings.discordPseudo && this.accountSettings.discordTag) {
+      if (this.user) {
+        try {
+          this.accountSettings.user.response = undefined;
+        } catch (error: any) {
+          location.reload();
+        }
+        this.accountSettings.email = this.accountSettings.user.email;
+        this.socket.emit('setProfile', this.accountSettings);
+      } else {
+        window.alert('Compte Google non connecté');
+      }
+    } else {
+    }
   }
 
 }

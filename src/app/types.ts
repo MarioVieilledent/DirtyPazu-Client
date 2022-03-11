@@ -1,3 +1,4 @@
+import { SocialUser } from "angularx-social-login";
 
 // Pour le noms des différentes pages / components Angular
 
@@ -51,13 +52,29 @@ export interface DibiWordSuggestion {
     date: Date; // Date et heure de la proposition
     author: any; // Compte utilisateur qui a proposé le mot
     word: DibiWord; // Mot proposé ne contenant pas encore d'_id
+    multipleDibi: boolean; // Vrai si plusieurs propositions pour le mot dibi
+    dibiSuggestions: Suggestion[]; // Les suggestions de mots dibi à voter
     upVotes: []; // Comptes utilisateurs ayant votés pour
     downVotes: []; // Comptes utilisateurs ayant votés contre
     comments: Comment[]; // liste des commentaires faits par les utilisateurs
     state: stateSuggestion;
 }
 
-//Un commentaire
+// Une proposition de mot Dibi à voter
+export interface Suggestion {
+    dibi?: string; // Proposition
+    description?: string; // Description du choix facultative
+    votes?: NoteDibiWord[]; // Notes (votes) = liste de notes
+}
+
+// Un vote pour une proposition parmi plusieurs mots dibi
+export interface NoteDibiWord {
+    email: string; // Email du compte qui a voté
+    date: Date; // Date du vote
+    value: number; // Valeur de la note
+}
+
+// Un commentaire
 export interface Comment {
     author: any; // Compte du commentateur
     title: string; // Titre du commentaire
@@ -74,8 +91,15 @@ export type stateSuggestion =
     | 'refusedByAdmins' // Les admins ont refusé le mot accepté par les utilisateur, il est en attente d'être modifié par l'auteur en fonction des commentaires
     | 'added' // Le mot accepté par les utilisateurs et validé par les admins, il est à présent ajouté comme mot au dictionnaire, et archivé (l'archivage est simplement l'état added)
 
-// Pour les logs
+export interface AccountSettings {
+    email: string, // Email fonctionnant comme clé primaire
+    user: SocialUser,
+    discordPseudo: string; // Pseudo sur Discord (modifiable)
+    discordTag: string; // Code à 4 chiffres après le #
+    description?: string; // Description du profil
+}
 
+// Pour les logs
 export interface Log {
     id_?: string;
     message: string;

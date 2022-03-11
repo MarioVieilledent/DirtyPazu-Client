@@ -1,1 +1,29 @@
-<p>dibi-vote works!</p>
+<div class="body">
+    <div class="container">
+        <div class="top">
+            <div class="left">
+            </div>
+            <div class="right">
+            </div>
+        </div>
+        <div class="row-pages">
+        </div>
+        <div class="row-order">
+        </div>
+        <div class="list" *ngIf="suggestions">
+            <div class="row" *ngFor="let suggestion of suggestions">
+                <div class="view">
+                    <div class="left">
+                        <span>{{suggestion.author}}</span>
+                    </div>
+                    <div class="middle">
+                        <span>{{suggestion.word.dibi}}</span>
+                    </div>
+                    <div class="right">
+                        <span>Vote</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

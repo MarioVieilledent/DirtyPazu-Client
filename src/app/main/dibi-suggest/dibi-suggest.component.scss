@@ -19,6 +19,16 @@ $border: 1px solid #757473;
         flex-direction: column;
         align-items: flex-start;
 
+        .message-success {
+            margin-top: 12px;
+            color: #8e8;
+        }
+
+        .message-error {
+            margin-top: 12px;
+            color: #e88;
+        }
+
         .chevron-more {
             cursor: pointer;
             height: 20px;

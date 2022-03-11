@@ -1,25 +1,37 @@
 <div class="container" id="zone-click-exit">
     <div class="box">
         <div class="header">
+            <h2>Centre de connexion</h2>
         </div>
-        <div class="google-account">
-            <div class="left">
+        <div class="accounts">
+            <div class="google-account">
                 <h3>Compte Google</h3>
-                <div class="user-display" *ngIf="user">
-                    <img src="{{user.photoUrl}}">
-                    <div class="text-infos">
-                        <h4>{{user.name}}</h4>
-                        <p>{{user.email}}</p>
+                <div class="google-info">
+                    <div class="user-display" *ngIf="user">
+                        <img src="{{user.photoUrl}}">
+                        <div class="text-infos">
+                            <h4>{{user.name}}</h4>
+                            <p>{{user.email}}</p>
+                        </div>
+                    </div>
+                </div>
+                <h3 *ngIf="user">Informations profil</h3>
+                <div class="account-setup" *ngIf="user">
+                    <span>Saisir pseudo Discord</span>
+                    <div class="inline-inputs" *ngIf="accountSettings">
+                        <input [(ngModel)]="accountSettings.discordPseudo" type="text" class="pseudo"
+                            (focusout)="saveAccountSettings()">
+                        <span>#</span>
+                        <input [(ngModel)]="accountSettings.discordTag" type="text" class="tag" placeholder="1234"
+                            (focusout)="saveAccountSettings()">
+                        <img *ngIf="!accountSettings.discordPseudo || !accountSettings.discordTag" class="mandatory"
+                            src="assets/mandatory.svg">
                     </div>
                 </div>
                 <button *ngIf="!user" (click)="signInWithGoogle()">Connexion via Google</button>
-                <button *ngIf="user" (click)="signOut()">Déconnexion</button>
+                <button *ngIf="user" (click)="signOut()">Déconnexion Google</button>
             </div>
-            <div class="right">
-            </div>
-        </div>
-        <div class="admin">
-            <div class="left">
+            <div class="admin">
                 <div class="admin-section" *ngIf="adminConnected">
                     <h3 class="margin-bottom">Vous êtes Admin</h3>
                     <button *ngIf="adminConnected" (click)="logoutAdmin()">Déconnexion admin</button>
@@ -30,8 +42,6 @@
                     <span class="margin-bottom" *ngIf="errorMessage">{{errorMessage}}</span>
                     <button (click)="connectAdmin()">Entrer</button>
                 </div>
-            </div>
-            <div class="right">
             </div>
         </div>
     </div>

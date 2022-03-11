@@ -1,13 +1,32 @@
 <div class='form-word'>
     <div class="mandatory">
         <div class="block">
-            <div class="label-input">
+            <div class="checkbox-multiple-dibi">
+                <input name="multipleDibi" id="multipleDibi" type="checkbox" [(ngModel)]="multipleDibi">
+                <label for="multipleDibi">Plusieurs suggestions Dibi à voter</label>
+            </div>
+            <div class="label-input" *ngIf="!multipleDibi">
                 <span class="label">Dibi</span>
                 <div class="input-and-mandatory-logo">
                     <input [className]="word.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')"
                         [(ngModel)]="word.dibi">
                     <img class="mandatory" *ngIf="!word.dibi" src="assets/mandatory.svg">
                 </div>
+            </div>
+            <div class="multiple-dibi" *ngIf="multipleDibi">
+                <div class="dibi-row">
+                    <span class="dibi">Dibi</span>
+                    <span class="description">Description du choix</span>
+                </div>
+                <div class="dibi-row" *ngFor="let dibiSuggestion of dibiSuggestions; let i = index;">
+                    <input [className]="'dibi ' + word.partOfSpeech" type="text" [(ngModel)]="dibiSuggestion.dibi">
+                    <input class="description" type="text" [(ngModel)]="dibiSuggestion.description">
+                    <img *ngIf="i <= 1 && !dibiSuggestions[i].dibi" class="mandatory" src="assets/mandatory.svg">
+                    <img *ngIf="i > 1" src="assets/trash-solid.svg" (click)="removeRowSuggestion(i)"
+                        title="Retirer Prposition">
+                </div>
+                <img *ngIf="dibiSuggestions.length < 12" class="new-row" src="assets/plus-solid.svg"
+                    (click)="addRowSuggestion()" title="Nouvelle Proposition">
             </div>
             <span class="help">Un mot commençant par une majuscule. Particules en minuscule avec un "-".</span>
         </div>
@@ -53,7 +72,7 @@
         </div>
     </div>
     <div class="facultative">
-        <div class="block">
+        <!-- <div class="block">
             <div class="label-input">
                 <span class="label">Créateur</span>
                 <div class="input-and-mandatory-logo">
@@ -62,7 +81,7 @@
                 </div>
             </div>
             <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
-        </div>
+        </div> -->
         <div class="block">
             <div class="label-input">
                 <span class="label">Description</span>
@@ -76,6 +95,8 @@
         </div>
     </div>
     <div class="buttons">
-        <button *ngIf="word.dibi && word.french && word.author" (click)="sendWord()">{{buttonMessage}}</button>
+        <button
+            *ngIf="(word.dibi && word.french) || (dibiSuggestions[0].dibi && dibiSuggestions[1].dibi && word.french)"
+            (click)="sendWord()">{{use === 'suggest' ? 'Proposer' : ''}}</button>
     </div>
 </div>

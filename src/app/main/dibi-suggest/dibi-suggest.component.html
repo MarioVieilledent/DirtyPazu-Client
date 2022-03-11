@@ -4,7 +4,10 @@
     </div>
     <div class="word-and-help" *ngIf="user">
         <div>
-            <app-word-editor [buttonMessage]="'Proposer'" (wordEmitter)="suggestWord($event)"></app-word-editor>
+            <app-word-editor [dibiDict]="dibiDict" [use]="'suggest'" (wordEmitter)="suggestWord($event)">
+            </app-word-editor>
+            <span *ngIf="statusResponse === 1" class="message-error">{{responseSuggestWord}}</span>
+            <span *ngIf="statusResponse === 0" class="message-success">{{responseSuggestWord}}</span>
         </div>
         <img class="chevron-more" *ngIf="!more" src="assets/chevron-up-solid.svg" (click)="toggleMoreInfos(true)">
         <img class="chevron-more" *ngIf="more" src="assets/chevron-down-solid.svg" (click)="toggleMoreInfos(false)">

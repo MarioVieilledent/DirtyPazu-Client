@@ -1,7 +1,7 @@
 <div class="body">
     <app-connect-center *ngIf="userMenu" [adminConnected]="adminConnected" [pwd]="pwd" [user]="user"
-        (adminConnectionEmitter)="setAdminConnected($event)" (closeBoxEmitter)="setUserMenu($event)"
-        (userEmitter)="setUser($event)">
+        [accountSettings]="accountSettings" (adminConnectionEmitter)="setAdminConnected($event)"
+        (closeBoxEmitter)="setUserMenu($event)" (userEmitter)="setUser($event)">
     </app-connect-center>
     <div class="container">
         <div class="header">
@@ -36,12 +36,12 @@
                     <span>Dictionnaire</span>
                 </div>
 
-                <div *ngIf="user" class="button" (click)="setNav('Dibi-suggest-word')">
+                <div *ngIf="user && accountSettings" class="button" (click)="setNav('Dibi-suggest-word')">
                     <img src="assets/circle-plus-solid.svg">
                     <span>Proposer</span>
                 </div>
 
-                <div *ngIf="user" class="button" (click)="setNav('Dibi-vote')">
+                <div *ngIf="user && accountSettings" class="button" (click)="setNav('Dibi-vote')">
                     <img src="assets/square-poll-horizontal-solid.svg">
                     <span>Voter</span>
                 </div>
@@ -66,16 +66,18 @@
                         <app-flag [pixelSize]="pixelSize" [displayRegions]="displayRegions"></app-flag>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-infos'">
-                        <app-dibi-infos></app-dibi-infos>
+                        <app-dibi-infos [dibiDict]="dibiDict"></app-dibi-infos>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-dict'">
-                        <app-dibi-dict [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-dict>
+                        <app-dibi-dict [dibiDict]="dibiDict" [adminConnected]="adminConnected" [pwd]="pwd">
+                        </app-dibi-dict>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-suggest-word'">
-                        <app-dibi-suggest [user]="user"></app-dibi-suggest>
+                        <app-dibi-suggest [dibiDict]="dibiDict" [user]="user" [accountSettings]="accountSettings">
+                        </app-dibi-suggest>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-vote'">
-                        <app-dibi-vote></app-dibi-vote>
+                        <app-dibi-vote [user]="user" [accountSettings]="accountSettings"></app-dibi-vote>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Logs'">
                         <app-logs></app-logs>

@@ -1,0 +1,169 @@
+$bg-color-row-hover: #302f2e; // Couleur de fond des boutons hover
+
+$top-height: 73px;
+$all-none-partOfSpeech-width: 52px;
+
+$padding: 12px;
+$border-radius: 4px;
+$border: 1px solid #757473;
+
+// Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
+$left-menu-width: 50%;
+// $middle-menu-width: 50%;
+$right-menu-width: 50%;
+
+// Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
+$left-row-width: 70%;
+$middle-row-width: 15%;
+$right-row-width: 15%;
+
+// Largeur du label (créateur, description)
+$label-detail-view-width: 100px;
+
+// Hauteur d'une ligne
+$row-view-height: 30px;
+
+// textes
+$bold: 600;
+
+$size-checkbox: 12px;
+
+.body {
+    display: flex;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        max-width: 1200px;
+        min-width: 250px;
+
+        .top {
+            display: flex;
+            height: $top-height;
+            width: 100%;
+
+            .left {
+                display: flex;
+                align-items: flex-start;
+                width: $left-menu-width;
+                border-right: $border;
+                overflow: auto;
+            }
+
+            .right {
+                width: $right-menu-width;
+                padding-left: $padding;
+                overflow: auto;
+            }
+        }
+
+        .row-pages {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+
+            img {
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .row-order {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+            padding-right: $padding;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - #{$top-height} - 30px);
+            width: 100%;
+            overflow: auto;
+            border-top: $border;
+            padding-top: 3px;
+
+            .row {
+                display: flex;
+                flex-direction: column;
+
+                .view {
+                    display: flex;
+                    align-items: center;
+                    height: $row-view-height;
+                    cursor: pointer;
+
+                    .left {
+                        display: flex;
+                        align-items: center;
+                        width: $left-row-width;
+                    }
+
+                    .middle {
+                        display: flex;
+                        align-items: center;
+                        width: $middle-row-width;
+                    }
+
+                    .right {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        margin: 0px $padding;
+                        width: $right-row-width;
+                    }
+                }
+            }
+
+            .row:hover {
+                background-color: $bg-color-row-hover;
+            }
+        }
+    }
+}
+
+// Media query
+
+@media screen and (max-width: 1100px) {
+    .body {
+        .container {
+            .top {
+                .left {
+                    flex-direction: column;
+                }
+            }
+            .row-order {
+                justify-content: space-between;
+            }
+            .list {
+                .row {
+                    .view {
+                        .left {
+                            width: 100%;
+                        }
+                        .middle {
+                            display: none;
+                        }
+                        .right {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

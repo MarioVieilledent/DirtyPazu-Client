@@ -13,7 +13,7 @@ import { DibiWord } from 'src/app/types';
 export class DibiDictComponent implements OnInit {
 
   // Liste des mots du dico
-  dibiDict: DibiWord[] = []; // Tous les mots
+  @Input() dibiDict: DibiWord[]; // Dictionnaire récupéré du component principal
   filteredDibiDict: DibiWord[] = []; // Seulement ceux filtrés
   filteredAllPages: DibiWord[][] = []; // Ceux filtrés structurés par pages
 
@@ -181,16 +181,9 @@ export class DibiDictComponent implements OnInit {
     // Check du localStorage pour voir su une préférence en nombre de mots par page existe
     window.localStorage.getItem('nbWordsPerPage') ? this.nbWordsPerPage = parseInt(window.localStorage.getItem('nbWordsPerPage')) : this.nbWordsPerPage = this.nbWordsPerPageDefalut;
 
-    // Demande du dictionnaire
-    this.socket.emit('fetchDict', {});
-
-    // Récupération du dictionnaire
-    this.socket.on('loadDict', (data) => {
-      this.dibiDict = data.dict;
-      // Mise en minuscule de tous les mots Dibis
-      this.formatDibiWords();
-      this.searchObservable.next();
-    });
+    // Mise en minuscule de tous les mots Dibis
+    this.formatDibiWords();
+    this.searchObservable.next();
 
     // En réponse à la modification d'un mot
     this.socket.on('responseEditWord', (data) => {

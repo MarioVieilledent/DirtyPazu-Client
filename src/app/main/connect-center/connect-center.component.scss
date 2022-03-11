@@ -32,67 +32,103 @@ $selected-color: #393837;
         background-color: $box-color;
         border: $border;
         border-radius: $border-radius;
-        padding: $padding;
+        padding: $padding 0px $padding 0px;
 
         .header {
             display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
             width: 100%;
             height: 32px;
         }
 
-        .google-account,
-        .admin {
+        .accounts {
             display: flex;
             width: 100%;
-            height: calc(50% - 16px);
 
-            h3 {
-                margin-bottom: $padding;
-            }
-
-            .user-display {
-                display: flex;
-                margin: $padding 0px 0px 0px;
-
-                img {
-                    height: 96px;
-                    width: 96px;
-                    border-radius: 96px;
-                    margin-bottom: 6px;
-                }
-
-                h4 {
-                    font-size: 16px;
-                    margin-bottom: 6px;
-                }
-
-                p {
-                    font-size: 12px;
-                    margin-bottom: 6px;
-                }
-
-                .text-infos {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: flex-start;
-                    margin-left: 24px;
-                }
-            }
-
-            .admin-section {
+            .google-account,
+            .admin {
                 display: flex;
                 flex-direction: column;
+                padding: 0px $padding 0px $padding;
+                width: 50%;
 
-                .margin-bottom {
+                h3 {
                     margin-bottom: $padding;
                 }
-            }
-        }
 
-        .left,
-        .right {
-            width: 50%;
+                .google-info {
+                    display: flex;
+
+                    .user-display {
+                        display: flex;
+
+                        img {
+                            height: 96px;
+                            width: 96px;
+                            border-radius: 96px;
+                            margin-bottom: 6px;
+                        }
+
+                        h4 {
+                            font-size: 16px;
+                            margin-bottom: 6px;
+                        }
+
+                        p {
+                            font-size: 12px;
+                            margin-bottom: 6px;
+                        }
+
+                        .text-infos {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: flex-start;
+                            margin-left: 24px;
+                        }
+                    }
+                }
+
+                .account-setup {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-bottom: 12px;
+
+                    .inline-inputs {
+                        display: flex;
+                        align-items: center;
+                        margin: 12px 0px 12px 0px;
+
+                        .pseudo {
+                            width: 150px;
+                            margin-right: 6px;
+                        }
+
+                        .tag {
+                            width: 50px;
+                            margin-left: 6px;
+                        }
+
+                        .mandatory {
+                            margin-left: $padding;
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+                }
+
+                .admin-section {
+                    display: flex;
+                    flex-direction: column;
+
+                    .margin-bottom {
+                        margin-bottom: $padding;
+                    }
+                }
+            }
         }
     }
 }

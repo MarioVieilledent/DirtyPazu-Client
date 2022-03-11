@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
 import { Socket } from 'ngx-socket-io';
-import { PageName } from '../types';
+import { AccountSettings, DibiWord, PageName } from '../types';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   messageServeur: string;
   navigation: PageName = 'Dibi-infos'; // Navigation entre les pages
 
-  dibiDict: any[]; // Dictionnaire Dibi
+  dibiDict: DibiWord[]; // Dictionnaire Dibi
 
   pixelSize: number = 2;
   displayRegions = false;
@@ -27,6 +27,7 @@ export class MainComponent implements OnInit {
   pwd: string; // Mot de passe en base 64 permettant le fonctionnement des requêtes serveur
 
   user: SocialUser; // Utilisateur Google
+  accountSettings: AccountSettings; // Options du compte à enregistrer sur la db
 
   userMenu = false; // À true, ouvre la page de connexion et manage de comptes
 
@@ -34,6 +35,11 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    // Récupération du dictionnaire
+    this.socket.on('loadDict', (data) => {
+      this.dibiDict = data.dict;
+    });
 
     // Si une fenêtre de navigation est en localStorage, on l'affiche au démarrage
     if (window.localStorage.getItem('nav')) {
@@ -51,11 +57,27 @@ export class MainComponent implements OnInit {
       window.localStorage.setItem('pwd', data.pwd);
     });
 
+    // En réponse à la demande d'informations supplémentaires sur le profil, les charges et affiches les informations compte Google (on est connecté)
+    this.socket.on('responseProfile', data => {
+      this.user = data.user;
+      if (data.accountSettings) {
+        this.accountSettings = data.accountSettings;
+      } else {
+      }
+    });
+
     // Prépare la réception de la connexion
     this.authService.authState.subscribe((user) => {
-      this.user = user;
-      console.log(user);
+      // Récupère les infos de l'utilisateur Google et requête le serveur pour avoir les informations supplémentaires du profil
+      if (user) {
+        this.socket.emit('loadProfile', user); // Connexion
+      } else {
+        this.user = user; // Déconnexion
+      }
     });
+
+    // Chargement du dictionnaire une fois au début
+    this.socket.emit('fetchDict', {});
 
     // Tente de se connecter avec le compte Google
     setTimeout(() => {
