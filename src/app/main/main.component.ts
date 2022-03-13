@@ -56,10 +56,17 @@ export class MainComponent implements OnInit {
     // Récupération des profils
     this.socket.on('loadProfiles', profiles => {
       // Création d'un dictionnaire de profils pour une utilisation plus facile
-        this.profiles = {};
+      this.profiles = {};
       profiles.forEach(profil => {
         this.profiles[profil.email] = profil;
       });
+    });
+
+    // Confirmation du paramétrage du compte avec pseudo Discord pour pouvoir accéder à la suite du site
+    this.socket.on('accountSetingsOk', user => {
+      setTimeout(() => {
+        this.socket.emit('loadProfile', user); // Connexion après une seconde pour s'assurer que le pseudo discord soit bien enregistré
+      }, 1000);
     });
 
     // Si une fenêtre de navigation est en localStorage, on l'affiche au démarrage

@@ -42,6 +42,7 @@ export class ConnectCenterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     // Si mot de passe incorrect, un message rouge s'affiche
     this.socket.on('wrongPwd', () => {
       this.setAdminConnected(false);
@@ -51,6 +52,7 @@ export class ConnectCenterComponent implements OnInit {
         this.errorMessage = undefined;
       }, 5000);
     });
+
   }
 
   ngAfterViewInit(): void {
@@ -59,7 +61,6 @@ export class ConnectCenterComponent implements OnInit {
       if (!this.accountSettings) {
         if (this.user) {
           this.accountSettings = { email: this.user.email, user: this.user, discordPseudo: '', discordTag: '' };
-          console.log(this.accountSettings)
         }
       }
     }, 250);
