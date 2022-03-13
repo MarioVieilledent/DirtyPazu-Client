@@ -15,7 +15,7 @@
                 <ng-container *ngIf="dibiWordsSuggestion.words[0].dibis.length > 1">
                     <div class="description-dibi" *ngFor="let option of dibiWordsSuggestion.words[0].dibis; let indexOption = index">
                         <img src="assets/discord_emojis/letter_{{indexOption}}.svg">
-                        <input type="text" [(ngModel)]="dibiWordsSuggestion.optionsDescription[indexOption]">
+                        <input placeholder="origine, provenance, racine" type="text" [(ngModel)]="dibiWordsSuggestion.optionsDescription[indexOption]">
                     </div>
                 </ng-container>
             </div>

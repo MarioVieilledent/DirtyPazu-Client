@@ -28,7 +28,6 @@ export class DibiVoteComponent implements OnInit {
     // Une fois que tous les éléments en inputs sont biens chargés
     if (this.dibiDict && this.suggestions && this.user && this.accountSettings && this.profiles && !this.allLoaded) {
       this.allLoaded = true;
-      console.log(this.profiles);
     }
   }
 

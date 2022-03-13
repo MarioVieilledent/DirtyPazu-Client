@@ -5,9 +5,9 @@
         </div>
         <div class="table" *ngIf="allLoaded">
             <div class="row-header">
-                <div class="state">
+                <!-- <div class="state">
                     <span>État</span>
-                </div>
+                </div> -->
                 <div class="author-date">
                     <span>Auteur et date</span>
                 </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="row-suggestion" *ngFor="let suggestion of suggestions">
-                <div class="state">
+                <!-- <div class="state">
                     <ng-container [ngSwitch]="suggestion.state">
                         <img *ngSwitchCase="'suggested'" src="assets/discord_emojis/bulb.svg">
                         <img *ngSwitchCase="'modified'" src="assets/discord_emojis/bulb.svg">
@@ -30,7 +30,7 @@
                         <img *ngSwitchCase="'refused'" src="assets/discord_emojis/no_entry_sign.svg">
                         <img *ngSwitchCase="'added'" src="assets/discord_emojis/bookmark.svg">
                     </ng-container>
-                </div>
+                </div> -->
                 <div class="author-date">
                     <div class="author">
                         <div class="profile-picture">
@@ -62,6 +62,26 @@
                     </div>
                 </div>
                 <div class="vote">
+                    <div class="vote-and-comment">
+                        <div class="two-arrows">
+                            <div class="arrow-value">
+                                <img src="assets/discord_emojis/arrow_up.svg">
+                                <span>{{suggestion.upVotes.length}}</span>
+                            </div>
+                            <div class="arrow-value">
+                                <img src="assets/discord_emojis/arrow_down.svg">
+                                <span>{{suggestion.downVotes.length}}</span>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <img src="assets/discord_emojis/comment.svg">
+                        </div>
+                    </div>
+                    <div class="choose-dibi-option" *ngIf="suggestion.words[0].dibis.length > 1">
+                        <div class="option-stars" *ngFor="let item of suggestion.words[0].dibis">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="admin">
                 </div>
