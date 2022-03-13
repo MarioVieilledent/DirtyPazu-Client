@@ -1,32 +1,7 @@
-$bg-color-row-hover: #302f2e; // Couleur de fond des boutons hover
-
-$top-height: 73px;
-$all-none-partOfSpeech-width: 52px;
-
 $padding: 12px;
 $border-radius: 4px;
 $border: 1px solid #757473;
-
-// Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
-$left-menu-width: 50%;
-// $middle-menu-width: 50%;
-$right-menu-width: 50%;
-
-// Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
-$left-row-width: 70%;
-$middle-row-width: 15%;
-$right-row-width: 15%;
-
-// Largeur du label (créateur, description)
-$label-detail-view-width: 100px;
-
-// Hauteur d'une ligne
-$row-view-height: 30px;
-
-// textes
-$bold: 600;
-
-$size-checkbox: 12px;
+$img-size: 20px;
 
 .body {
     display: flex;
@@ -39,129 +14,165 @@ $size-checkbox: 12px;
         flex-direction: column;
         height: 100%;
         width: 100%;
-        max-width: 1200px;
-        min-width: 250px;
 
-        .top {
+        .options {
             display: flex;
-            height: $top-height;
-            width: 100%;
-
-            .left {
-                display: flex;
-                align-items: flex-start;
-                width: $left-menu-width;
-                border-right: $border;
-                overflow: auto;
-            }
-
-            .right {
-                width: $right-menu-width;
-                padding-left: $padding;
-                overflow: auto;
-            }
         }
 
-        .row-pages {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 30px;
-            width: 100%;
-            overflow: auto;
-            border-top: $border;
-
-            img {
-                height: 20px;
-                width: 20px;
-                cursor: pointer;
-            }
-        }
-
-        .row-order {
-            display: flex;
-            align-items: center;
-            height: 30px;
-            width: 100%;
-            overflow: auto;
-            border-top: $border;
-            padding-right: $padding;
-        }
-
-        .list {
+        .table {
             display: flex;
             flex-direction: column;
-            height: calc(100% - #{$top-height} - 30px);
             width: 100%;
-            overflow: auto;
-            border-top: $border;
-            padding-top: 3px;
 
-            .row {
+            .state {
+                padding: $padding;
+                padding: $padding;
+                border-right: $border;
+                width: 10%;
+            }
+
+            .author-date {
+                padding: $padding;
+                padding: $padding;
+                border-right: $border;
+                width: 20%;
+            }
+
+            .suggestion {
+                padding: $padding;
+                padding: $padding;
+                border-right: $border;
+                width: 40%;
+            }
+
+            .vote {
+                padding: $padding;
+                padding: $padding;
+                border-right: $border;
+                width: 20%;
+            }
+
+            .admin {
+                padding: $padding;
+                padding: $padding;
+                width: 10%;
+            }
+
+            .row-header {
                 display: flex;
-                flex-direction: column;
+            }
+    
+            .row-suggestion {
+                display: flex;
+                
+                .state, .author-date, .suggestion, .vote, .admin {
+                    border-top: $border;
+                }
 
-                .view {
+                .state {
                     display: flex;
-                    align-items: center;
-                    height: $row-view-height;
-                    cursor: pointer;
+                    justify-content: center;
 
-                    .left {
-                        display: flex;
-                        align-items: center;
-                        width: $left-row-width;
-                    }
-
-                    .middle {
-                        display: flex;
-                        align-items: center;
-                        width: $middle-row-width;
-                    }
-
-                    .right {
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        margin: 0px $padding;
-                        width: $right-row-width;
+                    img {
+                        height: 32px;
+                        width: 32px;
                     }
                 }
-            }
 
-            .row:hover {
-                background-color: $bg-color-row-hover;
-            }
-        }
-    }
-}
-
-// Media query
-
-@media screen and (max-width: 1100px) {
-    .body {
-        .container {
-            .top {
-                .left {
+                .author-date {
+                    display: flex;
                     flex-direction: column;
+
+                    .author {
+                        display: flex;
+                        width: 100%;
+                        margin-bottom: $padding;
+
+                        .profile-picture {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            img {
+                                height: 32px;
+                                width: 32px;
+                                border-radius: 32px;
+                                margin-right: $padding;
+                            }
+                        }
+
+                        .names {
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            width: calc(100% - 32px - 12px);
+
+                            span {
+                                overflow-wrap: break-word;
+                            }
+                        }
+                    }
+
+                    .date {
+                        display: flex;
+                        width: 100%;
+
+                        span {
+                            font-size: 12px;
+                            color: #757473;
+                        }
+                    }
                 }
-            }
-            .row-order {
-                justify-content: space-between;
-            }
-            .list {
-                .row {
-                    .view {
-                        .left {
+
+                .suggestion {
+                    display: flex;
+                    flex-direction: column;
+
+                    .word {
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: $padding;
+                        
+                        .french {
+                            display: flex;
                             width: 100%;
                         }
-                        .middle {
-                            display: none;
-                        }
-                        .right {
-                            display: none;
+                        
+                        .dibis {
+                            display: flex;
+                            flex-direction: column;
+                            
+                            .dibi {
+                                display: flex;
+                                margin-top: 6px;
+
+                                img {
+                                    height: $img-size;
+                                    width: $img-size;
+                                    margin-right: 6px
+                                }
+
+                                span {
+                                    width: calc(100% - $img-size - 6px);
+                                }
+                            }
                         }
                     }
+
+                    .description {
+                        display: flex;
+                        width: 100%;
+                    }
+                }
+
+                .vote {
+                    display: flex;
+
+                }
+
+                .admin {
+                    display: flex;
+
                 }
             }
         }

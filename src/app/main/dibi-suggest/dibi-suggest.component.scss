@@ -1,6 +1,7 @@
 $padding: 12px;
 $border-radius: 4px;
 $border: 1px solid #757473;
+$img-size: 20px;
 
 .body {
     display: flex;
@@ -10,43 +11,249 @@ $border: 1px solid #757473;
     width: 100%;
     overflow: auto;
 
+    img {
+        height: $img-size;
+        width: $img-size;
+        cursor: pointer;
+    }
+
     .title-description {
         margin-bottom: $padding;
+
+        span {
+            margin-top: 6px;
+        }
     }
 
     .word-and-help {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
 
-        .message-success {
-            margin-top: 12px;
-            color: #8e8;
-        }
+        .all-fields  {
+            display: flex;
+            flex-direction: column;
 
-        .message-error {
-            margin-top: 12px;
-            color: #e88;
-        }
+            .table, .description, .dibis, .send, .bottom {
+                border-radius: $border-radius;
+                background-color: #444240;
+            }
+    
+            .dibis {
+                display: flex;
+                flex-direction: column;
+                padding: $padding;
 
-        .chevron-more {
-            cursor: pointer;
-            height: 20px;
-            margin-top: $padding;
-        }
+                .dibis-suggestions {
+                    display: flex;
+                    align-items: center;
 
-        .help {
-            margin-top: $padding;
-            padding: $padding;
-            border-radius: $border-radius;
-            background-color: #444240;
+                    img {
+                        margin-left: $padding;
+                    }
+                }
 
-            h2 {
-                margin-bottom: 24px;
+                .description-dibi {
+                    display: flex;
+                    align-items: center;
+                    margin-top: $padding;
+                    width: 100%;
+
+                    img {
+                        height: 24px;
+                        width: 24px;
+                    }
+                    
+                    input {
+                        margin-left: $padding;
+                        width: calc(100% - 24px - 12px);
+                    }
+                }
             }
 
-            p {
-                margin-bottom: $padding;
+            .table {
+                display: flex;
+                flex-direction: column;
+                margin-top: $padding;
+                overflow: auto;
+
+                .block {
+                    display: flex;
+                    flex-direction: column;
+
+                    .top {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 6px;
+                        width: 100%;
+                        height: $img-size;
+
+                        .img-and-label {
+                            display: flex;
+                            align-items: center;
+
+                            img {
+
+                                margin-right: 6px;
+                            }
+                        
+                            span {
+                                font-size: 12px;
+                                color: #bbb;
+                                width: calc(100% - 32px);
+                            }
+                        }
+                        
+                    }
+
+                    .bottom-input {
+                        display: flex;
+                        width: 100%;
+
+                        input, select {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .block-multiple {
+                    margin-bottom: $padding;
+                }
+
+                // Columns
+
+                .option {
+                    width: 200px;
+                    min-width: 200px;
+                    padding: $padding;
+                    border-right: $border;
+
+                    .header-span-and-icon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
+
+                .last-column {
+                    display: flex;
+                    align-items: center;
+                    width: calc($img-size + (2 * $padding));
+                    min-width: calc($img-size + (2 * $padding));
+                    padding: $padding;
+
+                    .dibis-suggestions {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+
+                        span {
+                            font-size: 12px;
+                            color: #bbb;
+                        }
+                    }
+                }
+
+                // Rows
+
+                .row-header {
+                    display: flex;
+                    border-bottom: $border;
+                }
+
+                .row-french {
+                    display: flex;
+                    border-bottom: $border;
+                }
+
+                .row-dibis {
+                    display: flex;
+                    border-bottom: $border;
+
+                    .option {
+                        padding-bottom: 0px !important; 
+                    }
+                }
+
+                .row-english {
+                    display: flex;
+                    border-bottom: $border;
+                }
+
+                .row-part-of-speech {
+                    display: flex;
+                }
+
+            }
+    
+            .description {
+                display: flex;
+                flex-direction: column;
+                padding: $padding;
+                margin-top: $padding;
+
+                span {
+                    margin-bottom: 6px;
+                }
+
+                textarea {
+                    resize: vertical;
+                }
+            }
+
+            .send {
+                display: flex;
+                flex-direction: column;
+                padding: $padding;
+                margin-top: $padding;
+
+                .row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .row-2 {
+                    margin-top: $padding;
+                }
+
+                .message-success {
+                    margin-top: 12px;
+                    color: #8e8;
+                }
+                
+                .message-error {
+                    margin-top: 12px;
+                    color: #e88;
+                }
+            }
+    
+            .bottom {
+                display: flex;
+                flex-direction: column;
+                padding: $padding;
+                margin-top: $padding;
+
+                .bottom-title {
+                    display: flex;
+                    align-items: center;
+
+                    h2 {
+                        margin-left: $padding;
+                    }
+                }
+        
+                .help {
+                    margin-top: $padding;
+
+                    h2 {
+                        margin-bottom: 24px;
+                    }
+        
+                    p {
+                        margin-bottom: $padding;
+                    }
+                }
             }
         }
     }

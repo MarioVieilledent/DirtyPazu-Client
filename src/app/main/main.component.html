@@ -73,11 +73,11 @@
                         </app-dibi-dict>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-suggest-word'">
-                        <app-dibi-suggest [dibiDict]="dibiDict" [user]="user" [accountSettings]="accountSettings">
+                        <app-dibi-suggest [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user" [accountSettings]="accountSettings">
                         </app-dibi-suggest>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-vote'">
-                        <app-dibi-vote [user]="user" [accountSettings]="accountSettings"></app-dibi-vote>
+                        <app-dibi-vote [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user" [accountSettings]="accountSettings" [profiles]="profiles"></app-dibi-vote>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Logs'">
                         <app-logs></app-logs>

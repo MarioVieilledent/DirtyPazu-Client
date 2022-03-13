@@ -19,7 +19,6 @@ import { LogsComponent } from './main/logs/logs.component';
 import { InfosComponent } from './main/infos/infos.component';
 import { ConnectCenterComponent } from './main/connect-center/connect-center.component';
 import { DibiSuggestComponent } from './main/dibi-suggest/dibi-suggest.component';
-import { WordEditorComponent } from './main/word-editor/word-editor.component';
 import { DibiVoteComponent } from './main/dibi-vote/dibi-vote.component';
 
 // Social connexion
@@ -43,7 +42,6 @@ const config: SocketIoConfig = { url, options: {} };
     InfosComponent,
     ConnectCenterComponent,
     DibiSuggestComponent,
-    WordEditorComponent,
     DibiVoteComponent
   ],
   imports: [

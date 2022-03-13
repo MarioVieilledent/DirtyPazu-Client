@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { AccountSettings } from 'src/app/types';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-connect-center',
@@ -25,7 +26,7 @@ export class ConnectCenterComponent implements OnInit {
   @Input() user: SocialUser;
   @Input() accountSettings: AccountSettings;
 
-  constructor(private socket: Socket, private authService: SocialAuthService) {
+  constructor(private http: HttpClient, private socket: Socket, private authService: SocialAuthService) {
     // Si click à l'extérieur de la fenêtre, fermeture de la fenêtre
     window.onclick = (event: MouseEvent) => {
       if (event.target === document.getElementById('zone-click-exit')) {

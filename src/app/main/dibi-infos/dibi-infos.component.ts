@@ -83,100 +83,107 @@ export class DibiInfosComponent implements OnInit {
   constructor(private socket: Socket) { }
 
   ngOnInit(): void {
+  }
 
-    // Récupération du dictionnaire et opérations
-    // Récupérations des stats de la répartition des natures gr. et nb mots langue
-    this.dibiDict.forEach(word => {
-      switch (word.partOfSpeech) {
-        case ('Noun'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Noun').nb++;
-          break;
-        case ('Pronoun'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Pronoun').nb++;
-          break;
-        case ('Verb'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Verb').nb++;
-          break;
-        case ('Adjective'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Adjective').nb++;
-          break;
-        case ('Adverb'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Adverb').nb++;
-          break;
-        case ('Conjonction'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Conjonction').nb++;
-          break;
-        case ('FunctionParticule'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'FunctionParticule').nb++;
-          break;
-        case ('TransformationParticule'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'TransformationParticule').nb++;
-          break;
-        case ('SpiritWord'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'SpiritWord').nb++;
-          break;
-        case ('Interjection'):
-          this.nbPartsOfSpeech.find(i => i.savedAs === 'Interjection').nb++;
-          break;
-      }
-    });
-
-    // Tri par nombre (stats de répartiotion des natures gr.)
-    this.nbPartsOfSpeech.sort((a, b) => {
-      if (a.nb < b.nb) {
-        return 1;
-      } else if (a.nb > b.nb) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
-
-    // Construction du piechart des natures grammaticales
-    this.nbPartsOfSpeech.forEach(element => {
-      this.pieChartLabels.push(element.label);
-      this.pieChartData.push(element.nb);
-      this.pieChartColors[0].backgroundColor.push(element.color);
-    });
-
-    // Construction du line chart du nb mots chaque jour
-    let day = this.datify(new Date(this.dibiDict[0].date));
-    this.barChartLabelsNG.push(day);
-    this.barChartLabels.push(day);
-    this.dibiDict.forEach(word => {
-      this.numbersOfWords.Total++; // Incrément des mots totaux
-      if (day === this.datify(new Date(word.date))) {
-        this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
-      } else {
-        // Ajout des nouveaux mots selon la date
-        this.barChartDataNG.forEach(elem => {
-          elem.data.push(this.numbersOfWords[elem.label]);
-        });
-        this.barChartData[0].data.push(this.numbersOfWords.Total);
-        // Mise à jour de la date suivante
-        day = this.datify(new Date(word.date));
-        this.barChartLabelsNG.push(day);
-        this.barChartLabels.push(day);
-        // Ajout du prochain mot (qui est passé en else car nouvelle date, mais qu'il faut compter)
-        this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
-      }
-    });
-    // Ajout des nouveaux mots selon la date
-    this.barChartDataNG.forEach(elem => {
-      elem.data.push(this.numbersOfWords[elem.label]);
-    });
-    this.barChartData[0].data.push(this.numbersOfWords.Total);
-
-    // Tri par taille (stats de répartition des natures gr.)
-    this.barChartDataNG.sort((a, b) => {
-      if (a.data[a.data.length - 1] < b.data[b.data.length - 1]) {
-        return 1;
-      } else if (a.data[a.data.length - 1] > b.data[b.data.length - 1]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
+  /**
+   * Si un changement Angular est détecté, et qu'il s'agit de @Input() dibiDict
+   * Démarrage du traitement du dictionnaire
+   */
+   ngOnChanges (): void {
+    if (this.dibiDict) {
+      // Récupérations des stats de la répartition des natures gr. et nb mots langue
+      this.dibiDict.forEach(word => {
+        switch (word.partOfSpeech) {
+          case ('Noun'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Noun').nb++;
+            break;
+          case ('Pronoun'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Pronoun').nb++;
+            break;
+          case ('Verb'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Verb').nb++;
+            break;
+          case ('Adjective'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Adjective').nb++;
+            break;
+          case ('Adverb'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Adverb').nb++;
+            break;
+          case ('Conjonction'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Conjonction').nb++;
+            break;
+          case ('FunctionParticule'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'FunctionParticule').nb++;
+            break;
+          case ('TransformationParticule'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'TransformationParticule').nb++;
+            break;
+          case ('SpiritWord'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'SpiritWord').nb++;
+            break;
+          case ('Interjection'):
+            this.nbPartsOfSpeech.find(i => i.savedAs === 'Interjection').nb++;
+            break;
+        }
+      });
+  
+      // Tri par nombre (stats de répartiotion des natures gr.)
+      this.nbPartsOfSpeech.sort((a, b) => {
+        if (a.nb < b.nb) {
+          return 1;
+        } else if (a.nb > b.nb) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+  
+      // Construction du piechart des natures grammaticales
+      this.nbPartsOfSpeech.forEach(element => {
+        this.pieChartLabels.push(element.label);
+        this.pieChartData.push(element.nb);
+        this.pieChartColors[0].backgroundColor.push(element.color);
+      });
+  
+      // Construction du line chart du nb mots chaque jour
+      let day = this.datify(new Date(this.dibiDict[0].date));
+      this.barChartLabelsNG.push(day);
+      this.barChartLabels.push(day);
+      this.dibiDict.forEach(word => {
+        this.numbersOfWords.Total++; // Incrément des mots totaux
+        if (day === this.datify(new Date(word.date))) {
+          this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
+        } else {
+          // Ajout des nouveaux mots selon la date
+          this.barChartDataNG.forEach(elem => {
+            elem.data.push(this.numbersOfWords[elem.label]);
+          });
+          this.barChartData[0].data.push(this.numbersOfWords.Total);
+          // Mise à jour de la date suivante
+          day = this.datify(new Date(word.date));
+          this.barChartLabelsNG.push(day);
+          this.barChartLabels.push(day);
+          // Ajout du prochain mot (qui est passé en else car nouvelle date, mais qu'il faut compter)
+          this.numbersOfWords[this.frenchify(word.partOfSpeech)]++; // Incrément du nombre de mots selon le nature gr.
+        }
+      });
+      // Ajout des nouveaux mots selon la date
+      this.barChartDataNG.forEach(elem => {
+        elem.data.push(this.numbersOfWords[elem.label]);
+      });
+      this.barChartData[0].data.push(this.numbersOfWords.Total);
+  
+      // Tri par taille (stats de répartition des natures gr.)
+      this.barChartDataNG.sort((a, b) => {
+        if (a.data[a.data.length - 1] < b.data[b.data.length - 1]) {
+          return 1;
+        } else if (a.data[a.data.length - 1] > b.data[b.data.length - 1]) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 
   /**

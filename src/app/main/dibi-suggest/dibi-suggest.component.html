@@ -1,28 +1,164 @@
 <div class="body">
     <div class="title-description">
-        <h1>Proposer un mot</h1>
+        <h1>Proposer</h1>
+        <span>Un ou plusieurs mots de la même famille</span>
     </div>
     <div class="word-and-help" *ngIf="user">
-        <div>
-            <app-word-editor [dibiDict]="dibiDict" [use]="'suggest'" (wordEmitter)="suggestWord($event)">
-            </app-word-editor>
-            <span *ngIf="statusResponse === 1" class="message-error">{{responseSuggestWord}}</span>
-            <span *ngIf="statusResponse === 0" class="message-success">{{responseSuggestWord}}</span>
+        <div class="all-fields" *ngIf="allLoaded && dibiWordsSuggestion">
+            <div class="dibis">
+                <div class="dibis-suggestions">
+                    <span>{{dibiWordsSuggestion.words[0].dibis.length > 1 ? 'Description des propositions' : 'Une seule version dibi'}}</span>
+                    <img src="assets/minus-solid.svg" title="Enlever proposition Dibi"
+                        (click)="removeDibiOption()">
+                    <img src="assets/plus-solid.svg" title="Ajouter proposition Dibi" (click)="addDibiOption()">
+                </div>
+                <ng-container *ngIf="dibiWordsSuggestion.words[0].dibis.length > 1">
+                    <div class="description-dibi" *ngFor="let option of dibiWordsSuggestion.words[0].dibis; let indexOption = index">
+                        <img src="assets/discord_emojis/letter_{{indexOption}}.svg">
+                        <input type="text" [(ngModel)]="dibiWordsSuggestion.optionsDescription[indexOption]">
+                    </div>
+                </ng-container>
+            </div>
+            <div class="table">
+                <div class="row-header">
+                    <div class="option" *ngFor="let word of dibiWordsSuggestion.words; let index = index;">
+                        <div class="header-span-and-icon">
+                            <span>Mot {{index + 1}}</span>
+                            <img *ngIf="index > 0" src="assets/trash-solid.svg" title="Retirer le mot"
+                                (click)="removeWord(index)">
+                        </div>
+                    </div>
+                    <div class="last-column">
+                        <img src="assets/plus-solid.svg" title="Nouveau mot" (click)="addWord()">
+                    </div>
+                </div>
+                <div class="row-french">
+                    <div class="option" *ngFor="let word of dibiWordsSuggestion.words; let index = index;">
+                        <div class="block">
+                            <div class="top">
+                                <div class="img-and-label">
+                                    <span>Français</span>
+                                </div>
+                                <img src="assets/mandatory.svg" *ngIf="!word.french">
+                            </div>
+                            <div class="bottom-input">
+                                <input type="text" [(ngModel)]="word.french" (input)="displaySendButton = false">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last-column">
+                    </div>
+                </div>
+                <div class="row-dibis">
+                    <div class="option" *ngFor="let word of dibiWordsSuggestion.words; let index = index;">
+                        <div class="block block-multiple" *ngFor="let dibi of word.dibis; let indexDibi = index">
+                            <div class="top">
+                                <div class="img-and-label">
+                                    <img *ngIf="dibiWordsSuggestion.words[0].dibis.length > 1" src="assets/discord_emojis/letter_{{indexDibi}}.svg">
+                                    <span>Dibi</span>
+                                </div>
+                                <img src="assets/mandatory.svg" *ngIf="!word.dibis[indexDibi].dibi">
+                            </div>
+                            <div class="bottom-input">
+                                <input [className]="word.partOfSpeech" type="text"
+                                    [(ngModel)]="word.dibis[indexDibi].dibi" (input)="displaySendButton = false">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last-column">
+                    </div>
+                </div>
+                <div class="row-english">
+                    <div class="option" *ngFor="let word of dibiWordsSuggestion.words; let index = index;">
+                        <div class="block">
+                            <div class="top">
+                                <div class="img-and-label">
+                                    <span>Anglais</span>
+                                </div>
+                            </div>
+                            <div class="bottom-input">
+                                <input type="text" [(ngModel)]="word.english">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last-column">
+                    </div>
+                </div>
+                <div class="row-part-of-speech">
+                    <div class="option" *ngFor="let word of dibiWordsSuggestion.words; let index = index;">
+                        <div class="block">
+                            <div class="top">
+                                <div class="img-and-label">
+                                    <span>Nature grammaticale</span>
+                                </div>
+                            </div>
+                            <div class="bottom-input">
+                                <select [className]="word.partOfSpeech" [(ngModel)]="word.partOfSpeech">
+                                    <option value="Noun">Nom</option>
+                                    <option value="Pronoun">Pronom</option>
+                                    <option value="Verb">Verbe</option>
+                                    <option value="Adjective">Adjectif</option>
+                                    <option value="Adverb">Adverbe</option>
+                                    <option value="Conjonction">Conjonction</option>
+                                    <option value="Interjection">Interjection</option>
+                                    <option value="Particule">Particule</option>
+                                    <option value="SpiritWord">Mot d'esprit</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last-column">
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <span>Description {{dibiWordsSuggestion.words.length === 1 ? 'du mot' : 'des mots'}}</span>
+                <textarea [(ngModel)]="dibiWordsSuggestion.description" rows="5"></textarea>
+            </div>
+            <div class="send">
+                <div class="row row-1">
+                    <div>
+                        <span *ngIf="statusResponse === 1" class="message-error">{{responseSuggestWord}}</span>
+                        <span *ngIf="statusResponse === 0" class="message-success">{{responseSuggestWord}}</span>
+                    </div>
+                    <div>
+                        <button (click)="check()">Vérifier</button>
+                    </div>
+                </div>
+                <div class="row row-2" *ngIf="displaySendButton">
+                    <div>
+                        <span class="message-success">Veuillez vérifier votre proposition avant de l'envoyer</span>
+                    </div>
+                    <div>
+                        <button (click)="sendSuggestion()">Proposer</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-title">
+                    <img class="chevron-more" *ngIf="!more" src="assets/circle-info-solid.svg"
+                        (click)="toggleMoreInfos(true)">
+                    <img class="chevron-more" *ngIf="more" src="assets/circle-info-solid.svg"
+                        (click)="toggleMoreInfos(false)">
+                    <h2 *ngIf="more">Processus proposition d'un mot</h2>
+                </div>
+                <div class="help" *ngIf="more">
+                    <p>1) Tout le monde peut proposer un ou plusieurs mots de la même famille (nom, verbe, adjectif, etc.)en complétant un maximum d'informations.</p>
+                    <p>2) Une fois proposée, la suggestion est votée.
+                    </p>
+                    <p>3) À partir d'un certain nombre de vote positifs, la suggestion est acceptable et attend la validation
+                        des admins.</p>
+                        <p>6) Si le mot n'est pas accepté par les admins, l'utilisateur qui a proposé le mot peut modifier
+                            sa proposition en fonction des commentaires des admins.</p>
+                    <p>4) Si les admins l'acceptent, le mot est ajouté au dictionnaire.</p>
+                    <p>5) Si le mot n'est pas accepté par les membres, l'utilisateur qui a proposé le mot peut modifier
+                        sa proposition en fonction des commentaires.</p>
+                    <p>7) Lorsque le mot est de nouveau modifié, le cycle recommence.</p>
+                </div>
+            </div>
         </div>
-        <img class="chevron-more" *ngIf="!more" src="assets/chevron-up-solid.svg" (click)="toggleMoreInfos(true)">
-        <img class="chevron-more" *ngIf="more" src="assets/chevron-down-solid.svg" (click)="toggleMoreInfos(false)">
-        <div class="help" *ngIf="more">
-            <h2>Processus proposition d'un mot</h2>
-            <p>1) Tout le monde peut proposer un mot en complétant un maximum d'informations.</p>
-            <p>2) Le mot passe en phase de vote, tout le monde peut voter et commenter pour des modifications.</p>
-            <p>3) À partir d'un certain nombre de vote positifs, le mot est acceptable et attend la validation d'un
-                admin.</p>
-            <p>4) Si les admins l'acceptent, le mot est ajouté au dictionnaire.</p>
-            <p>5) Si le mot n'est pas accepté par les membres, l'utilisateur qui a proposé le mot peut modifier sa
-                proposition en fonction des commentaires.</p>
-            <p>6) Si le mot n'est pas accepté par les admins, l'utilisateur qui a proposé le mot peut modifier sa
-                proposition en fonction des commentaires des admins.</p>
-            <p>7) Lorsque le mot est de nouveau modifié, le cycle recommence.</p>
+        <div class="" *ngIf="!allLoaded">
+            <span class="not-connected">Vous devez vous connecter via Google pour proposer un mot.</span>
         </div>
     </div>
     <div class="" *ngIf="!user">

@@ -1,27 +1,69 @@
 <div class="body">
     <div class="container">
-        <div class="top">
-            <div class="left">
+        <div class="options">
+
+        </div>
+        <div class="table" *ngIf="allLoaded">
+            <div class="row-header">
+                <div class="state">
+                    <span>État</span>
+                </div>
+                <div class="author-date">
+                    <span>Auteur et date</span>
+                </div>
+                <div class="suggestion">
+                    <span>Suggestion</span>
+                </div>
+                <div class="vote">
+                    <span>Vote</span>
+                </div>
+                <div class="admin">
+                    <span>Admin</span>
+                </div>
             </div>
-            <div class="right">
-            </div>
-        </div>
-        <div class="row-pages">
-        </div>
-        <div class="row-order">
-        </div>
-        <div class="list" *ngIf="suggestions">
-            <div class="row" *ngFor="let suggestion of suggestions">
-                <div class="view">
-                    <div class="left">
-                        <span>{{suggestion.author}}</span>
+            <div class="row-suggestion" *ngFor="let suggestion of suggestions">
+                <div class="state">
+                    <ng-container [ngSwitch]="suggestion.state">
+                        <img *ngSwitchCase="'suggested'" src="assets/discord_emojis/bulb.svg">
+                        <img *ngSwitchCase="'modified'" src="assets/discord_emojis/bulb.svg">
+                        <img *ngSwitchCase="'accepted'" src="assets/discord_emojis/white_check_mark.svg">
+                        <img *ngSwitchCase="'refused'" src="assets/discord_emojis/no_entry_sign.svg">
+                        <img *ngSwitchCase="'added'" src="assets/discord_emojis/bookmark.svg">
+                    </ng-container>
+                </div>
+                <div class="author-date">
+                    <div class="author">
+                        <div class="profile-picture">
+                            <img src="{{profiles[suggestion.author].user.photoUrl}}">
+                        </div>
+                        <div class="names">
+                            <!-- <span>{{profiles[suggestion.author].user.name}}</span> -->
+                            <span>{{profiles[suggestion.author].discordPseudo}}#{{profiles[suggestion.author].discordTag}}</span>
+                        </div>
                     </div>
-                    <div class="middle">
-                        <span>{{suggestion.word.dibi}}</span>
+                    <div class="date">
+                        <span>{{suggestion.date | date:'dd/MM/YYYY - HH:mm:ss'}}</span>
                     </div>
-                    <div class="right">
-                        <span>Vote</span>
+                </div>
+                <div class="suggestion">
+                    <div class="word" *ngFor="let word of suggestion.words">
+                        <div class="french">
+                            <span>{{word.french + (word.english ? ' / ' + word.english : '')}}</span>
+                        </div>
+                        <div class="dibis">
+                            <div class="dibi" *ngFor="let dibi of word.dibis; let indexDibi = index;">
+                                <img *ngIf="word.dibis.length > 1" src="assets/discord_emojis/letter_{{indexDibi}}.svg">
+                                <span [className]="word.partOfSpeech">{{dibi.dibi}}</span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="description">
+                        <span>{{suggestion.description}}</span>
+                    </div>
+                </div>
+                <div class="vote">
+                </div>
+                <div class="admin">
                 </div>
             </div>
         </div>

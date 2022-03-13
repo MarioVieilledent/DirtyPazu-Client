@@ -181,10 +181,6 @@ export class DibiDictComponent implements OnInit {
     // Check du localStorage pour voir su une préférence en nombre de mots par page existe
     window.localStorage.getItem('nbWordsPerPage') ? this.nbWordsPerPage = parseInt(window.localStorage.getItem('nbWordsPerPage')) : this.nbWordsPerPage = this.nbWordsPerPageDefalut;
 
-    // Mise en minuscule de tous les mots Dibis
-    this.formatDibiWords();
-    this.searchObservable.next();
-
     // En réponse à la modification d'un mot
     this.socket.on('responseEditWord', (data) => {
       if (data.status === 0) {
@@ -200,6 +196,20 @@ export class DibiDictComponent implements OnInit {
     this.socket.on('wordDeleted', () => {
       location.reload();
     });
+  }
+
+  /**
+   * Si un changement Angular est détecté, et qu'il s'agit de @Input() dibiDict
+   * Démarrage du traitement du dictionnaire (mise en minuscule des mots Dibi et lancement de l'observable de recherche)
+   */
+   ngOnChanges (): void {
+    // Met en minuscule tous les mots Dibis (pour que les mots soit mieux lisibles dans le dico)
+    if (this.dibiDict) {
+      this.dibiDict.forEach(word => {
+        word.dibi = word.dibi.toLowerCase();
+        this.searchObservable.next();
+      });
+    }
   }
 
   /**
@@ -307,7 +317,10 @@ export class DibiDictComponent implements OnInit {
    * À chaque touche cliqué sur l'input de recherche, envoie d'un next dans l'Observable searchObservable
    */
   eachKeySearch(): void {
+    // Remove des accents de l'expression recherchée
     this.searchSimplified = removeAccents(this.search.toLowerCase());
+    // Suppression des espaces avant et après
+    this.searchSimplified = this.searchSimplified.trim();
     // Next sur l'observable de filtrage de tous les mots
     this.searchObservable.next(this.searchSimplified);
   }
@@ -414,15 +427,6 @@ export class DibiDictComponent implements OnInit {
     }
     this.filteredDibiDict = list;
     // this.eachKeySearch();
-  }
-
-  /**
-   * Met en minuscule tous les mots Dibis (pour que les mots soit mieux lisibles dans le dico)
-   */
-  formatDibiWords(): void {
-    this.dibiDict.forEach(word => {
-      word.dibi = word.dibi.toLowerCase();
-    });
   }
 
   /**
