@@ -13,6 +13,8 @@ $nav-width: 200px;
 $padding: 12px;
 $border-radius: 4px;
 
+$phone-view: 600px;
+
 .body {
     display: flex;
     position: absolute;
@@ -55,20 +57,15 @@ $border-radius: 4px;
                     margin: 0px 12px;
                 }
 
-                .title,
-                .title-small {
+                .title {
                     margin: 0px 12px;
+                    white-space: nowrap;
                 }
 
-                .title-gold,
-                .title-gold-small {
+                .title-gold {
                     cursor: pointer;
                     color: #ffdb88;
-                }
-
-                .title-small,
-                .title-gold-small {
-                    display: none;
+                    white-space: nowrap;
                 }
             }
 
@@ -121,7 +118,8 @@ $border-radius: 4px;
                     font-size: 16px;
                 }
 
-                .button {
+                .button,
+                .button-selected {
                     display: flex;
                     align-items: center;
                     border-radius: $border-radius;
@@ -140,7 +138,8 @@ $border-radius: 4px;
                     }
                 }
 
-                .button:hover {
+                .button:hover,
+                .button-selected {
                     background-color: $bg-color-nav-button-hover;
                 }
             }
@@ -148,7 +147,7 @@ $border-radius: 4px;
             .content {
                 display: flex;
                 height: 100%;
-                width: calc(100% - #{$nav-width});
+                width: calc(100% - $nav-width);
                 background-color: $bg-color-content;
                 overflow: auto;
 
@@ -161,27 +160,76 @@ $border-radius: 4px;
 
         .footer {
             display: none;
-            height: $footer-height;
+            justify-content: space-between;
             width: 100%;
+            height: 50px;
+            background-color: $bg-color-option-block;
+
+            .button,
+            .button-selected {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                flex-grow: 1;
+
+                img {
+                    height: 16px;
+                    width: 16px;
+                    margin-bottom: 6px;
+                }
+
+                span {
+                    font-size: 14px;
+                }
+            }
+
+            .button:hover,
+            .button-selected {
+                background-color: $bg-color-option-block-hover;
+            }
+
+            .user-bubble-button {
+                position: absolute;
+                height: 52px;
+                width: 52px;
+                bottom: calc(50px + 12px);
+                right: 12px;
+
+                .user-button,
+                .user-connected-button {
+                    border-radius: 40px;
+                    height: 100%;
+                    width: 100%;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: $phone-view) {
     .body {
         .container {
             .header {
-                .block-title {
-                    .title,
-                    .title-gold {
-                        display: none;
-                    }
+                display: none;
+            }
 
-                    .title-small,
-                    .title-gold-small {
-                        display: flex;
-                    }
+            .middle {
+                height: calc(100% - 50px);
+
+                .nav {
+                    display: none;
                 }
+
+                .content {
+                    width: 100% !important;
+                }
+            }
+
+            .footer {
+                display: flex;
             }
         }
     }

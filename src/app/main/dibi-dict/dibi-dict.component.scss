@@ -1,10 +1,11 @@
 $bg-color-row-hover: #302f2e; // Couleur de fond des boutons hover
 
-$top-height: 73px;
+$simple-top-height: 34px;
+$advanced-top-height: 94px;
 $all-none-partOfSpeech-width: 52px;
 
 $padding: 12px;
-$border-radius: 4px;
+$border-radius: 6px;
 $border: 1px solid #757473;
 
 // Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
@@ -13,9 +14,9 @@ $left-menu-width: 50%;
 $right-menu-width: 50%;
 
 // Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
-$left-row-width: 70%;
-$middle-row-width: 15%;
-$right-row-width: 15%;
+$left-row-width: calc(100% - 75px);
+$middle-row-width: 0;
+$right-row-width: 75px;
 
 // Largeur du label (créateur, description)
 $label-detail-view-width: 100px;
@@ -30,7 +31,7 @@ $size-checkbox: 12px;
 
 .body {
     display: flex;
-    padding: $padding;
+    padding: 6px 6px 0px 6px;
     height: 100%;
     width: 100%;
 
@@ -44,137 +45,173 @@ $size-checkbox: 12px;
 
         .top {
             display: flex;
-            height: $top-height;
             width: 100%;
 
-            .left {
+            .simple-top {
                 display: flex;
-                align-items: flex-start;
-                width: $left-menu-width;
-                border-right: $border;
-                overflow: auto;
+                height: $simple-top-height;
+                width: 100%;
 
-                .all-none-partOfSpeech {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-start;
-                    width: $all-none-partOfSpeech-width;
-
-                    .all-none {
-                        display: flex;
-                        cursor: pointer;
-                        padding: 3px 0px 3px 0px;
-                        font-weight: 600;
-                        font-size: 14px;
-
-                        label {
-                            cursor: pointer;
-                        }
-                    }
-                }
-
-                .partsOfSpeech {
-                    display: flex;
-                    align-items: flex-start;
-                    justify-content: flex-start;
-                    flex-wrap: wrap;
-                    padding: 0px $padding 0px $padding;
-                    width: calc(100% - #{$all-none-partOfSpeech-width});
-                }
-
-                .partOfSpeech {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    padding: 3px 6px 3px 6px;
-
-                    input {
-                        height: $size-checkbox;
-                        width: $size-checkbox;
-                        margin-right: 6px;
-                    }
-
-                    label {
-                        font-size: 14px;
-                        cursor: pointer;
-                        white-space: nowrap;
-                    }
+                .input-and-cross {
+                    width: calc(100% - 28px - 6px);
                 }
             }
 
-            .right {
-                width: $right-menu-width;
-                padding-left: $padding;
-                overflow: auto;
+            .advanced-top {
+                display: flex;
+                height: $advanced-top-height;
+                width: 100%;
 
-                .search-input {
-                    .search-and-regex-button {
+                .left {
+                    display: flex;
+                    align-items: flex-start;
+                    width: $left-menu-width;
+                    border-right: $border;
+                    overflow: auto;
+
+                    .all-none-partOfSpeech {
                         display: flex;
-                        justify-content: space-between;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        width: $all-none-partOfSpeech-width;
 
-                        .input-and-cross {
+                        .all-none {
                             display: flex;
-                            height: 28px;
-                            width: calc(100% - 28px - #{$padding});
-                            background-color: #555453;
-                            border-radius: 4px;
+                            cursor: pointer;
+                            padding: 3px 0px 3px 0px;
+                            font-weight: 600;
+                            font-size: 14px;
 
-                            input {
-                                height: 100%;
-                                width: calc(100% - #{$padding} - 23px);
-                                background-color: transparent;
-                            }
-
-                            .cross {
-                                display: flex;
-                                align-items: center;
-                                margin-left: $padding;
+                            label {
                                 cursor: pointer;
-
-                                img {
-                                    height: 18px;
-                                    width: 18px;
-                                }
                             }
-                        }
-
-                        button {
-                            height: 28px;
-                            width: 28px;
-                        }
-
-                        .regexOn {
-                            background-color: #7573b1;
                         }
                     }
 
-                    .options-search {
+                    .partsOfSpeech {
                         display: flex;
                         align-items: flex-start;
                         justify-content: flex-start;
                         flex-wrap: wrap;
-                        margin: $padding 0px 0px 0px;
-                        overflow: auto;
+                        padding: 0px $padding 0px $padding;
+                        width: calc(100% - #{$all-none-partOfSpeech-width});
+                    }
 
-                        .element {
-                            display: flex;
-                            align-items: center;
+                    .partOfSpeech {
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        padding: 3px 6px 3px 6px;
+
+                        input {
+                            height: $size-checkbox;
+                            width: $size-checkbox;
+                            margin-right: 6px;
+                        }
+
+                        label {
+                            font-size: 14px;
                             cursor: pointer;
-                            padding: 3px 6px 3px 6px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
 
-                            input {
-                                height: $size-checkbox;
-                                width: $size-checkbox;
+                .right {
+                    width: $right-menu-width;
+                    padding-left: $padding;
+                    overflow: auto;
+
+                    .search-input {
+                        .search-and-regex-and-advanced-toggle {
+                            display: flex;
+                            justify-content: space-between;
+
+                            .input-and-cross {
+                                width: calc(100% - 28px - 28px - 6px - 6px);
                             }
 
-                            .label-option-search {
-                                font-weight: $bold;
+                            button {
+                                height: 28px;
+                                width: 28px;
                                 margin-left: 6px;
-                                font-size: 12px;
+                            }
+
+                            .regexOn {
+                                background-color: #7573b1;
+                            }
+                        }
+
+                        .options-search {
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            flex-wrap: wrap;
+                            margin: $padding 0px 0px 0px;
+                            overflow: auto;
+
+                            .element {
+                                display: flex;
+                                align-items: center;
                                 cursor: pointer;
+                                padding: 3px 6px 3px 6px;
+
+                                input {
+                                    height: $size-checkbox;
+                                    width: $size-checkbox;
+                                }
+
+                                .label-option-search {
+                                    font-weight: $bold;
+                                    margin-left: 6px;
+                                    font-size: 12px;
+                                    cursor: pointer;
+                                }
                             }
                         }
                     }
+                }
+            }
+
+            .input-and-cross {
+                display: flex;
+                height: 28px;
+                background-color: #555453;
+                border-radius: $border-radius;
+
+                input {
+                    height: 100%;
+                    width: calc(100% - #{$padding} - 23px);
+                    background-color: transparent;
+                }
+
+                .cross {
+                    display: flex;
+                    align-items: center;
+                    margin-left: $padding;
+                    cursor: pointer;
+
+                    img {
+                        height: 14px;
+                        width: 14px;
+                    }
+                }
+            }
+
+            .toggle-advanced-search {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #555453;
+                border-radius: $border-radius;
+                width: 28px;
+                height: 28px;
+                margin-left: 6px;
+                cursor: pointer;
+
+                .advanced-search-icon {
+                    width: 16px;
+                    height: 16px;
                 }
             }
         }
@@ -183,10 +220,11 @@ $size-checkbox: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 30px;
+            height: 22px;
             width: 100%;
             overflow: auto;
             border-top: $border;
+            font-size: 12px;
 
             .left {
                 display: flex;
@@ -228,8 +266,8 @@ $size-checkbox: 12px;
             }
 
             img {
-                height: 20px;
-                width: 20px;
+                height: 16px;
+                width: 16px;
                 cursor: pointer;
             }
         }
@@ -237,11 +275,12 @@ $size-checkbox: 12px;
         .row-order {
             display: flex;
             align-items: center;
-            height: 30px;
+            height: 22px;
             width: 100%;
             overflow: auto;
             border-top: $border;
             padding-right: $padding;
+            font-size: 12px;
 
             .left {
                 display: flex;
@@ -273,8 +312,8 @@ $size-checkbox: 12px;
 
                 img {
                     margin-left: $padding;
-                    height: 18px;
-                    width: 18px;
+                    height: 16px;
+                    width: 16px;
                 }
             }
 
@@ -283,10 +322,18 @@ $size-checkbox: 12px;
             }
         }
 
-        .list {
+        .list-advanced {
+            height: calc(100% - 22px - 22px - $advanced-top-height);
+        }
+
+        .list-simple {
+            height: calc(100% - 22px - 22px - $simple-top-height);
+        }
+
+        .list-simple,
+        .list-advanced {
             display: flex;
             flex-direction: column;
-            height: calc(100% - #{$top-height} - 30px);
             width: 100%;
             overflow: auto;
             border-top: $border;
@@ -298,7 +345,6 @@ $size-checkbox: 12px;
 
                 .view {
                     display: flex;
-                    align-items: center;
                     height: $row-view-height;
                     cursor: pointer;
 
@@ -306,6 +352,7 @@ $size-checkbox: 12px;
                         display: flex;
                         align-items: center;
                         width: $left-row-width;
+                        overflow: hidden;
 
                         .dibi {
                             font-size: 18px;
@@ -325,6 +372,9 @@ $size-checkbox: 12px;
                     }
 
                     .middle {
+                    }
+
+                    .right {
                         display: flex;
                         align-items: center;
                         width: $middle-row-width;
@@ -332,19 +382,6 @@ $size-checkbox: 12px;
                         .date {
                             color: #999;
                             font-size: 12px;
-                        }
-                    }
-
-                    .right {
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        margin: 0px $padding;
-                        width: $right-row-width;
-
-                        .partOfSpeech {
-                            font-size: 13px;
-                            white-space: nowrap;
                         }
                     }
                 }
@@ -495,106 +532,106 @@ $size-checkbox: 12px;
 
 // Media query
 
-@media screen and (max-width: 1100px) {
-    .body {
-        .container {
-            .top {
-                .left {
-                    flex-direction: column;
-                    .all-none-partOfSpeech {
-                        .all-none {
-                            padding: 3px 6px 3px 6px;
-                        }
-                    }
+// @media screen and (max-width: 1100px) {
+//     .body {
+//         .container {
+//             .top {
+//                 .left {
+//                     flex-direction: column;
+//                     .all-none-partOfSpeech {
+//                         .all-none {
+//                             padding: 3px 6px 3px 6px;
+//                         }
+//                     }
 
-                    .partsOfSpeech {
-                        margin: 0px;
-                        padding: 0px;
-                    }
-                }
-            }
-            .row-pages {
-                .left {
-                    img {
-                        margin-right: 6px;
-                    }
-                }
-                .middle {
-                    .desc-word {
-                        display: none;
-                    }
-                    .block-info {
-                        margin: 0px 6px;
-                    }
-                }
-                .right {
-                    img {
-                        margin-left: 6px;
-                    }
-                }
-            }
-            .row-order {
-                justify-content: space-between;
+//                     .partsOfSpeech {
+//                         margin: 0px;
+//                         padding: 0px;
+//                     }
+//                 }
+//             }
+//             .row-pages {
+//                 .left {
+//                     img {
+//                         margin-right: 6px;
+//                     }
+//                 }
+//                 .middle {
+//                     .desc-word {
+//                         display: none;
+//                     }
+//                     .block-info {
+//                         margin: 0px 6px;
+//                     }
+//                 }
+//                 .right {
+//                     img {
+//                         margin-left: 6px;
+//                     }
+//                 }
+//             }
+//             .row-order {
+//                 justify-content: space-between;
 
-                .left {
-                    width: auto;
-                }
+//                 .left {
+//                     width: auto;
+//                 }
 
-                .middle {
-                    width: auto;
-                }
+//                 .middle {
+//                     width: auto;
+//                 }
 
-                .right {
-                    width: auto;
-                }
+//                 .right {
+//                     width: auto;
+//                 }
 
-                .label-button-sort {
-                    font-size: 12px;
-                }
-            }
-            .list {
-                .row {
-                    .view {
-                        .left {
-                            width: 100%;
-                        }
-                        .middle {
-                            display: none;
-                        }
-                        .right {
-                            display: none;
-                        }
-                    }
+//                 .label-button-sort {
+//                     font-size: 12px;
+//                 }
+//             }
+//             .list {
+//                 .row {
+//                     .view {
+//                         .left {
+//                             width: 100%;
+//                         }
+//                         .middle {
+//                             display: none;
+//                         }
+//                         .right {
+//                             display: none;
+//                         }
+//                     }
 
-                    .details {
-                        .block-detail-if-screen-too-small {
-                            display: flex;
-                        }
+//                     .details {
+//                         .block-detail-if-screen-too-small {
+//                             display: flex;
+//                         }
 
-                        .edit {
-                            .form-new-word {
-                                .block {
-                                    .label-input {
-                                        .label {
-                                            width: 20%;
-                                            font-size: 14px;
-                                            margin-right: $padding;
-                                            white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-                                            white-space: -webkit-pre-wrap; /* Chrome & Safari */
-                                            white-space: -pre-wrap; /* Opera 4-6 */
-                                            white-space: -o-pre-wrap; /* Opera 7 */
-                                            white-space: pre-wrap; /* CSS3 */
-                                            word-wrap: break-word; /* Internet Explorer 5.5+ */
-                                            word-break: break-all;
-                                            white-space: normal;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+//                         .edit {
+//                             .form-new-word {
+//                                 .block {
+//                                     .label-input {
+//                                         .label {
+//                                             width: 20%;
+//                                             font-size: 14px;
+//                                             margin-right: $padding;
+//                                             white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+//                                             white-space: -webkit-pre-wrap; /* Chrome & Safari */
+//                                             white-space: -pre-wrap; /* Opera 4-6 */
+//                                             white-space: -o-pre-wrap; /* Opera 7 */
+//                                             white-space: pre-wrap; /* CSS3 */
+//                                             word-wrap: break-word; /* Internet Explorer 5.5+ */
+//                                             word-break: break-all;
+//                                             white-space: normal;
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }

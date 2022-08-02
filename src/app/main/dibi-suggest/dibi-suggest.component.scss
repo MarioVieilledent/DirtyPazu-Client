@@ -1,7 +1,7 @@
-$padding: 12px;
+$padding: 6px;
 $border-radius: 4px;
 $border: 1px solid #757473;
-$img-size: 20px;
+$img-size: 16px;
 
 .body {
     display: flex;
@@ -29,15 +29,19 @@ $img-size: 20px;
         display: flex;
         flex-direction: column;
 
-        .all-fields  {
+        .all-fields {
             display: flex;
             flex-direction: column;
 
-            .table, .description, .dibis, .send, .bottom {
+            .table,
+            .description,
+            .dibis,
+            .send,
+            .bottom {
                 border-radius: $border-radius;
                 background-color: #444240;
             }
-    
+
             .dibis {
                 display: flex;
                 flex-direction: column;
@@ -62,7 +66,7 @@ $img-size: 20px;
                         height: 24px;
                         width: 24px;
                     }
-                    
+
                     input {
                         margin-left: $padding;
                         width: calc(100% - 24px - 12px);
@@ -93,24 +97,23 @@ $img-size: 20px;
                             align-items: center;
 
                             img {
-
                                 margin-right: 6px;
                             }
-                        
+
                             span {
                                 font-size: 12px;
                                 color: #bbb;
                                 width: calc(100% - 32px);
                             }
                         }
-                        
                     }
 
                     .bottom-input {
                         display: flex;
                         width: 100%;
 
-                        input, select {
+                        input,
+                        select {
                             width: 100%;
                         }
                     }
@@ -171,7 +174,7 @@ $img-size: 20px;
                     border-bottom: $border;
 
                     .option {
-                        padding-bottom: 0px !important; 
+                        padding-bottom: 0px !important;
                     }
                 }
 
@@ -183,9 +186,8 @@ $img-size: 20px;
                 .row-part-of-speech {
                     display: flex;
                 }
-
             }
-    
+
             .description {
                 display: flex;
                 flex-direction: column;
@@ -221,13 +223,13 @@ $img-size: 20px;
                     margin-top: 12px;
                     color: #8e8;
                 }
-                
+
                 .message-error {
                     margin-top: 12px;
                     color: #e88;
                 }
             }
-    
+
             .bottom {
                 display: flex;
                 flex-direction: column;
@@ -242,14 +244,14 @@ $img-size: 20px;
                         margin-left: $padding;
                     }
                 }
-        
+
                 .help {
                     margin-top: $padding;
 
                     h2 {
                         margin-bottom: 24px;
                     }
-        
+
                     p {
                         margin-bottom: $padding;
                     }

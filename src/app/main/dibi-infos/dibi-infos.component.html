@@ -4,6 +4,9 @@
             <h1>Infos & stats</h1>
             <p>Ce site à pour vocation de répertorier l'ensemble des mots du Dibi.</p>
             <p>Pour report un bug, ou proposer une suggestion => dm sur mon Discord : Pazu#4444</p>
+            <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Liste de tous les
+                mots format
+                JSON</a>
         </div>
         <div class="content">
             <div class="block">
@@ -26,26 +29,30 @@
                     <h2>Répartition des mots selon leur nature grammaticale</h2>
                 </div>
                 <!-- <canvas id="pieChart" width="400" height="400"></canvas> -->
-                <canvas class="pie-chart" baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="'pie'"></canvas>
+                <canvas class="pie-chart" baseChart [options]="options" [data]="pieChartData" [labels]="pieChartLabels"
+                    [colors]="pieChartColors" [chartType]="'pie'"></canvas>
             </div>
             <div class="block chart">
                 <div class="title">
                     <h2>Taille du dictionnaire en fonction du temps</h2>
                 </div>
-                <canvas class="line-chart" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'line'">
+                <canvas class="line-chart" baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                    [options]="barChartOptions" [legend]="barChartLegend" [chartType]="'line'">
                 </canvas>
             </div>
             <div class="block chart">
                 <div class="title">
                     <h2>Nombres de mots dans le dictrionnaire selon leur nature grammaticale en fonciton du temps</h2>
                 </div>
-                <canvas class="line-chart" baseChart [datasets]="barChartDataNG" [labels]="barChartLabelsNG" [options]="barChartOptionsNG" [legend]="barChartLegendNG" [chartType]="'line'">
+                <canvas class="line-chart" baseChart [datasets]="barChartDataNG" [labels]="barChartLabelsNG"
+                    [options]="barChartOptionsNG" [legend]="barChartLegendNG" [chartType]="'line'">
                 </canvas>
             </div>
         </div>
         <div>
             <h2>API</h2>
-            <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Dictionnaire complet</a>
+            <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Dictionnaire
+                complet</a>
         </div>
     </div>
 </div>

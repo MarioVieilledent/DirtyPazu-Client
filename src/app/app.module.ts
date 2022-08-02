@@ -24,6 +24,8 @@ import { DibiVoteComponent } from './main/dibi-vote/dibi-vote.component';
 // Social connexion
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { AccountComponent } from './main/account/account.component';
+import { DibiGrammarComponent } from './main/dibi-grammar/dibi-grammar.component';
 const socialId = '886518860996-o45rlpuk1f0n9verombausklme0ampga.apps.googleusercontent.com';
 
 // Socket.io
@@ -42,7 +44,9 @@ const config: SocketIoConfig = { url, options: {} };
     InfosComponent,
     ConnectCenterComponent,
     DibiSuggestComponent,
-    DibiVoteComponent
+    DibiVoteComponent,
+    AccountComponent,
+    DibiGrammarComponent
   ],
   imports: [
     BrowserModule,

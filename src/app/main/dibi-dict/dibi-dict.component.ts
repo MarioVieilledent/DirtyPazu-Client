@@ -59,9 +59,11 @@ export class DibiDictComponent implements OnInit {
   searchResult$: Observable<DibiWord[]>;
   regexSearch: boolean = false; // Si la recherche s'effectue en regex ou de manière classique
 
+  advancedSearch = false;
+
   // Pour le tri des mots
 
-  sortBy: SortBy = 'dibi'; // Possibilité de trier par mot dibi, date, nature grammaticale, 
+  sortBy: SortBy = 'date'; // Possibilité de trier par mot dibi, date, nature grammaticale, 
   sortOrder: SortOrder = 'cresc'; // cresc (ordre alphabétique) et decresc (ordre inverse alphabétique)
 
   message = { mes: '', color: '' }; // Message et sa couleur affichant le retour du serveur
@@ -174,6 +176,9 @@ export class DibiDictComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Check du localStorage pour voir la préférence de la recherche simple ou avancée
+    window.localStorage.getItem('advancedSearch') ? this.advancedSearch = (window.localStorage.getItem('advancedSearch') === 'true' ? true : false) : false;
+
     // Check du localStorage pour voir les préférences de tri (pas de filtrage)
     window.localStorage.getItem('sortBy') ? this.sortBy = window.localStorage.getItem('sortBy') as SortBy : {};
     window.localStorage.getItem('sortOrder') ? this.sortOrder = window.localStorage.getItem('sortOrder') as SortOrder : {};
@@ -202,7 +207,7 @@ export class DibiDictComponent implements OnInit {
    * Si un changement Angular est détecté, et qu'il s'agit de @Input() dibiDict
    * Démarrage du traitement du dictionnaire (mise en minuscule des mots Dibi et lancement de l'observable de recherche)
    */
-   ngOnChanges (): void {
+  ngOnChanges(): void {
     // Met en minuscule tous les mots Dibis (pour que les mots soit mieux lisibles dans le dico)
     if (this.dibiDict) {
       this.dibiDict.forEach(word => {
@@ -479,6 +484,14 @@ export class DibiDictComponent implements OnInit {
       window.localStorage.setItem('nbWordsPerPage', nb.toString());
       this.buildPages();
     }
+  }
+
+  /**
+   * Ouvre ou ferme les options avancées de recherche de mots
+   */
+  toggleAdvancedSearch(b: boolean): void {
+    window.localStorage.setItem('advancedSearch', b.toString());
+    this.advancedSearch = b;
   }
 
 }

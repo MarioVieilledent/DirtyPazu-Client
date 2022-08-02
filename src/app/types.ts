@@ -2,7 +2,7 @@ import { SocialUser } from "angularx-social-login";
 
 // Pour le noms des différentes pages / components Angular
 
-export type PageName = 'Infos' | 'Flag' | 'Dibi-infos' | 'Dibi-dict' | 'Dibi-suggest-word' | 'Dibi-vote' | 'Dibi-grammar-rules' | 'Logs';
+export type PageName = 'Infos' | 'Flag' | 'Dibi-infos' | 'Dibi-dict' | 'Dibi-suggest-word' | 'Dibi-vote' | 'Dibi-grammar-rules' | 'Account' | 'Logs';
 
 // Pour la page flag
 

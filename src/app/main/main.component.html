@@ -12,8 +12,6 @@
             <div class="block-title">
                 <h1 [className]="adminConnected ? 'title-gold' : 'title'" (click)="reload()"
                     (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
-                <h1 [className]="adminConnected ? 'title-gold-small' : 'title-small'" (click)="reload()"
-                    (auxclick)="openNewBlank()">Dibi</h1>
             </div>
             <div class="groupped-imgs">
                 <img *ngIf="adminConnected" class="golden-crown" src="assets/crown-solid.svg" title="Admin">
@@ -26,31 +24,45 @@
         <div class="middle">
             <div class="nav" #nav>
 
-                <div class="button" (click)="setNav('Dibi-infos')">
+                <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'"
+                    (click)="setNav('Dibi-infos')">
                     <img src="assets/circle-info-solid.svg">
                     <span>Infos</span>
                 </div>
 
-                <div class="button" (click)="setNav('Dibi-dict')">
+                <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+                    (click)="setNav('Dibi-grammar-rules')">
+                    <img src="assets/book-bookmark-solid.svg">
+                    <span>Grammaire</span>
+                </div>
+
+                <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'"
+                    (click)="setNav('Dibi-dict')">
                     <img src="assets/book-solid.svg">
                     <span>Dictionnaire</span>
                 </div>
 
-                <div *ngIf="user && accountSettings" class="button" (click)="setNav('Dibi-suggest-word')">
+                <div *ngIf="user && accountSettings"
+                    [ngClass]="navigation === 'Dibi-suggest-word' ? 'button-selected' : 'button'"
+                    (click)="setNav('Dibi-suggest-word')">
                     <img src="assets/circle-plus-solid.svg">
                     <span>Proposer</span>
                 </div>
 
-                <div *ngIf="user && accountSettings" class="button" (click)="setNav('Dibi-vote')">
+                <div *ngIf="user && accountSettings"
+                    [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'" (click)="setNav('Dibi-vote')">
                     <img src="assets/square-poll-horizontal-solid.svg">
                     <span>Voter</span>
                 </div>
 
-                <!-- <div class="button" (click)="setNav('Dibi-grammar-rules')">
-                <span>Grammaire</span>
-                </div> -->
+                <div *ngIf="accountSettings" [ngClass]="navigation === 'Account' ? 'button-selected' : 'button'"
+                    (click)="setNav('Account')">
+                    <img src="assets/user-solid.svg">
+                    <span>Compte</span>
+                </div>
 
-                <div *ngIf="adminConnected" class="button" (click)="setNav('Logs')">
+                <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
+                    (click)="setNav('Logs')">
                     <img src="assets/file-lines-regular.svg">
                     <span>Logs</span>
                 </div>
@@ -72,12 +84,20 @@
                         <app-dibi-dict [dibiDict]="dibiDict" [adminConnected]="adminConnected" [pwd]="pwd">
                         </app-dibi-dict>
                     </ng-container>
+                    <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
+                        <app-dibi-grammar></app-dibi-grammar>
+                    </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-suggest-word'">
-                        <app-dibi-suggest [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user" [accountSettings]="accountSettings">
+                        <app-dibi-suggest [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user"
+                            [accountSettings]="accountSettings">
                         </app-dibi-suggest>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Dibi-vote'">
-                        <app-dibi-vote [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user" [accountSettings]="accountSettings" [profiles]="profiles"></app-dibi-vote>
+                        <app-dibi-vote [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user"
+                            [accountSettings]="accountSettings" [profiles]="profiles"></app-dibi-vote>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'Account'">
+                        <app-account></app-account>
                     </ng-container>
                     <ng-container *ngSwitchCase="'Logs'">
                         <app-logs></app-logs>
@@ -89,7 +109,41 @@
             </div>
         </div>
         <div class="footer">
+            <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'" (click)="setNav('Dibi-infos')">
+                <img src="assets/circle-info-solid.svg">
+                <span>Infos</span>
+            </div>
 
+            <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+                (click)="setNav('Dibi-grammar-rules')">
+                <img src="assets/book-bookmark-solid.svg">
+                <span>Gram.</span>
+            </div>
+
+            <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'" (click)="setNav('Dibi-dict')">
+                <img src="assets/book-solid.svg">
+                <span>Dico</span>
+            </div>
+
+            <div *ngIf="user && accountSettings"
+                [ngClass]="navigation === 'Dibi-suggest-word' ? 'button-selected' : 'button'"
+                (click)="setNav('Dibi-suggest-word')">
+                <img src="assets/circle-plus-solid.svg">
+                <span>Proposer</span>
+            </div>
+
+            <div *ngIf="user && accountSettings" [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'"
+                (click)="setNav('Dibi-vote')">
+                <img src="assets/square-poll-horizontal-solid.svg">
+                <span>Voter</span>
+            </div>
+
+            <div class="user-bubble-button">
+                <img *ngIf="!user" class="user-button" src="assets/user-solid.svg" (click)="openUserMenu()"
+                    title="Connexion">
+                <img *ngIf="user" class="user-connected-button" src="{{user.photoUrl}}" (click)="openUserMenu()"
+                    title="Options utilisateur">
+            </div>
         </div>
     </div>
 </div>

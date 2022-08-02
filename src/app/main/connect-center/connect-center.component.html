@@ -5,7 +5,8 @@
         </div>
         <div class="accounts">
             <div class="google-account">
-                <h3>Compte Google</h3>
+                <h3 *ngIf="user" class="margin-bottom">Compte Google connecté</h3>
+                <h3 *ngIf="!user" class="margin-bottom">Connexion compte Google</h3>
                 <div class="google-info">
                     <div class="user-display" *ngIf="user">
                         <img src="{{user.photoUrl}}">
@@ -33,7 +34,10 @@
             </div>
             <div class="admin">
                 <div class="admin-section" *ngIf="adminConnected">
-                    <h3 class="margin-bottom">Vous êtes Admin</h3>
+                    <div class="crown-and-title margin-bottom">
+                        <img class="golden-crown" src="assets/crown-solid.svg" title="Admin">
+                        <h3>Vous êtes Admin</h3>
+                    </div>
                     <button *ngIf="adminConnected" (click)="logoutAdmin()">Déconnexion admin</button>
                 </div>
                 <div class="admin-section" *ngIf="!adminConnected">

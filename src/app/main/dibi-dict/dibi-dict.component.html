@@ -1,86 +1,108 @@
 <div class="body">
     <div class="container">
         <div class="top">
-            <div class="left">
-                <div class="all-none-partOfSpeech">
-                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(true)"
-                            title="Sélectionner toutes les natures grammaticales">Tous</label></div>
-                    <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(false)"
-                            title="Sélectionner aucune nature grammaticale">Aucun</label></div>
+            <div class="simple-top" *ngIf="!advancedSearch">
+                <div class="input-and-cross" id="expression-search">
+                    <input type="text" [(ngModel)]="search" (input)="eachKeySearch()" placeholder="Rechercher">
+                    <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
+                        <img class="empty-search" src="./assets/times-solid.svg">
+                    </div>
                 </div>
-                <div class="partsOfSpeech">
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Noun" type="checkbox" class="Noun"
-                            [(ngModel)]="searchOptions.partsOfSpeech.Noun"><label for="Noun" class="Noun">Noms</label>
-                    </div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Pronoun" type="checkbox"
-                            class="Pronoun" [(ngModel)]="searchOptions.partsOfSpeech.Pronoun"><label for="Pronoun"
-                            class="Pronoun">Pronoms</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox"
-                            class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label for="Adjective"
-                            class="Adjective">Adjectifs</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Verb" type="checkbox" class="Verb"
-                            [(ngModel)]="searchOptions.partsOfSpeech.Verb"><label for="Verb" class="Verb">Verbes</label>
-                    </div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adverb" type="checkbox"
-                            class="Adverb" [(ngModel)]="searchOptions.partsOfSpeech.Adverb"><label for="Adverb"
-                            class="Adverb">Adverbes</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="FunctionParticule" type="checkbox"
-                            class="FunctionParticule" [(ngModel)]="searchOptions.partsOfSpeech.FunctionParticule"><label
-                            for="FunctionParticule" class="FunctionParticule">Particules de fonction</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="TransformationParticule"
-                            type="checkbox" class="TransformationParticule"
-                            [(ngModel)]="searchOptions.partsOfSpeech.TransformationParticule"><label
-                            for="TransformationParticule" class="TransformationParticule">Particules de
-                            transformation</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="SpiritWord" type="checkbox"
-                            class="SpiritWord" [(ngModel)]="searchOptions.partsOfSpeech.SpiritWord"><label
-                            for="SpiritWord" class="SpiritWord">Mots d'esprit</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Conjonction" type="checkbox"
-                            class="Conjonction" [(ngModel)]="searchOptions.partsOfSpeech.Conjonction"><label
-                            for="Conjonction" class="Conjonction">Conjonctions</label></div>
-                    <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Interjection" type="checkbox"
-                            class="Interjection" [(ngModel)]="searchOptions.partsOfSpeech.Interjection"><label
-                            for="Interjection" class="Interjection">Interjections</label></div>
-                    <ng-container *ngIf="adminConnected">
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noAuthor" type="checkbox"
-                                class="noAuthor" [(ngModel)]="searchOptions.doesNotContiain.author"><label
-                                for="noAuthor" class="noAuthor">Sans créateur</label></div>
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noDescription" type="checkbox"
-                                class="noDescription" [(ngModel)]="searchOptions.doesNotContiain.description"><label
-                                for="noDescription" class="noDescription">Sans description</label></div>
-                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noEnglish" type="checkbox"
-                                class="noEnglish" [(ngModel)]="searchOptions.doesNotContiain.english"><label
-                                for="noEnglish" class="noEnglish">Sans Anglais</label></div>
-                    </ng-container>
+                <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(true)">
+                    <img class="advanced-search-icon" src="assets/ellipsis-solid.svg" alt="Icône recherche avancée">
                 </div>
             </div>
-            <div class="right">
-                <div class="search-input">
-                    <div class="search-and-regex-button">
-                        <div class="input-and-cross" id="expression-search">
-                            <input type="text" [(ngModel)]="search" (input)="eachKeySearch()" placeholder="Rechercher">
-                            <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
-                                <img class="empty-search" src="./assets/times-solid.svg">
+            <div class="advanced-top" *ngIf="advancedSearch">
+                <div class="left">
+                    <div class="all-none-partOfSpeech">
+                        <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(true)"
+                                title="Sélectionner toutes les natures grammaticales">Tous</label></div>
+                        <div class="all-none" (click)="eachKeySearch()"><label (click)="allPartsOfSpeech(false)"
+                                title="Sélectionner aucune nature grammaticale">Aucun</label></div>
+                    </div>
+                    <div class="partsOfSpeech">
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Noun" type="checkbox"
+                                class="Noun" [(ngModel)]="searchOptions.partsOfSpeech.Noun"><label for="Noun"
+                                class="Noun">Noms</label>
+                        </div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Pronoun" type="checkbox"
+                                class="Pronoun" [(ngModel)]="searchOptions.partsOfSpeech.Pronoun"><label for="Pronoun"
+                                class="Pronoun">Pronoms</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adjective" type="checkbox"
+                                class="Adjective" [(ngModel)]="searchOptions.partsOfSpeech.Adjective"><label
+                                for="Adjective" class="Adjective">Adjectifs</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Verb" type="checkbox"
+                                class="Verb" [(ngModel)]="searchOptions.partsOfSpeech.Verb"><label for="Verb"
+                                class="Verb">Verbes</label>
+                        </div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Adverb" type="checkbox"
+                                class="Adverb" [(ngModel)]="searchOptions.partsOfSpeech.Adverb"><label for="Adverb"
+                                class="Adverb">Adverbes</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="FunctionParticule"
+                                type="checkbox" class="FunctionParticule"
+                                [(ngModel)]="searchOptions.partsOfSpeech.FunctionParticule"><label
+                                for="FunctionParticule" class="FunctionParticule">Particules de fonction</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="TransformationParticule"
+                                type="checkbox" class="TransformationParticule"
+                                [(ngModel)]="searchOptions.partsOfSpeech.TransformationParticule"><label
+                                for="TransformationParticule" class="TransformationParticule">Particules de
+                                transformation</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="SpiritWord" type="checkbox"
+                                class="SpiritWord" [(ngModel)]="searchOptions.partsOfSpeech.SpiritWord"><label
+                                for="SpiritWord" class="SpiritWord">Mots d'esprit</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Conjonction" type="checkbox"
+                                class="Conjonction" [(ngModel)]="searchOptions.partsOfSpeech.Conjonction"><label
+                                for="Conjonction" class="Conjonction">Conjonctions</label></div>
+                        <div class="partOfSpeech" (click)="eachKeySearch()"><input id="Interjection" type="checkbox"
+                                class="Interjection" [(ngModel)]="searchOptions.partsOfSpeech.Interjection"><label
+                                for="Interjection" class="Interjection">Interjections</label></div>
+                        <ng-container *ngIf="adminConnected">
+                            <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noAuthor" type="checkbox"
+                                    class="noAuthor" [(ngModel)]="searchOptions.doesNotContiain.author"><label
+                                    for="noAuthor" class="noAuthor">Sans créateur</label></div>
+                            <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noDescription"
+                                    type="checkbox" class="noDescription"
+                                    [(ngModel)]="searchOptions.doesNotContiain.description"><label for="noDescription"
+                                    class="noDescription">Sans description</label></div>
+                            <div class="partOfSpeech" (click)="eachKeySearch()"><input id="noEnglish" type="checkbox"
+                                    class="noEnglish" [(ngModel)]="searchOptions.doesNotContiain.english"><label
+                                    for="noEnglish" class="noEnglish">Sans Anglais</label></div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="search-input">
+                        <div class="search-and-regex-and-advanced-toggle">
+                            <div class="input-and-cross" id="expression-search">
+                                <input type="text" [(ngModel)]="search" (input)="eachKeySearch()"
+                                    placeholder="Rechercher">
+                                <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
+                                    <img class="empty-search" src="./assets/times-solid.svg">
+                                </div>
+                            </div>
+                            <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''"
+                                title="Recherche expression régulière">.*</button>
+                            <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(false)">
+                                <img class="advanced-search-icon" src="assets/ellipsis-solid.svg"
+                                    alt="Icône recherche avancée">
                             </div>
                         </div>
-                        <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''"
-                            title="Recherche expression régulière">.*</button>
-                    </div>
-                    <div class="options-search">
-                        <div class="element" (click)="eachKeySearch()"><input id="Dibi" type="checkbox" class="Dibi"
-                                [(ngModel)]="searchOptions.element.Dibi"><label for="Dibi"
-                                class="label-option-search">Dibi</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="French" type="checkbox" class="French"
-                                [(ngModel)]="searchOptions.element.French"><label for="French"
-                                class="label-option-search">Français</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="English" type="checkbox"
-                                class="English" [(ngModel)]="searchOptions.element.English"><label for="English"
-                                class="label-option-search">Anglais</label></div>
-                        <div class="element" (click)="eachKeySearch()"><input id="Author" type="checkbox" class="Author"
-                                [(ngModel)]="searchOptions.element.Author"><label for="Author"
-                                class="label-option-search">Créateur</label></div>
-                        <!-- <div class="element" (click)="eachKeySearch()"><input id="Date" type="checkbox" class="Date" [(ngModel)]="searchOptions.element.Date"><label for="Date" class="label-option-search">Date</label></div>
-                            <div class="element" (click)="eachKeySearch()"><input id="Description" type="checkbox" class="Description" [(ngModel)]="searchOptions.element.Description"><label for="Description" class="label-option-search">Description</label></div> -->
+                        <div class="options-search">
+                            <div class="element" (click)="eachKeySearch()"><input id="Dibi" type="checkbox" class="Dibi"
+                                    [(ngModel)]="searchOptions.element.Dibi"><label for="Dibi"
+                                    class="label-option-search">Dibi</label></div>
+                            <div class="element" (click)="eachKeySearch()"><input id="French" type="checkbox"
+                                    class="French" [(ngModel)]="searchOptions.element.French"><label for="French"
+                                    class="label-option-search">Français</label></div>
+                            <div class="element" (click)="eachKeySearch()"><input id="English" type="checkbox"
+                                    class="English" [(ngModel)]="searchOptions.element.English"><label for="English"
+                                    class="label-option-search">Anglais</label></div>
+                            <div class="element" (click)="eachKeySearch()"><input id="Author" type="checkbox"
+                                    class="Author" [(ngModel)]="searchOptions.element.Author"><label for="Author"
+                                    class="label-option-search">Créateur</label></div>
+                            <!-- <div class="element" (click)="eachKeySearch()"><input id="Date" type="checkbox" class="Date" [(ngModel)]="searchOptions.element.Date"><label for="Date" class="label-option-search">Date</label></div>
+                                <div class="element" (click)="eachKeySearch()"><input id="Description" type="checkbox" class="Description" [(ngModel)]="searchOptions.element.Description"><label for="Description" class="label-option-search">Description</label></div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,22 +139,16 @@
                 </div>
             </div>
             <div class="middle">
+            </div>
+            <div class="right">
                 <div class="label-button-sort" (click)="setSort('date')" title="Trier par date d'ajout">
                     <span>Date ajout</span>
                     <img *ngIf="sortBy === 'date' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
                     <img *ngIf="sortBy === 'date' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
                 </div>
             </div>
-            <div class="right">
-                <div class="label-button-sort" (click)="setSort('partOfSpeech')" title="Trier par nature grammaticale">
-                    <span>Nature</span>
-                    <img *ngIf="sortBy === 'partOfSpeech' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
-                    <img *ngIf="sortBy === 'partOfSpeech' && sortOrder === 'decresc'"
-                        src="./assets/chevron-down-solid.svg">
-                </div>
-            </div>
         </div>
-        <div class="list" *ngIf="filteredAllPages">
+        <div [ngClass]="advancedSearch ? 'list-advanced' : 'list-simple'" *ngIf="filteredAllPages">
             <div class="row" *ngFor="let word of filteredAllPages[currentPage]">
                 <div class="view" (click)="openDetail(word)">
                     <div class="left">
@@ -142,24 +158,10 @@
                         </div>
                     </div>
                     <div class="middle">
-                        <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">
-                            {{word.date | date:'dd/MM/YYYY'}}</div>
                     </div>
                     <div class="right">
-                        <ng-container [ngSwitch]="word.partOfSpeech">
-                            <div class="partOfSpeech Noun" *ngSwitchCase="'Noun'">Nom</div>
-                            <div class="partOfSpeech Pronoun" *ngSwitchCase="'Pronoun'">Pronom</div>
-                            <div class="partOfSpeech Verb" *ngSwitchCase="'Verb'">Verbe</div>
-                            <div class="partOfSpeech Adjective" *ngSwitchCase="'Adjective'">Adjectif</div>
-                            <div class="partOfSpeech Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                            <div class="partOfSpeech Conjonction" *ngSwitchCase="'Conjonction'">Conjonction</div>
-                            <div class="partOfSpeech Interjection" *ngSwitchCase="'Interjection'">Interjection</div>
-                            <div class="partOfSpeech FunctionParticule" *ngSwitchCase="'FunctionParticule'">Particule de
-                                fonction</div>
-                            <div class="partOfSpeech TransformationParticule" *ngSwitchCase="'TransformationParticule'">
-                                Particule de transformation</div>
-                            <div class="partOfSpeech SpiritWord" *ngSwitchCase="'SpiritWord'">Mot d'esprit</div>
-                        </ng-container>
+                        <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">
+                            {{word.date | date:'dd/MM/YYYY'}}</div>
                     </div>
                 </div>
                 <div *ngIf="detail === word._id" class="details"
