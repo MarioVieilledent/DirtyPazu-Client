@@ -1,12 +1,12 @@
 $bg-color-row-hover: #302f2e; // Couleur de fond des boutons hover
 
-$simple-top-height: 34px;
+$simple-top-height: 42px;
 $advanced-top-height: 94px;
 $all-none-partOfSpeech-width: 52px;
 
 $padding: 12px;
 $border-radius: 6px;
-$border: 1px solid #757473;
+$border: 1px solid #555453;
 
 // Dans la barre de recherche : pourcentage de la partie gauche, milieu et droite
 $left-menu-width: 50%;
@@ -53,7 +53,24 @@ $size-checkbox: 12px;
                 width: 100%;
 
                 .input-and-cross {
-                    width: calc(100% - 28px - 6px);
+                    width: calc(100% - 42px - 6px);
+                    height: calc(100% - 6px);
+                    border-radius: 21px;
+
+                    input {
+                        padding-left: 14px;
+                        font-size: 16px;
+                    }
+
+                    .cross {
+                        margin-right: 14px;
+                    }
+                }
+
+                .toggle-advanced-search {
+                    height: 36px;
+                    width: 36px;
+                    border-radius: 18px;
                 }
             }
 

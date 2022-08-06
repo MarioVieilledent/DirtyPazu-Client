@@ -30,11 +30,11 @@
                     <span>Infos</span>
                 </div>
 
-                <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+                <!-- <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-grammar-rules')">
                     <img src="assets/book-bookmark-solid.svg">
                     <span>Grammaire</span>
-                </div>
+                </div> -->
 
                 <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-dict')">
@@ -55,11 +55,16 @@
                     <span>Voter</span>
                 </div>
 
-                <div *ngIf="accountSettings" [ngClass]="navigation === 'Account' ? 'button-selected' : 'button'"
+                <div [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'" (click)="setNav('New-word')">
+                    <img src="assets/circle-plus-solid.svg">
+                    <span>Ajouter</span>
+                </div>
+
+                <!-- <div *ngIf="accountSettings" [ngClass]="navigation === 'Account' ? 'button-selected' : 'button'"
                     (click)="setNav('Account')">
                     <img src="assets/user-solid.svg">
                     <span>Compte</span>
-                </div>
+                </div> -->
 
                 <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
                     (click)="setNav('Logs')">
@@ -71,40 +76,59 @@
             </div>
             <div class="content" #content>
                 <div class="switch-component" [ngSwitch]="navigation">
+
                     <ng-container *ngSwitchCase="'Infos'">
                         <app-infos></app-infos>
                     </ng-container>
+
                     <ng-container *ngSwitchCase="'Flag'">
                         <app-flag [pixelSize]="pixelSize" [displayRegions]="displayRegions"></app-flag>
                     </ng-container>
+
                     <ng-container *ngSwitchCase="'Dibi-infos'">
                         <app-dibi-infos [dibiDict]="dibiDict"></app-dibi-infos>
                     </ng-container>
+
                     <ng-container *ngSwitchCase="'Dibi-dict'">
                         <app-dibi-dict [dibiDict]="dibiDict" [adminConnected]="adminConnected" [pwd]="pwd">
                         </app-dibi-dict>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
+
+                    <!-- <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
                         <app-dibi-grammar></app-dibi-grammar>
+                    </ng-container> -->
+
+                    <ng-container *ngSwitchCase="'New-word'">
+                        <app-dibi-new-word [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-new-word>
                     </ng-container>
+
                     <ng-container *ngSwitchCase="'Dibi-suggest-word'">
                         <app-dibi-suggest [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user"
                             [accountSettings]="accountSettings">
                         </app-dibi-suggest>
                     </ng-container>
+
                     <ng-container *ngSwitchCase="'Dibi-vote'">
                         <app-dibi-vote [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user"
                             [accountSettings]="accountSettings" [profiles]="profiles"></app-dibi-vote>
                     </ng-container>
-                    <ng-container *ngSwitchCase="'Account'">
-                        <app-account></app-account>
+
+                    <ng-container *ngSwitchCase="'Dibi-word'">
+                        <app-dibi-vote [dibiDict]="dibiDict" [suggestions]="suggestions" [user]="user"
+                            [accountSettings]="accountSettings" [profiles]="profiles"></app-dibi-vote>
                     </ng-container>
+
+                    <!-- <ng-container *ngSwitchCase="'Account'">
+                        <app-account></app-account>
+                    </ng-container> -->
+
                     <ng-container *ngSwitchCase="'Logs'">
                         <app-logs></app-logs>
                     </ng-container>
-                    <ng-container *ngSwitchDefault>
 
+                    <ng-container *ngSwitchDefault>
                     </ng-container>
+
                 </div>
             </div>
         </div>
@@ -114,11 +138,11 @@
                 <span>Infos</span>
             </div>
 
-            <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+            <!-- <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-grammar-rules')">
                 <img src="assets/book-bookmark-solid.svg">
                 <span>Gram.</span>
-            </div>
+            </div> -->
 
             <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'" (click)="setNav('Dibi-dict')">
                 <img src="assets/book-solid.svg">
@@ -138,12 +162,30 @@
                 <span>Voter</span>
             </div>
 
-            <div class="user-bubble-button">
+            <div *ngIf="adminConnected" [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'"
+                (click)="setNav('New-word')">
+                <img src="assets/circle-plus-solid.svg">
+                <span>Ajouter</span>
+            </div>
+
+            <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
+                (click)="setNav('Logs')">
+                <img src="assets/file-lines-regular.svg">
+                <span>Logs</span>
+            </div>
+
+            <div class="button" (click)="openUserMenu()">
+                <img *ngIf="!adminConnected" src="assets/user-solid.svg">
+                <img *ngIf="adminConnected" src="assets/crown-solid.svg">
+                <span>Admin</span>
+            </div>
+
+            <!-- <div class="user-bubble-button">
                 <img *ngIf="!user" class="user-button" src="assets/user-solid.svg" (click)="openUserMenu()"
                     title="Connexion">
                 <img *ngIf="user" class="user-connected-button" src="{{user.photoUrl}}" (click)="openUserMenu()"
                     title="Options utilisateur">
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

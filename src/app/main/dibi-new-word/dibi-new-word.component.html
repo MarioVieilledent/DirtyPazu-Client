@@ -1,0 +1,85 @@
+<div class="body">
+    <div class="title-description">
+        <h1>Ajouter un mot</h1>
+    </div>
+    <div class='form-new-word'>
+        <div class="mandatory">
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Dibi</span>
+                    <input [className]="newWord.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')"
+                        [(ngModel)]="newWord.dibi">
+                </div>
+                <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
+            </div>
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Français</span>
+                    <input type="text" (input)="checkFormat($event, 'french')" [(ngModel)]="newWord.french">
+                </div>
+                <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés
+                    par des virgules.</span>
+            </div>
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Anglais</span>
+                    <input type="text" (input)="checkFormat($event, 'english')" [(ngModel)]="newWord.english">
+                </div>
+                <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés
+                    par des virgules. Facultatif.</span>
+            </div>
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Nature</span>
+                    <select [className]="newWord.partOfSpeech" [(ngModel)]="newWord.partOfSpeech">
+                        <option value="Noun">Nom</option>
+                        <option value="Pronoun">Pronom</option>
+                        <option value="Verb">Verbe</option>
+                        <option value="Adjective">Adjectif</option>
+                        <option value="Adverb">Adverbe</option>
+                        <option value="Conjonction">Conjonction</option>
+                        <option value="Interjection">Interjection</option>
+                        <option value="Particule">Particule</option>
+                        <option value="SpiritWord">Mot d'esprit</option>
+                    </select>
+                </div>
+                <span class="help">Nature grammaticale (ou classe grammaticale).</span>
+            </div>
+        </div>
+        <div class="facultative">
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Créateur</span>
+                    <input type="text" [(ngModel)]="newWord.author" placeholder="pseudo#code">
+                </div>
+                <span class="help">Créateur du mot, celui qui l'a proposé à l'origine (pseudo Discord).</span>
+            </div>
+            <div class="block">
+                <div class="label-input">
+                    <span class="label">Description</span>
+                    <textarea name="new-word-description" id="new-word-description" rows="5"
+                        [(ngModel)]="newWord.description"></textarea>
+                </div>
+                <span class="help">Description, étymologie, exemples, règles grammaticales, lore, etc.
+                    Facultatif.</span>
+            </div>
+        </div>
+        <div class="buttons">
+            <span [ngSwitch]="message.color">
+                <p class="green-mes" *ngSwitchCase="'green'">{{message.mes}}</p>
+                <p class="yellow-mes" *ngSwitchCase="'yellow'">{{message.mes}}</p>
+                <p class="red-mes" *ngSwitchCase="'red'">{{message.mes}}</p>
+                <p *ngSwitchDefault></p>
+            </span>
+            <button (click)="addWord()">Ajouter</button>
+        </div>
+    </div>
+    <div class="dict" *ngIf="dibiDict">
+        <h1>Liste</h1>
+        <div *ngFor="let word of dibiDict">
+            <span>{{word.dibi}} - </span>
+            <span>{{word.french}} </span>
+            <span>({{word.partOfSpeech}})</span>
+        </div>
+    </div>
+</div>
