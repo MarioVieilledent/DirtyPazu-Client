@@ -27,14 +27,14 @@
                 <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-infos')">
                     <img src="assets/circle-info-solid.svg">
-                    <span>Infos</span>
+                    <span>Accueil</span>
                 </div>
 
-                <!-- <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+                <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-grammar-rules')">
                     <img src="assets/book-bookmark-solid.svg">
-                    <span>Grammaire</span>
-                </div> -->
+                    <span>Manuel</span>
+                </div>
 
                 <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-dict')">
@@ -94,9 +94,9 @@
                         </app-dibi-dict>
                     </ng-container>
 
-                    <!-- <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
+                    <ng-container *ngSwitchCase="'Dibi-grammar-rules'">
                         <app-dibi-grammar></app-dibi-grammar>
-                    </ng-container> -->
+                    </ng-container>
 
                     <ng-container *ngSwitchCase="'New-word'">
                         <app-dibi-new-word [adminConnected]="adminConnected" [pwd]="pwd"></app-dibi-new-word>
@@ -135,14 +135,14 @@
         <div class="footer">
             <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'" (click)="setNav('Dibi-infos')">
                 <img src="assets/circle-info-solid.svg">
-                <span>Infos</span>
+                <span>Accueil</span>
             </div>
 
-            <!-- <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
+            <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-grammar-rules')">
                 <img src="assets/book-bookmark-solid.svg">
-                <span>Gram.</span>
-            </div> -->
+                <span>Manuel</span>
+            </div>
 
             <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'" (click)="setNav('Dibi-dict')">
                 <img src="assets/book-solid.svg">
@@ -168,11 +168,11 @@
                 <span>Ajouter</span>
             </div>
 
-            <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
+            <!-- <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
                 (click)="setNav('Logs')">
                 <img src="assets/file-lines-regular.svg">
                 <span>Logs</span>
-            </div>
+            </div> -->
 
             <div class="button" (click)="openUserMenu()">
                 <img *ngIf="!adminConnected" src="assets/user-solid.svg">

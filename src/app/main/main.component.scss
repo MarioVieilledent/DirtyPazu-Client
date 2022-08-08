@@ -149,7 +149,6 @@ $phone-view: 600px;
                 height: 100%;
                 width: calc(100% - $nav-width);
                 background-color: $bg-color-content;
-                overflow: auto;
 
                 .switch-component {
                     height: 100%;
@@ -164,6 +163,7 @@ $phone-view: 600px;
             width: 100%;
             height: 50px;
             background-color: $bg-color-option-block;
+            overflow: auto;
 
             .button,
             .button-selected {

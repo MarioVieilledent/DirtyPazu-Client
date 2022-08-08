@@ -10,14 +10,14 @@
                     <input [className]="newWord.partOfSpeech" type="text" (input)="checkFormat($event, 'dibi')"
                         [(ngModel)]="newWord.dibi">
                 </div>
-                <span class="help">Un mot commançant par une majuscule. Particules en minuscule avec un "-".</span>
+                <span class="help">Un mot commençant par une majuscule. Particules en minuscule avec un "-".</span>
             </div>
             <div class="block">
                 <div class="label-input">
                     <span class="label">Français</span>
                     <input type="text" (input)="checkFormat($event, 'french')" [(ngModel)]="newWord.french">
                 </div>
-                <span class="help">Traduction en Français, un ou plusieurs mots commançant par des majuscules, séparés
+                <span class="help">Traduction en Français, un ou plusieurs mots commençant par des majuscules, séparés
                     par des virgules.</span>
             </div>
             <div class="block">
@@ -25,7 +25,7 @@
                     <span class="label">Anglais</span>
                     <input type="text" (input)="checkFormat($event, 'english')" [(ngModel)]="newWord.english">
                 </div>
-                <span class="help">Traduction en Anglais, un ou plusieurs mots commançant par des majuscules, séparés
+                <span class="help">Traduction en Anglais, un ou plusieurs mots commençant par des majuscules, séparés
                     par des virgules. Facultatif.</span>
             </div>
             <div class="block">
@@ -39,7 +39,8 @@
                         <option value="Adverb">Adverbe</option>
                         <option value="Conjonction">Conjonction</option>
                         <option value="Interjection">Interjection</option>
-                        <option value="Particule">Particule</option>
+                        <option value="FunctionParticule">Particule de fonction</option>
+                        <option value="TransformationParticule">Particule de transformation</option>
                         <option value="SpiritWord">Mot d'esprit</option>
                     </select>
                 </div>

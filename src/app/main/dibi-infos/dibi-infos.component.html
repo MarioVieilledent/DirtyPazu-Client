@@ -1,14 +1,43 @@
 <div class="body">
     <div class="container">
         <div class="header">
-            <h1>Infos & stats</h1>
-            <p>Ce site à pour vocation de répertorier l'ensemble des mots du Dibi.</p>
+            <h1>Infos</h1>
+            <p>Dibi Dictionary a pour vocation de répertorier l'ensemble des mots de la langue Dibi.</p>
             <p>Pour report un bug, ou proposer une suggestion => dm sur mon Discord : Pazu#4444</p>
-            <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Liste de tous les
-                mots format
-                JSON</a>
+            <h1>Ressources</h1>
+            <div class="logo-and-link">
+                <div class="img">
+                    <img src="assets/images/discord.png" alt="Logo Discord">
+                </div>
+                <a href="https://discord.gg/xSk3RMpEXB" target="_blank">Serveur Discord Dibi officiel</a>
+            </div>
+            <div class="logo-and-link">
+                <div class="img">
+                    <img src="assets/images/github.png" alt="Logo GitHub">
+                </div>
+                <a href="https://github.com/MarioVieilledent/DirtyPazu-Client" target="_blank">GitHub de la web app
+                    Angular</a>
+            </div>
+            <div class="logo-and-link">
+                <div class="img">
+                    <img src="assets/images/github.png" alt="Logo GitHub">
+                </div>
+                <a href="https://github.com/MarioVieilledent/DirtyPazu-Server/tree/NoGoogle" target="_blank">GitHub du
+                    serveur
+                    Node.js</a>
+            </div>
+            <div class="logo-and-link">
+                <div class="img">
+                    <img src="assets/images/json.png" alt="Logo JSON">
+                </div>
+                <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Liste de tous
+                    les
+                    mots format
+                    JSON</a>
+            </div>
         </div>
         <div class="content">
+            <h1>Statistiques</h1>
             <div class="block">
                 <div class="title">
                     <h2>Des chiffres</h2>
@@ -42,17 +71,12 @@
             </div>
             <div class="block chart">
                 <div class="title">
-                    <h2>Nombres de mots dans le dictrionnaire selon leur nature grammaticale en fonciton du temps</h2>
+                    <h2>Nombres de mots dans le dictionnaire selon leur nature grammaticale en fonction du temps</h2>
                 </div>
                 <canvas class="line-chart" baseChart [datasets]="barChartDataNG" [labels]="barChartLabelsNG"
                     [options]="barChartOptionsNG" [legend]="barChartLegendNG" [chartType]="'line'">
                 </canvas>
             </div>
-        </div>
-        <div>
-            <h2>API</h2>
-            <a href="https://dibi-dictionary.herokuapp.com/dictionnary/getWords/all" target="_blank">Dictionnaire
-                complet</a>
         </div>
     </div>
 </div>

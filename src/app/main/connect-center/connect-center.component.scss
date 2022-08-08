@@ -48,6 +48,7 @@ $phone-view: 600px;
 
         .accounts {
             display: flex;
+            flex-direction: column;
             width: 100%;
 
             .google-account {
@@ -60,7 +61,6 @@ $phone-view: 600px;
                 flex-direction: column;
                 padding: $padding $padding 0px $padding;
                 height: 100%;
-                width: 50%;
 
                 .margin-bottom {
                     margin-bottom: $padding;

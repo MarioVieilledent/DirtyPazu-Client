@@ -412,7 +412,7 @@ $size-checkbox: 12px;
                     padding-left: calc(#{$padding} * 2);
 
                     .block-detail-if-screen-too-small {
-                        display: none;
+                        display: flex;
                         flex-direction: column;
                     }
 

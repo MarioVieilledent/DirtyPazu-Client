@@ -77,14 +77,12 @@ export class DibiNewWordComponent implements OnInit {
     // Suppression d'espaces à la fin (que le mot Dibi)
     if (partOfSpeech === 'dibi') {
       if (value.endsWith(' ')) {
-        console.log(value + '!');
         value = value.slice(0, -1);
-        console.log(value + '!');
       }
     }
     // Set du bon formatage du mot Dibi
     this.newWord[partOfSpeech] = value;
-    // Autoadapt de la nature grammaticale
+    // Auto adapt de la nature grammaticale
     if (partOfSpeech === 'dibi') {
       if (value.endsWith('e')) {
         this.newWord.partOfSpeech = 'Verb';

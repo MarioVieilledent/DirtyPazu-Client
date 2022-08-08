@@ -19,6 +19,8 @@ $border: 1px solid #757473;
     padding: $padding $padding 0px $padding;
     height: 100%;
     width: 100%;
+    max-width: 1200px;
+    overflow: auto;
 
     .container {
         display: flex;
@@ -29,6 +31,32 @@ $border: 1px solid #757473;
         .header {
             display: flex;
             flex-direction: column;
+
+            .logo-and-link {
+                display: flex;
+                align-items: center;
+
+                .img {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #fff;
+                    height: 32px;
+                    width: 32px;
+                    margin-right: $padding;
+                    border-radius: $border-radius;
+
+                    img {
+                        height: 24px;
+                        width: 24px;
+                        margin: 0;
+                    }
+                }
+            }
+
+            * {
+                margin-bottom: 6px;
+            }
         }
 
         .content {
@@ -83,7 +111,7 @@ $border: 1px solid #757473;
             .chart {
                 padding-bottom: $padding;
                 align-items: center;
-                min-width: 700px;
+                overflow: auto;
 
                 .pie-chart {
                     max-width: 450px;
