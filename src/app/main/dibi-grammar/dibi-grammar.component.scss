@@ -1,9 +1,9 @@
 $padding: 20px;
 $border-color: #656463;
 
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&display=swap");
 
-.body {
+.grammar-bloc-body {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -21,15 +21,32 @@ $border-color: #656463;
         padding-top: 24px;
         margin-top: 24px;
 
+        // Div table spécifique pour affichage telephone adapté
         .table {
             margin-bottom: $padding;
             max-width: 100%;
             overflow: auto;
         }
-    }
 
-    .bold {
-        font-weight: 700;
+        // Div d'exemple
+        .example {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid $border-color;
+            padding: 12px;
+            margin-bottom: $padding;
+
+            span,
+            p {
+                margin: 3px 0px;
+            }
+        }
+
+        .example::before {
+            content: "Exemple";
+            font-family: "Comfortaa", cursive;
+            margin-bottom: 9px;
+        }
     }
 
     h1,
@@ -39,6 +56,7 @@ $border-color: #656463;
     h5,
     h6,
     span,
+    p,
     li,
     th,
     td {
@@ -111,5 +129,62 @@ $border-color: #656463;
     td {
         border: 1px solid $border-color;
         border-collapse: collapse;
+    }
+
+    // Classes à utiliser pour le style du texte
+
+    .left {
+        align-self: flex-start;
+    }
+
+    .middle {
+        align-self: center;
+    }
+
+    .right {
+        align-self: flex-end;
+    }
+
+    .bold,
+    .b {
+        font-weight: 700;
+    }
+
+    .underline,
+    .u {
+        text-decoration: underline;
+    }
+
+    .italics,
+    .i {
+        font-style: italic;
+    }
+
+    .red {
+        color: #f99;
+    }
+
+    .green {
+        color: #9f9;
+    }
+
+    .blue {
+        color: #99f;
+    }
+
+    .cyan {
+        color: #9ff;
+    }
+
+    .magenta {
+        color: #f9f;
+    }
+
+    .yellow {
+        color: #ff9;
+    }
+
+    .grey {
+        color: #999;
     }
 }
