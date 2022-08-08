@@ -55,7 +55,8 @@
                     <span>Voter</span>
                 </div>
 
-                <div [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'" (click)="setNav('New-word')">
+                <div *ngIf="adminConnected" [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'"
+                    (click)="setNav('New-word')">
                     <img src="assets/circle-plus-solid.svg">
                     <span>Ajouter</span>
                 </div>
@@ -149,18 +150,18 @@
                 <span>Dico</span>
             </div>
 
-            <div *ngIf="user && accountSettings"
+            <!-- <div *ngIf="user && accountSettings"
                 [ngClass]="navigation === 'Dibi-suggest-word' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-suggest-word')">
                 <img src="assets/circle-plus-solid.svg">
                 <span>Proposer</span>
-            </div>
+            </div> -->
 
-            <div *ngIf="user && accountSettings" [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'"
+            <!-- <div *ngIf="user && accountSettings" [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-vote')">
                 <img src="assets/square-poll-horizontal-solid.svg">
                 <span>Voter</span>
-            </div>
+            </div> -->
 
             <div *ngIf="adminConnected" [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'"
                 (click)="setNav('New-word')">
