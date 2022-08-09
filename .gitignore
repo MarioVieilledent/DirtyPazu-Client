@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# HTML pour la de grammaire à compléter par les admins
+/src/assets/HTML
+
 # compiled output
 /dist
 /tmp
