@@ -108,6 +108,7 @@ export class MainComponent implements OnInit {
     this.socket.emit('fetchDict', {});
 
     // Tente de se connecter avec le compte Google
+    /*
     setTimeout(() => {
       try {
         this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
@@ -115,7 +116,7 @@ export class MainComponent implements OnInit {
         // console.error(e.message);
       }
     }, 1000);
-
+    */
   }
 
   ngAfterViewInit() {

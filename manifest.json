@@ -1,0 +1,35 @@
+{
+    "short_name": "Dibi-dict",
+    "name": "Dibi dictionary",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "type": "image/ico",
+            "sizes": "96x96"
+        },
+        {
+            "src": "favicon192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "favicon512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "https://dibi-dictionary.herokuapp.com/",
+    "background_color": "#202023",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#202023",
+    "description": "Dictionnaire officiel de la langue Dibi, recherche de mots avancée parmi plus de 4000 mots Dibis, manuel de grammaire.",
+    "screenshots": [
+        {
+            "src": "https://dibi-dictionary.herokuapp.com/assets/prev.png",
+            "type": "image/png",
+            "sizes": "1200x630"
+        }
+    ],
+    "prefer_related_applications": true
+}
