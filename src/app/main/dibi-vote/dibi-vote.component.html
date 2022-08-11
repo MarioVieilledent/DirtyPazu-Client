@@ -34,7 +34,7 @@
                 <div class="author-date">
                     <div class="author">
                         <div class="profile-picture">
-                            <img src="{{profiles[suggestion.author].user.photoUrl}}">
+                            <img src="{{profiles[suggestion.author].user.photoUrl}}" alt="Image de profil Google">
                         </div>
                         <div class="names">
                             <!-- <span>{{profiles[suggestion.author].user.name}}</span> -->
@@ -52,7 +52,8 @@
                         </div>
                         <div class="dibis">
                             <div class="dibi" *ngFor="let dibi of word.dibis; let indexDibi = index;">
-                                <img *ngIf="word.dibis.length > 1" src="assets/discord_emojis/letter_{{indexDibi}}.svg">
+                                <img *ngIf="word.dibis.length > 1" src="assets/discord_emojis/letter_{{indexDibi}}.svg"
+                                    alt="Icône lettre proposition à voter">
                                 <span [className]="word.partOfSpeech">{{dibi.dibi}}</span>
                             </div>
                         </div>
@@ -65,16 +66,16 @@
                     <div class="vote-and-comment">
                         <div class="two-arrows">
                             <div class="arrow-value">
-                                <img src="assets/discord_emojis/arrow_up.svg">
+                                <img src="assets/discord_emojis/arrow_up.svg" alt="Voter +">
                                 <span>{{suggestion.upVotes.length}}</span>
                             </div>
                             <div class="arrow-value">
-                                <img src="assets/discord_emojis/arrow_down.svg">
+                                <img src="assets/discord_emojis/arrow_down.svg" alt="Voter -">
                                 <span>{{suggestion.downVotes.length}}</span>
                             </div>
                         </div>
                         <div class="comment">
-                            <img src="assets/discord_emojis/comment.svg">
+                            <img src="assets/discord_emojis/comment.svg" alt="Commenter">
                         </div>
                     </div>
                     <div class="choose-dibi-option" *ngIf="suggestion.words[0].dibis.length > 1">

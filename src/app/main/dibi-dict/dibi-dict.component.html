@@ -5,7 +5,7 @@
                 <div class="input-and-cross" id="expression-search">
                     <input type="text" [(ngModel)]="search" (input)="eachKeySearch()" placeholder="Rechercher">
                     <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
-                        <img class="empty-search" src="./assets/times-solid.svg">
+                        <img class="empty-search" src="./assets/times-solid.svg" alt="Croix pour vider la recherche">
                     </div>
                 </div>
                 <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(true)">
@@ -77,7 +77,8 @@
                                 <input type="text" [(ngModel)]="search" (input)="eachKeySearch()"
                                     placeholder="Rechercher">
                                 <div title="Effacer la recherche" class="cross" (click)="emptySearch()">
-                                    <img class="empty-search" src="./assets/times-solid.svg">
+                                    <img class="empty-search" src="./assets/times-solid.svg"
+                                        alt="Croix pour vider la recherche">
                                 </div>
                             </div>
                             <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''"
@@ -109,8 +110,10 @@
         </div>
         <div class="row-pages">
             <div class="left">
-                <img (click)="changePage('fullLeft')" src="./assets/angle-double-left-solid.svg">
-                <img (click)="changePage('left')" src="./assets/angle-left-solid.svg">
+                <img (click)="changePage('fullLeft')" src="./assets/angle-double-left-solid.svg"
+                    alt="Double chevrons gauche pour naviguer sur la première page">
+                <img (click)="changePage('left')" src="./assets/angle-left-solid.svg"
+                    alt="Chevron gauche page précédente">
             </div>
             <div class="middle">
                 <span (click)="editNbWordsPerPage()">{{filteredDibiDict.length === 0 ? '0' : this.currentPage *
@@ -120,22 +123,28 @@
                     {{filteredDibiDict.length}}</span>
             </div>
             <div class="right">
-                <img (click)="changePage('right')" src="./assets/angle-right-solid.svg">
-                <img (click)="changePage('fullRight')" src="./assets/angle-double-right-solid.svg">
+                <img (click)="changePage('right')" src="./assets/angle-right-solid.svg"
+                    alt="Chevron droite page suivante">
+                <img (click)="changePage('fullRight')" src="./assets/angle-double-right-solid.svg"
+                    alt="Double chevrons droite pour naviguer sur la dernière page">
             </div>
         </div>
         <div class="row-order">
             <div class="left">
                 <div class="label-button-sort" (click)="setSort('dibi')" title="Trier par mot Dibi">
                     <span>Mot Dibi</span>
-                    <img *ngIf="sortBy === 'dibi' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
-                    <img *ngIf="sortBy === 'dibi' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
+                    <img *ngIf="sortBy === 'dibi' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
+                        alt="Icône tri par mot dibi ordre croissant">
+                    <img *ngIf="sortBy === 'dibi' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
+                        alt="Icône tri par mot dibi ordre décroissant">
                 </div>
                 <div class="label-button-sort label-button-sort-fr" (click)="setSort('french')"
                     title="Trier par mot Français>">
                     <span>Français</span>
-                    <img *ngIf="sortBy === 'french' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
-                    <img *ngIf="sortBy === 'french' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
+                    <img *ngIf="sortBy === 'french' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
+                        alt="Icône tri par traduction fr ordre croissant">
+                    <img *ngIf="sortBy === 'french' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
+                        alt="Icône tri par traduction fr ordre décroissant">
                 </div>
             </div>
             <div class="middle">
@@ -143,8 +152,10 @@
             <div class="right">
                 <div class="label-button-sort" (click)="setSort('date')" title="Trier par date d'ajout">
                     <span>Date ajout</span>
-                    <img *ngIf="sortBy === 'date' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg">
-                    <img *ngIf="sortBy === 'date' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg">
+                    <img *ngIf="sortBy === 'date' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
+                        alt="Icône tri par date d'ajout ordre croissant">
+                    <img *ngIf="sortBy === 'date' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
+                        alt="Icône tri par date d'ajout ordre décroissant">
                 </div>
             </div>
         </div>
@@ -218,8 +229,10 @@
                         <span class="no-details">Pas de détails</span>
                     </div>
                     <div *ngIf="adminConnected" class="buttons-detail">
-                        <img (click)="delete(word)" src="./assets/trash-solid.svg" title="Supprimer">
-                        <img (click)="edit(word)" src="./assets/pen-solid.svg" title="Modifier">
+                        <img (click)="delete(word)" src="./assets/trash-solid.svg" title="Supprimer"
+                            alt="Icône suppression du mot">
+                        <img (click)="edit(word)" src="./assets/pen-solid.svg" title="Modifier"
+                            alt="Icône modification du mot">
                     </div>
                     <div *ngIf="editing === word._id" class="edit">
                         <div class='form-new-word'>

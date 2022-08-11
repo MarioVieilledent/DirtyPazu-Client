@@ -9,7 +9,7 @@
                 <h3 *ngIf="!user" class="margin-bottom">Connexion compte Google</h3>
                 <div class="google-info">
                     <div class="user-display" *ngIf="user">
-                        <img src="{{user.photoUrl}}">
+                        <img src="{{user.photoUrl}}" alt="Icône compte Google">
                         <div class="text-infos">
                             <h4>{{user.name}}</h4>
                             <p>{{user.email}}</p>
@@ -26,7 +26,7 @@
                         <input [(ngModel)]="accountSettings.discordTag" type="text" class="tag" placeholder="1234"
                             (focusout)="saveAccountSettings()">
                         <img *ngIf="!accountSettings.discordPseudo || !accountSettings.discordTag" class="mandatory"
-                            src="assets/mandatory.svg">
+                            src="assets/mandatory.svg" alt="Astérisque rouge obligatoire">
                     </div>
                 </div>
                 <button *ngIf="!user" (click)="signInWithGoogle()">Connexion via Google</button>
@@ -35,7 +35,7 @@
             <div class="admin">
                 <div class="admin-section" *ngIf="adminConnected">
                     <div class="crown-and-title margin-bottom">
-                        <img class="golden-crown" src="assets/crown-solid.svg" title="Admin">
+                        <img class="golden-crown" src="assets/crown-solid.svg" title="Admin" alt="Couronne dorée admin">
                         <h3>Vous êtes Admin</h3>
                     </div>
                     <button *ngIf="adminConnected" (click)="logoutAdmin()">Déconnexion admin</button>

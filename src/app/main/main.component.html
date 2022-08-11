@@ -14,11 +14,12 @@
                     (auxclick)="openNewBlank()">Dictionnaire Dibi</h1>
             </div>
             <div class="groupped-imgs">
-                <img *ngIf="adminConnected" class="golden-crown" src="assets/crown-solid.svg" title="Admin">
+                <img *ngIf="adminConnected" class="golden-crown" src="assets/crown-solid.svg" title="Admin"
+                    alt="Couronne dorée admin">
                 <img *ngIf="!user" class="user-button" src="assets/user-solid.svg" (click)="openUserMenu()"
-                    title="Connexion">
+                    title="Connexion" alt="Bouton user">
                 <img *ngIf="user" class="user-connected-button" src="{{user.photoUrl}}" (click)="openUserMenu()"
-                    title="Options utilisateur">
+                    title="Options utilisateur" alt="Bouton user">
             </div>
         </div>
         <div class="middle">
@@ -26,50 +27,50 @@
 
                 <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-infos')">
-                    <img src="assets/circle-info-solid.svg">
+                    <img src="assets/circle-info-solid.svg" alt="Icône page accueil">
                     <span>Accueil</span>
                 </div>
 
                 <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-grammar-rules')">
-                    <img src="assets/book-bookmark-solid.svg">
+                    <img src="assets/book-bookmark-solid.svg" alt="Icône manuel Dibi">
                     <span>Manuel</span>
                 </div>
 
                 <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-dict')">
-                    <img src="assets/book-solid.svg">
+                    <img src="assets/book-solid.svg" alt="Icône dictionnaire">
                     <span>Dictionnaire</span>
                 </div>
 
                 <div *ngIf="user && accountSettings"
                     [ngClass]="navigation === 'Dibi-suggest-word' ? 'button-selected' : 'button'"
                     (click)="setNav('Dibi-suggest-word')">
-                    <img src="assets/circle-plus-solid.svg">
+                    <img src="assets/circle-plus-solid.svg" alt="Icône proposer un mot dans le dico">
                     <span>Proposer</span>
                 </div>
 
                 <div *ngIf="user && accountSettings"
                     [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'" (click)="setNav('Dibi-vote')">
-                    <img src="assets/square-poll-horizontal-solid.svg">
+                    <img src="assets/square-poll-horizontal-solid.svg" alt="Icône page vote">
                     <span>Voter</span>
                 </div>
 
                 <div *ngIf="adminConnected" [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'"
                     (click)="setNav('New-word')">
-                    <img src="assets/circle-plus-solid.svg">
+                    <img src="assets/circle-plus-solid.svg" alt="Icône ajouter un mot dans le dico">
                     <span>Ajouter</span>
                 </div>
 
                 <!-- <div *ngIf="accountSettings" [ngClass]="navigation === 'Account' ? 'button-selected' : 'button'"
                     (click)="setNav('Account')">
-                    <img src="assets/user-solid.svg">
+                    <img src="assets/user-solid.svg" alt="Icône compte">
                     <span>Compte</span>
                 </div> -->
 
                 <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
                     (click)="setNav('Logs')">
-                    <img src="assets/file-lines-regular.svg">
+                    <img src="assets/file-lines-regular.svg" alt="Icône logs serveur">
                     <span>Logs</span>
                 </div>
 
@@ -135,57 +136,57 @@
         </div>
         <div class="footer">
             <div [ngClass]="navigation === 'Dibi-infos' ? 'button-selected' : 'button'" (click)="setNav('Dibi-infos')">
-                <img src="assets/circle-info-solid.svg">
+                <img src="assets/circle-info-solid.svg" alt="Icône page d'accueil">
                 <span>Accueil</span>
             </div>
 
             <div [ngClass]="navigation === 'Dibi-grammar-rules' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-grammar-rules')">
-                <img src="assets/book-bookmark-solid.svg">
+                <img src="assets/book-bookmark-solid.svg" alt="Icône manuel Dibi">
                 <span>Manuel</span>
             </div>
 
             <div [ngClass]="navigation === 'Dibi-dict' ? 'button-selected' : 'button'" (click)="setNav('Dibi-dict')">
-                <img src="assets/book-solid.svg">
+                <img src="assets/book-solid.svg" alt="Icône dictionnaire">
                 <span>Dico</span>
             </div>
 
             <!-- <div *ngIf="user && accountSettings"
                 [ngClass]="navigation === 'Dibi-suggest-word' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-suggest-word')">
-                <img src="assets/circle-plus-solid.svg">
+                <img src="assets/circle-plus-solid.svg" alt="Icône proposer un mot">
                 <span>Proposer</span>
             </div> -->
 
             <!-- <div *ngIf="user && accountSettings" [ngClass]="navigation === 'Dibi-vote' ? 'button-selected' : 'button'"
                 (click)="setNav('Dibi-vote')">
-                <img src="assets/square-poll-horizontal-solid.svg">
+                <img src="assets/square-poll-horizontal-solid.svg" alt="Icône voter">
                 <span>Voter</span>
             </div> -->
 
             <div *ngIf="adminConnected" [ngClass]="navigation === 'New-word' ? 'button-selected' : 'button'"
                 (click)="setNav('New-word')">
-                <img src="assets/circle-plus-solid.svg">
+                <img src="assets/circle-plus-solid.svg" alt="Icône ajouter un mot dans le dico">
                 <span>Ajouter</span>
             </div>
 
             <!-- <div *ngIf="adminConnected" [ngClass]="navigation === 'Logs' ? 'button-selected' : 'button'"
                 (click)="setNav('Logs')">
-                <img src="assets/file-lines-regular.svg">
+                <img src="assets/file-lines-regular.svg" alt="Icône logs serveur">
                 <span>Logs</span>
             </div> -->
 
             <div class="button" (click)="openUserMenu()">
-                <img *ngIf="!adminConnected" src="assets/user-solid.svg">
-                <img *ngIf="adminConnected" src="assets/crown-solid.svg">
+                <img *ngIf="!adminConnected" src="assets/user-solid.svg" alt="Icône utilisateur">
+                <img *ngIf="adminConnected" src="assets/crown-solid.svg" alt="Icône couronne dorée admin">
                 <span>Admin</span>
             </div>
 
             <!-- <div class="user-bubble-button">
                 <img *ngIf="!user" class="user-button" src="assets/user-solid.svg" (click)="openUserMenu()"
-                    title="Connexion">
+                    title="Connexion alt="Icône bulle utilisateur">
                 <img *ngIf="user" class="user-connected-button" src="{{user.photoUrl}}" (click)="openUserMenu()"
-                    title="Options utilisateur">
+                    title="Options utilisateur" alt="Icône bulle utilisateur">
             </div> -->
         </div>
     </div>

@@ -9,13 +9,16 @@
                 <div class="dibis-suggestions">
                     <span>{{dibiWordsSuggestion.words[0].dibis.length > 1 ?
                         'Plusieurs versions à voter' : 'Une seule version dibi'}}</span>
-                    <img src="assets/minus-solid.svg" title="Enlever proposition Dibi" (click)="removeDibiOption()">
-                    <img src="assets/plus-solid.svg" title="Ajouter proposition Dibi" (click)="addDibiOption()">
+                    <img src="assets/minus-solid.svg" title="Enlever proposition Dibi" (click)="removeDibiOption()"
+                        alt="Icône enlever proposition Dibi">
+                    <img src="assets/plus-solid.svg" title="Ajouter proposition Dibi" (click)="addDibiOption()"
+                        alt="Icône ajouter proposition Dibi">
                 </div>
                 <ng-container *ngIf="dibiWordsSuggestion.words[0].dibis.length > 1">
                     <div class="description-dibi"
                         *ngFor="let option of dibiWordsSuggestion.words[0].dibis; let indexOption = index">
-                        <img src="assets/discord_emojis/letter_{{indexOption}}.svg">
+                        <img src="assets/discord_emojis/letter_{{indexOption}}.svg"
+                            alt="Icône lettre proposition à voter">
                         <input placeholder="origine, provenance, racine" type="text"
                             [(ngModel)]="dibiWordsSuggestion.optionsDescription[indexOption]">
                     </div>
@@ -27,11 +30,12 @@
                         <div class="header-span-and-icon">
                             <span>Mot {{index + 1}}</span>
                             <img *ngIf="index > 0" src="assets/trash-solid.svg" title="Retirer le mot"
-                                (click)="removeWord(index)">
+                                (click)="removeWord(index)" alt="Icône retirer le mot">
                         </div>
                     </div>
                     <div class="last-column">
-                        <img src="assets/plus-solid.svg" title="Nouveau mot" (click)="addWord()">
+                        <img src="assets/plus-solid.svg" title="Nouveau mot" (click)="addWord()"
+                            alt="Icône ajouter un mot">
                     </div>
                 </div>
                 <div class="row-dibis">
@@ -40,10 +44,12 @@
                             <div class="top">
                                 <div class="img-and-label">
                                     <img *ngIf="dibiWordsSuggestion.words[0].dibis.length > 1"
-                                        src="assets/discord_emojis/letter_{{indexDibi}}.svg">
+                                        src="assets/discord_emojis/letter_{{indexDibi}}.svg"
+                                        alt="Icône lettre proposition à voter">
                                     <span>Dibi</span>
                                 </div>
-                                <img src="assets/mandatory.svg" *ngIf="!word.dibis[indexDibi].dibi">
+                                <img src="assets/mandatory.svg" *ngIf="!word.dibis[indexDibi].dibi"
+                                    alt="Astérisque rouge obligatoire">
                             </div>
                             <div class="bottom-input">
                                 <input [className]="word.partOfSpeech" type="text"
@@ -61,7 +67,7 @@
                                 <div class="img-and-label">
                                     <span>Français</span>
                                 </div>
-                                <img src="assets/mandatory.svg" *ngIf="!word.french">
+                                <img src="assets/mandatory.svg" *ngIf="!word.french" alt="Astérisque rouge obligatoire">
                             </div>
                             <div class="bottom-input">
                                 <input type="text" [(ngModel)]="word.french" (input)="displaySendButton = false">
@@ -140,9 +146,9 @@
             <div class="bottom">
                 <div class="bottom-title">
                     <img class="chevron-more" *ngIf="!more" src="assets/circle-info-solid.svg"
-                        (click)="toggleMoreInfos(true)">
+                        (click)="toggleMoreInfos(true)" alt="Icône plus d'infos">
                     <img class="chevron-more" *ngIf="more" src="assets/circle-info-solid.svg"
-                        (click)="toggleMoreInfos(false)">
+                        (click)="toggleMoreInfos(false)" alt="Icône moins d'infos">
                     <h2 *ngIf="more">Processus proposition d'un mot</h2>
                 </div>
                 <div class="help" *ngIf="more">

@@ -112,7 +112,7 @@ export class MainComponent implements OnInit {
       try {
         this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
       } catch (e) {
-        console.error(e.message);
+        // console.error(e.message);
       }
     }, 1000);
 
