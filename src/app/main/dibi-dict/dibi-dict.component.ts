@@ -429,31 +429,45 @@ export class DibiDictComponent implements OnInit {
       });
     } else if (sortBy === 'relevance') { // Tri par pertinence selon l'algo de Sylicium, service relevance-ort.service.ts
       let relevanceOn: string;
-      // Si recherche sur français, anglais et dibi, on utilise la recherche multiple de Sylicium
-      if (this.searchOptions.element.French && this.searchOptions.element.English && this.searchOptions.element.Dibi) {
-        if (sortOrder === 'cresc') {
-          list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.french, x.english, x.dibi] });
-        } else {
-          list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.french, x.english, x.dibi] }).reverse();
-        }
-      } else { // Si les trois coches ne sont pas cochés, le tri est plus spécifique
+      // S'il n'y a qu'un seul critère de recherche, utilisation de la méthode sortByQuery de Sylicium
+      if (((+this.searchOptions.element.Dibi) + (+this.searchOptions.element.French) + (+this.searchOptions.element.English)) === 1) {
         if (this.searchOptions.element.French) { // En priorité pertinence en français
           relevanceOn = 'french';
         } else if (this.searchOptions.element.Dibi) { // Ensuite pertinence en dibi (donc français décoché)
           relevanceOn = 'dibi';
         } else if (this.searchOptions.element.English) { // Ensuite pertinence en anglais (donc français et dibi décochés)
           relevanceOn = 'english';
-        } else { // Si aucune des trois option est cochée, on force la pertinence en Français
-          relevanceOn = 'french';
+        } else if (this.searchOptions.element.Author) { // Si aucune des trois option est cochée, on force la pertinence en Français
+          relevanceOn = 'author';
         }
         if (sortOrder === 'cresc') {
           list = this.relevanceSort.sortByQuery(list, this.search, (x: any) => { return x[relevanceOn] });
         } else {
           list = this.relevanceSort.sortByQuery(list, this.search, (x: any) => { return x[relevanceOn] }).reverse();
         }
+      } else { // S'il y a plusieurs critères, utilisation de la méthode sortByQueryMultipleElements de Sylicium
+        if (sortOrder === 'cresc') {
+          if (this.searchOptions.element.Dibi && this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.french, x.english] });
+          } else if (this.searchOptions.element.Dibi && this.searchOptions.element.French && !this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.french] });
+          } else if (this.searchOptions.element.Dibi && !this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.english] });
+          } else if (!this.searchOptions.element.Dibi && this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.french, x.english] });
+          }
+        } else {
+          if (this.searchOptions.element.Dibi && this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.french, x.english] });
+          } else if (this.searchOptions.element.Dibi && this.searchOptions.element.French && !this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.french] }).reverse();
+          } else if (this.searchOptions.element.Dibi && !this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.dibi, x.english] }).reverse();
+          } else if (!this.searchOptions.element.Dibi && this.searchOptions.element.French && this.searchOptions.element.English) {
+            list = this.relevanceSort.sortByQueryMultipleElements(list, this.search, (x: any) => { return [x.french, x.english] }).reverse();
+          }
+        }
       }
-
-
     } else { // Tri par élément de type string
       list.sort((a, b) => {
         const aComparable = removeAccents(a[sortBy].toLowerCase());
