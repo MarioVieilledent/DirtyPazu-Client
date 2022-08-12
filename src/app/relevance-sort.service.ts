@@ -101,7 +101,7 @@ export class RelevanceSortService {
   * @version 1.0.0
   * @copyright - Sylicium Corp.
   * @param {*} list - La liste à trier
-  * @param {*} query - La query dont la liste devra etre triée par
+  * @param {*} query - La query dont la liste devra être triée par
   * @param {*} depthFunction - Fonction qui renvoie la liste des elements par lesquels comparer la chaîne dans la liste Ex: avec [ {name:"coucou",firstname:"toi"}, {name:"slt",firstname:"hey"} ], dedepthFunction = (x) => { return [x.name, x.firstname] }
   * @returns float
   */
