@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
+import { RelevanceSortService } from 'src/app/relevance-sort.service';
 import { removeAccents } from 'src/app/services';
 import { DibiWord } from 'src/app/types';
 
@@ -18,7 +19,7 @@ export class DibiDictComponent implements OnInit {
   filteredAllPages: DibiWord[][] = []; // Ceux filtrés structurés par pages
 
   nbWordsPerPage: number; // Nombre de mots affichés dans une page (enregistré en localStorage pour préférence utilisateur)
-  nbWordsPerPageDefalut = 100; // Nombre de mots affichés dans une page par défaut (car localStorage pour préf utilisateur)
+  nbWordsPerPageDefalut = 100; // Nombre de mots affichés dans une page par défaut (car localStorage pour préférence utilisateur)
   currentPage = 0; // Index de la page courante
 
   @Input() adminConnected: boolean; // Si un administrateur est connecté
@@ -74,13 +75,13 @@ export class DibiDictComponent implements OnInit {
 
   editing = ''; // Id du mot que l'on édite
   wordToEdit: DibiWord; // Mot que l'on édite
-  oldWord: DibiWord; // Ancient mot, avnat qu'il soit modifié
+  oldWord: DibiWord; // Ancient mot, avant qu'il soit modifié
 
-  constructor(private socket: Socket) {
+  constructor(private socket: Socket, private relevanceSort: RelevanceSortService) {
 
     // Pipe du traitement de la recherche
     this.searchResult$ = this.searchObservable.pipe(
-      debounceTime(200), // Attente de 200 ms après que l'utilisateur ait arreté de taper sa racherche pour lancer le filtrage
+      debounceTime(200), // Attente de 200 ms après que l'utilisateur ait arrêté de taper sa recherche pour lancer le filtrage
       map(mc => {
         let filtered = [];
 
@@ -93,10 +94,10 @@ export class DibiDictComponent implements OnInit {
             this.setColorInputSearch('grey'); // Si recherche non regex, couleur classique
           }
 
-          // Itération sur tous les mots pour les filtrer et les placer dans filteredDibiDict (seulements les mots triés)
+          // Itération sur tous les mots pour les filtrer et les placer dans filteredDibiDict (seulement les mots triés)
           this.dibiDict.forEach(word => {
 
-            // Vérification que le mot à filtrer soit inclus dans parmis les options à gauche de la barre de recherche
+            // Vérification que le mot à filtrer soit inclus dans parmi les options à gauche de la barre de recherche
             if ((this.searchOptions.doesNotContiain.author && word.author) || (this.searchOptions.doesNotContiain.description && word.description) || (this.searchOptions.doesNotContiain.english && word.english)) {
 
             } else {
@@ -159,6 +160,15 @@ export class DibiDictComponent implements OnInit {
           this.setColorInputSearch('red');
         }
 
+        // Si on a saisi une recherche, par défaut, le tri se positionne sur "pertinence" (relevance)
+        if (this.search) {
+          this.sortBy = 'relevance';
+          this.sortOrder = 'cresc';
+        } else { // Sinon, on récupère le tri et l'ordre de tri en localStorage
+          window.localStorage.getItem('sortBy') ? this.sortBy = window.localStorage.getItem('sortBy') as SortBy : {};
+          window.localStorage.getItem('sortOrder') ? this.sortOrder = window.localStorage.getItem('sortOrder') as SortOrder : {};
+        }
+
         // Tri des mots
         this.sortDictionary(filtered, this.sortBy, this.sortOrder);
 
@@ -169,7 +179,7 @@ export class DibiDictComponent implements OnInit {
       })
     );
 
-    // Subscribede l'observable
+    // Subscribe l'observable
     this.searchResult$.subscribe();
 
   }
@@ -251,7 +261,7 @@ export class DibiDictComponent implements OnInit {
   }
 
   /**
-   * Sélection ou déselecitonne la recherche regex
+   * Sélection ou désélectionne la recherche regex
    */
   toggleRegexSearch(): void {
     this.eachKeySearch() // Lancement d'un next dans l'observable de filtrage
@@ -364,8 +374,16 @@ export class DibiDictComponent implements OnInit {
       this.sortOrder = 'cresc';
       window.localStorage.setItem('sortOrder', 'cresc');
     }
-    this.sortBy = sortBy;
-    window.localStorage.setItem('sortBy', sortBy);
+
+    if (sortBy === 'relevance') { // On n'enregistre par le tri par pertinence, il n'a pas de sens sans mot recherché
+      if (this.search) { // Si on est en recherche, on peut trier par pertinence, mais la préférence n'est pas en localStorage
+        this.sortBy = sortBy;
+      }
+    } else {
+      this.sortBy = sortBy;
+      window.localStorage.setItem('sortBy', sortBy);
+    }
+
     this.sortDictionary(this.filteredDibiDict, this.sortBy, this.sortOrder);
     this.buildPages();
   }
@@ -409,6 +427,23 @@ export class DibiDictComponent implements OnInit {
           }
         }
       });
+    } else if (sortBy === 'relevance') { // Tri par pertinence selon l'algo de Sylicium, service relevance-ort.service.ts
+      let relevanceOn: string;
+      if (this.searchOptions.element.French) { // En priorité pertinence en français
+        relevanceOn = 'french';
+      } else if (this.searchOptions.element.Dibi) { // Ensuite pertinence en dibi (donc français décoché)
+        relevanceOn = 'dibi';
+      } else if (this.searchOptions.element.English) { // Ensuite pertinence en anglais (donc français et dibi décochés)
+        relevanceOn = 'english';
+      } else { // Si aucune des trois option est cochée, on force la pertinence en Français
+        relevanceOn = 'french';
+      }
+
+      if (sortOrder === 'cresc') {
+        list = this.relevanceSort.sortByQuery(list, this.search, (x: any) => { return x[relevanceOn] });
+      } else {
+        list = this.relevanceSort.sortByQuery(list, this.search, (x: any) => { return x[relevanceOn] }).reverse();
+      }
     } else { // Tri par élément de type string
       list.sort((a, b) => {
         const aComparable = removeAccents(a[sortBy].toLowerCase());
@@ -498,6 +533,6 @@ export class DibiDictComponent implements OnInit {
 
 // Types internes à cette classe
 
-type SortBy = 'dibi' | 'french' | 'date' | 'partOfSpeech'; // Tri selon un élément
+type SortBy = 'dibi' | 'french' | 'date' | 'partOfSpeech' | 'relevance'; // Tri selon un élément, relevance = algo de Sylicium
 type SortOrder = 'cresc' | 'decresc'; // Ordre de tri
 type Translate = 'French' | 'English' | 'Both';

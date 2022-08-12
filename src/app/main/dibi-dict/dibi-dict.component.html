@@ -8,7 +8,7 @@
                         <img class="empty-search" src="./assets/times-solid.svg" alt="Croix pour vider la recherche">
                     </div>
                 </div>
-                <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(true)">
+                <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(true)" title="Recherche avancée">
                     <img class="advanced-search-icon" src="assets/ellipsis-solid.svg" alt="Icône recherche avancée">
                 </div>
             </div>
@@ -81,9 +81,10 @@
                                         alt="Croix pour vider la recherche">
                                 </div>
                             </div>
-                            <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : ''"
+                            <button (click)="toggleRegexSearch()" [className]="regexSearch ? 'regexOn' : 'regexOff'"
                                 title="Recherche expression régulière">.*</button>
-                            <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(false)">
+                            <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(false)"
+                                title="Recherche simple">
                                 <img class="advanced-search-icon" src="assets/ellipsis-solid.svg"
                                     alt="Icône recherche avancée">
                             </div>
@@ -132,15 +133,15 @@
         <div class="row-order">
             <div class="left">
                 <div class="label-button-sort" (click)="setSort('dibi')" title="Trier par mot Dibi">
-                    <span>Mot Dibi</span>
+                    <span [ngClass]="sortBy === 'dibi' ? 'sort-selected' : 'sort-not-selected'">Mot Dibi</span>
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
                         alt="Icône tri par mot dibi ordre croissant">
                     <img *ngIf="sortBy === 'dibi' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
                         alt="Icône tri par mot dibi ordre décroissant">
                 </div>
                 <div class="label-button-sort label-button-sort-fr" (click)="setSort('french')"
-                    title="Trier par mot Français>">
-                    <span>Français</span>
+                    title="Trier par mot Français">
+                    <span [ngClass]="sortBy === 'french' ? 'sort-selected' : 'sort-not-selected'">Français</span>
                     <img *ngIf="sortBy === 'french' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
                         alt="Icône tri par traduction fr ordre croissant">
                     <img *ngIf="sortBy === 'french' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
@@ -148,10 +149,18 @@
                 </div>
             </div>
             <div class="middle">
+                <div class="label-button-sort label-button-sort-relevance" (click)="setSort('relevance')"
+                    title="Trier par pertinence" *ngIf="search">
+                    <span [ngClass]="sortBy === 'relevance' ? 'sort-selected' : 'sort-not-selected'">Pertinence</span>
+                    <img *ngIf="sortBy === 'relevance' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
+                        alt="Icône tri par pertinence ordre croissant">
+                    <img *ngIf="sortBy === 'relevance' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
+                        alt="Icône tri par pertinence ordre décroissant">
+                </div>
             </div>
             <div class="right">
                 <div class="label-button-sort" (click)="setSort('date')" title="Trier par date d'ajout">
-                    <span>Date ajout</span>
+                    <span [ngClass]="sortBy === 'date' ? 'sort-selected' : 'sort-not-selected'">Date ajout</span>
                     <img *ngIf="sortBy === 'date' && sortOrder === 'cresc'" src="./assets/chevron-up-solid.svg"
                         alt="Icône tri par date d'ajout ordre croissant">
                     <img *ngIf="sortBy === 'date' && sortOrder === 'decresc'" src="./assets/chevron-down-solid.svg"
@@ -172,7 +181,7 @@
                     </div>
                     <div class="right">
                         <div *ngIf="word.date" class="date" title="{{word.date | date:'dd/MM/YYYY - HH:mm:ss'}}">
-                            {{word.date | date:'dd/MM/YYYY'}}</div>
+                            {{word.date | date:'dd/MM/YY'}}</div>
                     </div>
                 </div>
                 <div *ngIf="detail === word._id" class="details"

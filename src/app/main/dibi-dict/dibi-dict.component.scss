@@ -14,9 +14,9 @@ $left-menu-width: 50%;
 $right-menu-width: 50%;
 
 // Pour chaque ligne de la liste des mots : pourcentage de la partie gauche, partie du milieu
-$left-row-width: calc(100% - 75px);
+$left-row-width: calc(100% - 60px);
 $middle-row-width: 0;
-$right-row-width: 75px;
+$right-row-width: 60px;
 
 // Largeur du label (créateur, description)
 $label-detail-view-width: 100px;
@@ -53,13 +53,13 @@ $size-checkbox: 12px;
                 width: 100%;
 
                 .input-and-cross {
-                    width: calc(100% - 42px - 6px);
+                    width: calc(100% - 36px - 6px);
                     height: calc(100% - 6px);
                     border-radius: 21px;
 
                     input {
                         padding-left: 14px;
-                        font-size: 16px;
+                        font-size: 14px;
                     }
 
                     .cross {
@@ -71,6 +71,7 @@ $size-checkbox: 12px;
                     height: 36px;
                     width: 36px;
                     border-radius: 18px;
+                    background-color: #494847;
                 }
             }
 
@@ -148,7 +149,8 @@ $size-checkbox: 12px;
                                 width: calc(100% - 28px - 28px - 6px - 6px);
                             }
 
-                            button {
+                            .regexOn,
+                            .regexOff {
                                 height: 28px;
                                 width: 28px;
                                 margin-left: 6px;
@@ -156,6 +158,10 @@ $size-checkbox: 12px;
 
                             .regexOn {
                                 background-color: #7573b1;
+                            }
+
+                            .regexOff {
+                                background-color: #494847;
                             }
                         }
 
@@ -193,8 +199,8 @@ $size-checkbox: 12px;
             .input-and-cross {
                 display: flex;
                 height: 28px;
-                background-color: #555453;
                 border-radius: $border-radius;
+                background-color: #494847 !important;
 
                 input {
                     height: 100%;
@@ -219,7 +225,7 @@ $size-checkbox: 12px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: #555453;
+                background-color: #494847 !important;
                 border-radius: $border-radius;
                 width: 28px;
                 height: 28px;
@@ -257,18 +263,10 @@ $size-checkbox: 12px;
                 display: flex;
                 align-items: center;
                 white-space: nowrap;
+                cursor: pointer;
 
-                .block-info {
-                    margin: 0px 12px;
-                }
-
-                .clickable {
-                    cursor: pointer;
-                }
-
-                input:hover,
-                input:focus {
-                    background-color: #555351;
+                span {
+                    color: #bbb;
                 }
             }
 
@@ -292,24 +290,22 @@ $size-checkbox: 12px;
         .row-order {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             height: 22px;
             width: 100%;
             overflow: auto;
             border-top: $border;
-            padding-right: $padding;
             font-size: 12px;
 
             .left {
                 display: flex;
                 align-items: center;
-                width: $left-row-width;
                 white-space: nowrap;
             }
 
             .middle {
                 display: flex;
                 align-items: center;
-                width: $middle-row-width;
                 white-space: nowrap;
             }
 
@@ -318,7 +314,6 @@ $size-checkbox: 12px;
                 align-items: center;
                 justify-content: flex-end;
                 margin: 0px $padding;
-                width: $right-row-width;
                 white-space: nowrap;
             }
 
@@ -327,10 +322,18 @@ $size-checkbox: 12px;
                 align-items: center;
                 cursor: pointer;
 
+                .sort-selected {
+                    color: #fff;
+                }
+
+                .sort-not-selected {
+                    color: #bbb;
+                }
+
                 img {
-                    margin-left: $padding;
-                    height: 16px;
-                    width: 16px;
+                    margin-left: 6px;
+                    height: 14px;
+                    width: 14px;
                 }
             }
 
@@ -373,7 +376,7 @@ $size-checkbox: 12px;
 
                         .dibi {
                             font-size: 18px;
-                            margin: 0px 24px 0px 6px;
+                            margin: 0px 15px 0px 6px;
                             text-overflow: ellipsis;
                             white-space: nowrap;
                         }
@@ -394,11 +397,13 @@ $size-checkbox: 12px;
                     .right {
                         display: flex;
                         align-items: center;
-                        width: $middle-row-width;
+                        justify-content: flex-end;
+                        width: $right-row-width;
 
                         .date {
                             color: #999;
                             font-size: 12px;
+                            margin-right: 6px;
                         }
                     }
                 }
@@ -546,109 +551,3 @@ $size-checkbox: 12px;
         }
     }
 }
-
-// Media query
-
-// @media screen and (max-width: 1100px) {
-//     .body {
-//         .container {
-//             .top {
-//                 .left {
-//                     flex-direction: column;
-//                     .all-none-partOfSpeech {
-//                         .all-none {
-//                             padding: 3px 6px 3px 6px;
-//                         }
-//                     }
-
-//                     .partsOfSpeech {
-//                         margin: 0px;
-//                         padding: 0px;
-//                     }
-//                 }
-//             }
-//             .row-pages {
-//                 .left {
-//                     img {
-//                         margin-right: 6px;
-//                     }
-//                 }
-//                 .middle {
-//                     .desc-word {
-//                         display: none;
-//                     }
-//                     .block-info {
-//                         margin: 0px 6px;
-//                     }
-//                 }
-//                 .right {
-//                     img {
-//                         margin-left: 6px;
-//                     }
-//                 }
-//             }
-//             .row-order {
-//                 justify-content: space-between;
-
-//                 .left {
-//                     width: auto;
-//                 }
-
-//                 .middle {
-//                     width: auto;
-//                 }
-
-//                 .right {
-//                     width: auto;
-//                 }
-
-//                 .label-button-sort {
-//                     font-size: 12px;
-//                 }
-//             }
-//             .list {
-//                 .row {
-//                     .view {
-//                         .left {
-//                             width: 100%;
-//                         }
-//                         .middle {
-//                             display: none;
-//                         }
-//                         .right {
-//                             display: none;
-//                         }
-//                     }
-
-//                     .details {
-//                         .block-detail-if-screen-too-small {
-//                             display: flex;
-//                         }
-
-//                         .edit {
-//                             .form-new-word {
-//                                 .block {
-//                                     .label-input {
-//                                         .label {
-//                                             width: 20%;
-//                                             font-size: 14px;
-//                                             margin-right: $padding;
-//                                             white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-//                                             white-space: -webkit-pre-wrap; /* Chrome & Safari */
-//                                             white-space: -pre-wrap; /* Opera 4-6 */
-//                                             white-space: -o-pre-wrap; /* Opera 7 */
-//                                             white-space: pre-wrap; /* CSS3 */
-//                                             word-wrap: break-word; /* Internet Explorer 5.5+ */
-//                                             word-break: break-all;
-//                                             white-space: normal;
-//                                         }
-//                                     }
-//                                 }
-//                             }
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }

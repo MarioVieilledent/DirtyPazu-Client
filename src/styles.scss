@@ -90,12 +90,11 @@ textarea:focus {
     color: #b8e;
 }
 
-// Style des scrollbars
+// Style des scrollbar
 
 ::-webkit-scrollbar {
-    width: $padding;
-    height: $padding;
-    margin-right: $padding;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-corner {
@@ -104,5 +103,5 @@ textarea:focus {
 
 ::-webkit-scrollbar-thumb {
     background: #2a2826;
-    border-radius: $padding;
+    border-radius: 6px;
 }
