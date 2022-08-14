@@ -12,7 +12,7 @@ import { AccountSettings, DibiWord, DibiWordsSuggestion, PageName } from '../typ
 export class MainComponent implements OnInit {
 
   messageServeur: string;
-  navigation: PageName = 'Dibi-infos'; // Navigation entre les pages
+  navigation: PageName = 'Dibi-dict'; // Navigation entre les pages
 
   dibiDict: DibiWord[]; // Dictionnaire Dibi
   suggestions: DibiWordsSuggestion[]; // Suggestions
