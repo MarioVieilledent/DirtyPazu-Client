@@ -37,18 +37,14 @@ $border: 1px solid #757473;
                 align-items: center;
 
                 .img {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: #fff;
-                    height: 32px;
-                    width: 32px;
+                    height: 18px;
+                    width: 18px;
                     margin-right: $padding;
                     border-radius: $border-radius;
 
                     img {
-                        height: 24px;
-                        width: 24px;
+                        height: 18px;
+                        width: 18px;
                         margin: 0;
                     }
                 }
