@@ -384,14 +384,11 @@ $size-checkbox: 12px;
                         .french,
                         .english {
                             font-size: 14px;
-                            color: #ddd;
+                            color: #eee;
                             text-overflow: ellipsis;
                             white-space: nowrap;
                             overflow: hidden;
                         }
-                    }
-
-                    .middle {
                     }
 
                     .right {
@@ -401,8 +398,8 @@ $size-checkbox: 12px;
                         width: $right-row-width;
 
                         .date {
-                            color: #999;
-                            font-size: 12px;
+                            color: #888;
+                            font-size: 11px;
                             margin-right: 6px;
                         }
                     }
@@ -416,11 +413,6 @@ $size-checkbox: 12px;
                     padding-bottom: 0px;
                     padding-left: calc(#{$padding} * 2);
 
-                    .block-detail-if-screen-too-small {
-                        display: flex;
-                        flex-direction: column;
-                    }
-
                     .block-detail {
                         display: flex;
                         margin-bottom: $padding;
@@ -432,6 +424,7 @@ $size-checkbox: 12px;
 
                             span {
                                 font-size: 14px;
+                                color: #ddd;
                             }
                         }
 
@@ -446,7 +439,6 @@ $size-checkbox: 12px;
                             span {
                                 font-size: 13px;
                                 word-break: break-word;
-                                color: #ddd;
                             }
                         }
 
@@ -509,12 +501,6 @@ $size-checkbox: 12px;
                                     font-size: 13px;
                                     color: #ccc;
                                 }
-                            }
-
-                            .mandatory {
-                            }
-
-                            .facultative {
                             }
 
                             .buttons {

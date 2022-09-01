@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(true)" title="Recherche avancée">
-                    <img class="advanced-search-icon" src="assets/ellipsis-solid.svg" alt="Icône recherche avancée">
+                    <img class="advanced-search-icon" src="assets/chevron-down-solid.svg" alt="Icône recherche avancée">
                 </div>
             </div>
             <div class="advanced-top" *ngIf="advancedSearch">
@@ -85,7 +85,7 @@
                                 title="Recherche expression régulière">.*</button>
                             <div class="toggle-advanced-search" (click)="toggleAdvancedSearch(false)"
                                 title="Recherche simple">
-                                <img class="advanced-search-icon" src="assets/ellipsis-solid.svg"
+                                <img class="advanced-search-icon" src="assets/chevron-up-solid.svg"
                                     alt="Icône recherche avancée">
                             </div>
                         </div>
@@ -186,32 +186,30 @@
                 </div>
                 <div *ngIf="detail === word._id" class="details"
                     id="{{word.dibi + '.' + word.french + '.' + word.date.toString}}">
-                    <div class="block-detail-if-screen-too-small">
-                        <div *ngIf="word.partOfSpeech" class="block-detail">
-                            <div class="label"><span>Nature</span></div>
-                            <div class="value">
-                                <ng-container [ngSwitch]="word.partOfSpeech">
-                                    <div class="partOfSpeech-small-screen Noun" *ngSwitchCase="'Noun'">Nom</div>
-                                    <div class="partOfSpeech-small-screen Pronoun" *ngSwitchCase="'Pronoun'">Pronom
-                                    </div>
-                                    <div class="partOfSpeech-small-screen Verb" *ngSwitchCase="'Verb'">Verbe</div>
-                                    <div class="partOfSpeech-small-screen Adjective" *ngSwitchCase="'Adjective'">
-                                        Adjectif</div>
-                                    <div class="partOfSpeech-small-screen Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
-                                    <div class="partOfSpeech-small-screen Conjonction" *ngSwitchCase="'Conjonction'">
-                                        Conjonction</div>
-                                    <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">
-                                        Interjection</div>
-                                    <div class="partOfSpeech-small-screen FunctionParticule"
-                                        *ngSwitchCase="'FunctionParticule'">
-                                        Particule de fonction</div>
-                                    <div class="partOfSpeech-small-screen TransformationParticule"
-                                        *ngSwitchCase="'TransformationParticule'">
-                                        Particule de transformation</div>
-                                    <div class="partOfSpeech-small-screen SpiritWord" *ngSwitchCase="'SpiritWord'">
-                                        Mot d'esprit</div>
-                                </ng-container>
-                            </div>
+                    <div *ngIf="word.partOfSpeech" class="block-detail">
+                        <div class="label"><span>Nature</span></div>
+                        <div class="value">
+                            <ng-container [ngSwitch]="word.partOfSpeech">
+                                <div class="partOfSpeech-small-screen Noun" *ngSwitchCase="'Noun'">Nom</div>
+                                <div class="partOfSpeech-small-screen Pronoun" *ngSwitchCase="'Pronoun'">Pronom
+                                </div>
+                                <div class="partOfSpeech-small-screen Verb" *ngSwitchCase="'Verb'">Verbe</div>
+                                <div class="partOfSpeech-small-screen Adjective" *ngSwitchCase="'Adjective'">
+                                    Adjectif</div>
+                                <div class="partOfSpeech-small-screen Adverb" *ngSwitchCase="'Adverb'">Adverbe</div>
+                                <div class="partOfSpeech-small-screen Conjonction" *ngSwitchCase="'Conjonction'">
+                                    Conjonction</div>
+                                <div class="partOfSpeech-small-screen Interjection" *ngSwitchCase="'Interjection'">
+                                    Interjection</div>
+                                <div class="partOfSpeech-small-screen FunctionParticule"
+                                    *ngSwitchCase="'FunctionParticule'">
+                                    Particule de fonction</div>
+                                <div class="partOfSpeech-small-screen TransformationParticule"
+                                    *ngSwitchCase="'TransformationParticule'">
+                                    Particule de transformation</div>
+                                <div class="partOfSpeech-small-screen SpiritWord" *ngSwitchCase="'SpiritWord'">
+                                    Mot d'esprit</div>
+                            </ng-container>
                         </div>
                     </div>
                     <div *ngIf="word.french" class="block-detail">
