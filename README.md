@@ -2,7 +2,7 @@
 
 Web application Angular du dictionnaire dibi.
 
-[Site web en ligne du dictionnaire](https://dibi-dictionary.herokuapp.com/)
+[Site web en ligne du dictionnaire](https://dibi-dictionary.onrender.com/)
 
 ## Fonctionnalités
 - La web app est servie par le [serveur Node.js](https://github.com/MarioVieilledent/DirtyPazu-Server/tree/NoGoogle)
@@ -10,4 +10,4 @@ Web application Angular du dictionnaire dibi.
 - La web app récupère la liste des mots dibi une fois au démarrage
 - Le filtrage et le tri des mots s'effectue côté client
 
-Plus d'informations sur le site en ligne [dibi-dictionary](https://dibi-dictionary.herokuapp.com/)
+Plus d'informations sur le site en ligne [dibi-dictionary](https://dibi-dictionary.onrender.com/)
